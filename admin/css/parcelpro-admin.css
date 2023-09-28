@@ -1,0 +1,146 @@
+h3.ui-accordion-header {
+    font-weight: 600 !important;
+    font-family: "Open Sans",sans-serif !important;
+    font-size: 1em !important;
+}
+
+span.ui-accordion-header-icon    {
+    left: -7px !important;
+    font-size: 1em !important;
+}
+
+.noStyleAccordion .ui-accordion-header, .noStyleAccordion .ui-accordion-content {
+    font-family: "Open Sans",sans-serif !important;
+    padding-left: 10px !important;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.ui-accordion-content {
+    padding-top: 0 !important;
+}
+
+.addrule {
+    font-family: "Open Sans",sans-serif !important;
+}
+
+.parcelpro_services, .parcelpro_rules {
+    border-spacing: 0;
+    width: 100%;
+    clear: both;
+    margin: 0;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+    background: #fff;
+}
+
+.parcelpro_services td, .parcelpro_rules td {
+    vertical-align: middle;
+    padding: 4px 7px;
+}
+
+.parcelpro_services th, .parcelpro_rules th {
+    padding: 9px 7px;
+}
+
+.parcelpro_services .check {
+    width: 15px;
+    padding: 0 10px;
+    height: 3%;
+}
+
+.parcelpro_rules input {
+    width: 100%;
+}
+
+.addrule {
+    width: 125px !important;
+}
+
+.parcelpro_tip {
+    float: none !important;
+}
+
+.package-selector {
+    height: auto;
+    padding-left: 10px;
+}
+
+.package-text {
+    font-size: 14px;
+}
+
+.package-titel {
+    color: #05345f;
+    padding-bottom: 5px;
+}
+
+.package-label {
+    font-size: 14px;
+    padding-bottom: 10px !important;
+}
+
+.package-content {
+    height: 50%;
+}
+
+.package-actions {
+    height: 20%;
+    padding-top: 10px;
+}
+
+#spinner {
+    width: 75px;
+    text-align: right;
+}
+
+.btn-cancel {
+    text-decoration: none;
+    margin-left: 0;
+    float: left;
+    font-size: 15px;
+    color: #fff;
+    background-color: #cf1405;
+}
+
+.btn-apply {
+    text-decoration: none;
+    margin-right: 10px;
+    float: right;
+    font-size: 15px;
+    color: #fff;
+    background-color: #004f90;
+}
+
+.btn-danger {
+    font-size: 12px;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1px 5px;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+.landdrop {
+    width: 175px;
+    margin-top: 0 !important;
+}
