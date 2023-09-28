@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - "*.*.*"
-    branches:
-      - "setup-actions"
 
 jobs:
   deploy:
@@ -15,8 +13,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Deploy
         uses: 10up/action-wordpress-plugin-deploy@stable
-        with:
-          dry-run: true # TODO: Remove when verified everything works.
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
