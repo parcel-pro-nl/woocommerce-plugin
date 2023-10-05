@@ -151,7 +151,7 @@ class Parcelpro_Public
      * @since    1.0.0
      * @param $order_id
      */
-    function set_checkout_meta($order_id)
+    public function set_checkout_meta($order_id)
     {
         if (!empty($_POST[ 'parcelpro_afhaalpunt' ])) {
             update_post_meta($order_id, '_parcelpro_afhaalpunt', 'yes');
@@ -178,7 +178,7 @@ class Parcelpro_Public
      * @since    1.1.0
      * @param $order
      */
-    function add_order_tracking($order)
+    public function add_order_tracking($order)
     {
         $tracking = get_post_meta($order->get_id(), '_parcelpro_track', true);
         $tracking_url = get_post_meta($order->get_id(), '_parcelpro_track_url', true);

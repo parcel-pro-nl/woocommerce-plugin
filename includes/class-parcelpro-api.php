@@ -43,7 +43,7 @@ class ParcelPro_API
      *
      * @since    1.0.0
      */
-    function init()
+    public function init()
     {
         $settings = get_option('woocommerce_parcelpro_shipping_settings');
         $this->login_id = $settings[ 'login_id' ] ?? null;
@@ -260,7 +260,7 @@ class ParcelPro_API
      * @since    1.0.0
      * @return mixed
      */
-    function get_user_ip()
+    public function get_user_ip()
     {
         if (!empty($_SERVER[ 'HTTP_CLIENT_IP' ])) {
             $ip = $_SERVER[ 'HTTP_CLIENT_IP' ];

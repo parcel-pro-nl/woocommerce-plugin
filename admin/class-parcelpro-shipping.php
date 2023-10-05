@@ -63,7 +63,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
      *
      * @since    1.0.0
      */
-    function init()
+    public function init()
     {
         $this->api = new ParcelPro_API();
 
