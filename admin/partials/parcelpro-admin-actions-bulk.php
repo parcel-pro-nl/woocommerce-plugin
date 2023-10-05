@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Provide a admin area view for the plugin
  *
@@ -10,6 +11,7 @@
  * @package    Parcelpro
  * @subpackage Parcelpro/admin/partials
  */
+
 ?>
 <script type="text/javascript">
     (function ( $ ) {

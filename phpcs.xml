@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- See: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-Ruleset -->
+<ruleset name="Parcel Pro Standard" namespace="Parcelpro\CS\Standard">
+    <description>The Parcel Pro code style standard.</description>
+
+    <file>.</file>
+    <exclude-pattern>./vendor</exclude-pattern>
+    <exclude-pattern>**/*.js</exclude-pattern>
+
+    <rule ref="PSR12">
+        <!-- Allow lines longer than 120 characters. -->
+        <exclude name="Generic.Files.LineLength"/>
+        <!-- Allow classes without namespace. -->
+        <exclude name="PSR1.Classes.ClassDeclaration.MissingNamespace"/>
+        <!-- Allow class and methods names that are not in Pascal Case/Camel Caps. -->
+        <exclude name="Squiz.Classes.ValidClassName.NotCamelCaps"/>
+        <exclude name="PSR1.Methods.CamelCapsMethodName.NotCamelCaps"/>
+        <!-- Allow files to declare new symbols and have logic with side effects. -->
+        <!-- This is required for the woocommerce-parcelpro.php file. -->
+        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+    </rule>
+</ruleset>

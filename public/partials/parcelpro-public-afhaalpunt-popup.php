@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Provide a public-facing view for the plugin
  *
@@ -12,21 +13,25 @@
  */
 
 $rates = WC()->shipping()->get_shipping_methods();
-$parcelprorates = isset($rates['parcelpro_shipping'])? $rates['parcelpro_shipping']:null;
-if($parcelprorates){
-    $parcelprorates = isset($parcelprorates->settings['services'])?$parcelprorates->settings['services']:null;
+$parcelprorates = isset($rates['parcelpro_shipping']) ? $rates['parcelpro_shipping'] : null;
+if ($parcelprorates) {
+    $parcelprorates = isset($parcelprorates->settings['services']) ? $parcelprorates->settings['services'] : null;
 }
 
 $servicepuntenrates = [];
-if($parcelprorates){
-    foreach ($parcelprorates as $rate){
-        foreach ($rate as $row){
-            if(is_scalar($row)) continue;
-            if(isset($row['servicepunt']) && ($row['servicepunt'] != null || $row['servicepunt'] != 'off') && !in_array($rate['id'],$servicepuntenrates))array_push($servicepuntenrates,$rate['id']);
+if ($parcelprorates) {
+    foreach ($parcelprorates as $rate) {
+        foreach ($rate as $row) {
+            if (is_scalar($row)) {
+                continue;
+            }
+            if (isset($row['servicepunt']) && ($row['servicepunt'] != null || $row['servicepunt'] != 'off') && !in_array($rate['id'], $servicepuntenrates)) {
+                array_push($servicepuntenrates, $rate['id']);
+            }
         }
     }
 }
-echo("<script> var servicepuntmethodes = ". json_encode($servicepuntenrates)."; console.log(servicepuntmethodes)</script>");
+echo("<script> var servicepuntmethodes = " . json_encode($servicepuntenrates) . "; console.log(servicepuntmethodes)</script>");
 
 ?>
 <div class="global-modal" id="modal">

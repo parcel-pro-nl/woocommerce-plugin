@@ -25,11 +25,13 @@
  * Domain Path:     /languages
  */
 
-if ( !defined( 'WPINC' ) ) die( 'Access denied.' );
+if (!defined('WPINC')) {
+    die('Access denied.');
+}
 
-define( 'PARCELPRO_NAME', 'WooCommerce Parcel Pro' );
-define( 'PARCELPRO_REQUIRED_PHP_VERSION', '5.3' );
-define( 'PARCELPRO_REQUIRED_WP_VERSION', '3.1' );
+define('PARCELPRO_NAME', 'WooCommerce Parcel Pro');
+define('PARCELPRO_REQUIRED_PHP_VERSION', '5.3');
+define('PARCELPRO_REQUIRED_WP_VERSION', '3.1');
 
 
 /**
@@ -39,30 +41,38 @@ define( 'PARCELPRO_REQUIRED_WP_VERSION', '3.1' );
  * @return bool True if system requirements are met, false if not
  */
 
-function parcelpro_requirements_met() {
+function parcelpro_requirements_met()
+{
     global $wp_version;
 
-    if ( version_compare( PHP_VERSION, PARCELPRO_REQUIRED_PHP_VERSION, '<' ) ) return FALSE;
-    if ( version_compare( $wp_version, PARCELPRO_REQUIRED_WP_VERSION, '<' ) ) return FALSE;
-    if ( ( !in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) && ( defined( 'WOOCOMMERCE_VERSION' ) && version_compare( WOOCOMMERCE_VERSION, PARCELPRO_REQUIRED_WP_VERSION, '<' ) ) ) return FALSE;
+    if (version_compare(PHP_VERSION, PARCELPRO_REQUIRED_PHP_VERSION, '<')) {
+        return false;
+    }
+    if (version_compare($wp_version, PARCELPRO_REQUIRED_WP_VERSION, '<')) {
+        return false;
+    }
+    if (( !in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins'))) ) && ( defined('WOOCOMMERCE_VERSION') && version_compare(WOOCOMMERCE_VERSION, PARCELPRO_REQUIRED_WP_VERSION, '<') )) {
+        return false;
+    }
 
-    return TRUE;
+    return true;
 }
 
 /**
  * Prints an error that the system requirements weren't met.
  * @since    1.0.0
  */
-function parcelpro_requirements_error() {
+function parcelpro_requirements_error()
+{
     global $wp_version;
-    include( plugin_dir_path( __FILE__ ).'admin/partials/parcelpro-requirements-error.php' );
+    include(plugin_dir_path(__FILE__) . 'admin/partials/parcelpro-requirements-error.php');
 }
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ).'includes/class-parcelpro.php';
+require plugin_dir_path(__FILE__) . 'includes/class-parcelpro.php';
 
 /**
  * Begins execution of the plugin.
@@ -73,14 +83,15 @@ require plugin_dir_path( __FILE__ ).'includes/class-parcelpro.php';
  *
  * @since    1.0.0
  */
-function run_parcelpro() {
-    if ( parcelpro_requirements_met() ) {
-        if ( class_exists( 'ParcelPro' ) ) {
+function run_parcelpro()
+{
+    if (parcelpro_requirements_met()) {
+        if (class_exists('ParcelPro')) {
             $plugin = new Parcelpro();
             $plugin->run();
         }
     } else {
-        add_action( 'admin_notices', 'parcelpro_requirements_error' );
+        add_action('admin_notices', 'parcelpro_requirements_error');
     }
 }
 

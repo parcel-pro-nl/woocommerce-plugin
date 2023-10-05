@@ -33,7 +33,8 @@ class ParcelPro_API
      *
      * @since    1.0.0
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->init();
     }
 
@@ -42,8 +43,9 @@ class ParcelPro_API
      *
      * @since    1.0.0
      */
-    function init() {
-        $settings = get_option( 'woocommerce_parcelpro_shipping_settings' );
+    public function init()
+    {
+        $settings = get_option('woocommerce_parcelpro_shipping_settings');
         $this->login_id = $settings[ 'login_id' ] ?? null;
         $this->api_id = $settings[ 'api_id' ] ?? null;
     }
@@ -54,34 +56,35 @@ class ParcelPro_API
      * @since    1.0.0
      * @return mixed
      */
-     public function get_type($forceUpdate = false) {
-         if(!get_option( 'woocommerce_parcelpro_shipping_types_updated')){
-           update_option('woocommerce_parcelpro_shipping_types_updated', current_time('mysql'));
-         }
+    public function get_type($forceUpdate = false)
+    {
+        if (!get_option('woocommerce_parcelpro_shipping_types_updated')) {
+            update_option('woocommerce_parcelpro_shipping_types_updated', current_time('mysql'));
+        }
 
-         $lastUpdated = get_option( 'woocommerce_parcelpro_shipping_types_updated');
+        $lastUpdated = get_option('woocommerce_parcelpro_shipping_types_updated');
 
-         if((strtotime($lastUpdated) < strtotime('-1 days') ) || $forceUpdate){
-           $hash = $this->create_hash( $this->login_id . $this->current_time() );
-           $headers = array(
-               'GebruikerId' => $this->login_id,
-               'Datum'       => $this->current_time(),
-               'HmacSha256'  => $hash,
-           );
-           $curl = $this->setup_curl( $this->api_url . '/api/type.php' . '?' . http_build_query( $headers, '', '&' ) );
+        if ((strtotime($lastUpdated) < strtotime('-1 days') ) || $forceUpdate) {
+            $hash = $this->create_hash($this->login_id . $this->current_time());
+            $headers = array(
+              'GebruikerId' => $this->login_id,
+              'Datum'       => $this->current_time(),
+              'HmacSha256'  => $hash,
+            );
+            $curl = $this->setup_curl($this->api_url . '/api/type.php' . '?' . http_build_query($headers, '', '&'));
 
-           $response = curl_exec( $curl );
-           curl_close( $curl );
+            $response = curl_exec($curl);
+            curl_close($curl);
 
-           if(!get_option( 'woocommerce_parcelpro_shipping_types' )){
-             update_option('woocommerce_parcelpro_shipping_types', $response);
-           }
-         }else{
-           $response = get_option( 'woocommerce_parcelpro_shipping_types' );
-         }
+            if (!get_option('woocommerce_parcelpro_shipping_types')) {
+                update_option('woocommerce_parcelpro_shipping_types', $response);
+            }
+        } else {
+            $response = get_option('woocommerce_parcelpro_shipping_types');
+        }
 
-         return $response;
-     }
+        return $response;
+    }
 
     /**
      * Function to hash the data to sha256.
@@ -90,9 +93,11 @@ class ParcelPro_API
      * @param $data
      * @return string
      */
-    public function create_hash( $data ) {
-        if($this->api_id)
-          return hash_hmac( 'sha256', $data, $this->api_id );
+    public function create_hash($data)
+    {
+        if ($this->api_id) {
+            return hash_hmac('sha256', $data, $this->api_id);
+        }
     }
 
     /**
@@ -101,7 +106,8 @@ class ParcelPro_API
      * @since    1.0.0
      * @return string
      */
-    public function current_time() {
+    public function current_time()
+    {
         return (new DateTime('now'))->format('Y-m-d H:i:s');
     }
 
@@ -112,11 +118,12 @@ class ParcelPro_API
      * @param $url
      * @return resource
      */
-    public function setup_curl( $url ) {
+    public function setup_curl($url)
+    {
         $curl = curl_init();
 
-        curl_setopt( $curl, CURLOPT_URL, $url );
-        curl_setopt( $curl, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
         return $curl;
     }
@@ -128,27 +135,28 @@ class ParcelPro_API
      * @param $parameters
      * @return mixed
      */
-    public function post_zending( $parameters ) {
-        $json = json_encode( $parameters );
+    public function post_zending($parameters)
+    {
+        $json = json_encode($parameters);
 
-        $hash = $this->create_hash( $json );
-        $curl = $this->setup_curl( $this->webhook_url );
+        $hash = $this->create_hash($json);
+        $curl = $this->setup_curl($this->webhook_url);
         $referer = get_site_url();
 
-        curl_setopt( $curl, CURLOPT_HTTPHEADER, array(
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json',
-            sprintf( 'X-Wc-Webhook-Id: %s', $this->login_id ),
-            sprintf( 'X-Wc-Webhook-Signature: %s', $hash ),
-            sprintf( 'X-Wc-Webhook-Referer: %s', $referer ),
-        ) );
+            sprintf('X-Wc-Webhook-Id: %s', $this->login_id),
+            sprintf('X-Wc-Webhook-Signature: %s', $hash),
+            sprintf('X-Wc-Webhook-Referer: %s', $referer),
+        ));
 
-        curl_setopt( $curl, CURLOPT_POST, 1 );
-        curl_setopt( $curl, CURLOPT_POSTFIELDS, $json );
-        curl_setopt( $curl, CURLOPT_HEADER, FALSE );
-        curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, FALSE );
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
-        $response = curl_exec( $curl );
-        curl_close( $curl );
+        $response = curl_exec($curl);
+        curl_close($curl);
 
         return $response;
     }
@@ -161,16 +169,16 @@ class ParcelPro_API
      */
     public function shipments($id = null)
     {
-        $hash = $this->create_hash( $this->login_id . $this->current_time() );
+        $hash = $this->create_hash($this->login_id . $this->current_time());
         $headers = array(
             'GebruikerId' => $this->login_id,
             'Datum'       => $this->current_time(),
             'HmacSha256'  => $hash,
             'ZendingId' => $id
         );
-        $curl = $this->setup_curl( $this->api_url . '/api/zendingen.php' . '?' . http_build_query( $headers, '', '&' ) );
-        $response = curl_exec( $curl );
-        curl_close( $curl );
+        $curl = $this->setup_curl($this->api_url . '/api/zendingen.php' . '?' . http_build_query($headers, '', '&'));
+        $response = curl_exec($curl);
+        curl_close($curl);
 
         return $response;
     }
@@ -182,19 +190,20 @@ class ParcelPro_API
      * @param $zending_id
      * @return mixed
      */
-    public function get_label( $zending_id ) {
+    public function get_label($zending_id)
+    {
         return $this->get_url_label($zending_id);
-
     }
 
-    public function get_url_label( $zending_id){
-        $hash = $this->create_hash( $this->login_id . $zending_id );
+    public function get_url_label($zending_id)
+    {
+        $hash = $this->create_hash($this->login_id . $zending_id);
         $headers = array(
             'GebruikerId' => $this->login_id,
             'ZendingId'   => $zending_id,
             'HmacSha256'  => $hash,
         );
-        $url =  $this->api_url . '/api/label.php' . '?' . http_build_query( $headers, '', '&' ) ;
+        $url =  $this->api_url . '/api/label.php' . '?' . http_build_query($headers, '', '&') ;
         return $url;
     }
 
@@ -205,27 +214,28 @@ class ParcelPro_API
      * @param $data
      * @return mixed
      */
-    public function post_afhaalpunt_keuze( $data ) {
-        $hash = $this->create_hash( $this->login_id . $this->current_time() );
-        $curl = $this->setup_curl( $this->api_url . '/api/afhaalpunt_keuze.php' );
+    public function post_afhaalpunt_keuze($data)
+    {
+        $hash = $this->create_hash($this->login_id . $this->current_time());
+        $curl = $this->setup_curl($this->api_url . '/api/afhaalpunt_keuze.php');
 
         $parameters = array(
             "GebruikerId" => $this->login_id,
             "Datum"       => $this->current_time(),
             "HmacSha256"  => $hash,
             "Postcode"    => $data[ 'billing_postcode' ],
-            "Nummer"      => $this->get_housenumber( $data[ 'billing_address_1' ] ),
+            "Nummer"      => $this->get_housenumber($data[ 'billing_address_1' ]),
             "Ipadres"     => $this->get_user_ip(),
             "Ordernummer" => $data[ 'order_id' ],
             "Carrier"     => $data[ 'parcelpro_afhaalpunt' ],
             "LocationId"  => $data[ 'parcelpro_company' ],
         );
 
-        curl_setopt( $curl, CURLOPT_POST, 1 );
-        curl_setopt( $curl, CURLOPT_POSTFIELDS, $parameters );
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $parameters);
 
-        $response = curl_exec( $curl );
-        curl_close( $curl );
+        $response = curl_exec($curl);
+        curl_close($curl);
 
         return $response;
     }
@@ -237,8 +247,9 @@ class ParcelPro_API
      * @param $adres
      * @return mixed
      */
-    public function get_housenumber( $adres ) {
-        preg_match( '/^(\d*[\wäöüß\d \'\-\.]+)[,\s]+(\d+)\s*([\wäöüß\d\-\/]*)$/i', $adres, $match );
+    public function get_housenumber($adres)
+    {
+        preg_match('/^(\d*[\wäöüß\d \'\-\.]+)[,\s]+(\d+)\s*([\wäöüß\d\-\/]*)$/i', $adres, $match);
 
         return $match[ 2 ];
     }
@@ -249,18 +260,17 @@ class ParcelPro_API
      * @since    1.0.0
      * @return mixed
      */
-    function get_user_ip() {
-        if ( !empty( $_SERVER[ 'HTTP_CLIENT_IP' ] ) ) {
+    public function get_user_ip()
+    {
+        if (!empty($_SERVER[ 'HTTP_CLIENT_IP' ])) {
             $ip = $_SERVER[ 'HTTP_CLIENT_IP' ];
-        }
-        elseif ( !empty( $_SERVER[ 'HTTP_X_FORWARDED_FOR' ] ) ) {
+        } elseif (!empty($_SERVER[ 'HTTP_X_FORWARDED_FOR' ])) {
             $ip = $_SERVER[ 'HTTP_X_FORWARDED_FOR' ];
-        }
-        else {
+        } else {
             $ip = $_SERVER[ 'REMOTE_ADDR' ];
         }
 
-        return apply_filters( 'wpb_get_ip', $ip );
+        return apply_filters('wpb_get_ip', $ip);
     }
 
     /**
@@ -274,16 +284,18 @@ class ParcelPro_API
     public function types_key_values()
     {
         $result_records = [];
-        $types = json_decode($this->get_type(),true);
-        $result_records['0']='Niet Aanmelden Bij Parcel Pro';
-        if(isset($types['level']) && strtolower($types['level']) == 'error') return [];
+        $types = json_decode($this->get_type(), true);
+        $result_records['0'] = 'Niet Aanmelden Bij Parcel Pro';
+        if (isset($types['level']) && strtolower($types['level']) == 'error') {
+            return [];
+        }
 
-        foreach ($types as $type){
-            if(is_scalar($type)){
+        foreach ($types as $type) {
+            if (is_scalar($type)) {
                 continue;
             }
-            if(array_key_exists('Id',$type) && array_key_exists('Type',$type)){
-                $result_records[$type['Id']]=$type['Type'];
+            if (array_key_exists('Id', $type) && array_key_exists('Type', $type)) {
+                $result_records[$type['Id']] = $type['Type'];
             }
         }
 

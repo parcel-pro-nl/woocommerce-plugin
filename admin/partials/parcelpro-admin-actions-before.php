@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Provide a admin area view for the plugin
  *
@@ -10,9 +11,10 @@
  * @package    Parcelpro
  * @subpackage Parcelpro/admin/partials
  */
+
 ?>
 <a href="<?php echo $ship_link; ?>" class="button tips parcelpro-export" alt="Aanmelden bij Parcel Pro" data-tip="Aanmelden bij Parcel Pro">
-    <img src="<?php echo dirname( plugin_dir_url( __FILE__ ) ) . '/images/arrows.svg'; ?>" style="height: 16px; width: 12px;" alt="Aanmelden bij Parcel Pro">
+    <img src="<?php echo dirname(plugin_dir_url(__FILE__)) . '/images/arrows.svg'; ?>" style="height: 16px; width: 12px;" alt="Aanmelden bij Parcel Pro">
 </a>
 
 <!-- <a href="<?php //echo $package_link; ?>" class="button tips parcelpro-package" alt="Parcel Pro Aantal pakketten" data-tip="Parcel Pro Aantal pakketten">
