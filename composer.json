@@ -1,0 +1,26 @@
+{
+  "name": "parcelpro/woocommerce",
+  "description": "Verzendmodule om gemakkelijk orders in te laden in het verzendsysteem van Parcel Pro.",
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=7.1"
+  },
+  "license": [
+    "GPL-2.0-or-later"
+  ],
+  "authors": [
+    {
+      "name": "Parcel Pro",
+      "email": "ict@parcelpro.nl",
+      "homepage": "https://www.parcelpro.nl",
+      "role": "Developer"
+    }
+  ],
+  "scripts": {
+    "cs:check": "phpcs",
+    "cs:fix": "phpcbf"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.7"
+  }
+}
