@@ -1,4 +1,4 @@
-WP_DEBUG<?php
+<?php
 
 /**
  * Provide a admin area view for the plugin
@@ -27,7 +27,7 @@ WP_DEBUG<?php
         </li>
         <li>
             <strong><?php echo PARCELPRO_NAME; ?> requires the plugin <a
-                    href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> to be active!</strong>
+                        href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> to be active!</strong>
         </li>
     </ul>
     <p>If you need to upgrade your version of PHP you can ask your hosting company for assistance, and if you need help
