@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Provide a admin area view for the plugin
  *
@@ -10,18 +11,19 @@
  * @package    Parcelpro
  * @subpackage Parcelpro/admin/partials
  */
+
 //  TODO: Functionaliteiten voor extra pakketten toevoegen aan /api/woocommerce/order-created.php
 require_once(ABSPATH . 'wp-admin/admin.php');
 
-wp_enqueue_style( 'colors' );
-wp_enqueue_style( 'media' );
-wp_enqueue_style( $this->plugin_name, plugin_dir_url( __DIR__ ).'css/parcelpro-admin.css', array(), $this->version, 'all' );
-wp_enqueue_script( $this->plugin_name, plugin_dir_url( __DIR__ ).'js/parcelpro-admin.js', array( 'jquery' ), $this->version, FALSE );
+wp_enqueue_style('colors');
+wp_enqueue_style('media');
+wp_enqueue_style($this->plugin_name, plugin_dir_url(__DIR__) . 'css/parcelpro-admin.css', array(), $this->version, 'all');
+wp_enqueue_script($this->plugin_name, plugin_dir_url(__DIR__) . 'js/parcelpro-admin.js', array( 'jquery' ), $this->version, false);
 
-do_action( 'admin_print_styles' );
-do_action( 'admin_print_scripts' );
+do_action('admin_print_styles');
+do_action('admin_print_scripts');
 
-$package_apply_link = wp_nonce_url( admin_url( 'edit.php?&action=parcelpro-package-apply&order_id='. $order_id ), 'parcelpro-package-apply' );
+$package_apply_link = wp_nonce_url(admin_url('edit.php?&action=parcelpro-package-apply&order_id=' . $order_id), 'parcelpro-package-apply');
 
 ?>
 <head>
@@ -54,28 +56,36 @@ $package_apply_link = wp_nonce_url( admin_url( 'edit.php?&action=parcelpro-packa
         <p>
             <label class="package-label" for="spinner">Verzendmethode:&nbsp;</label>
             <select id="shipping_method">
-                <?php foreach($options as $key => $val) { ?>
+                <?php foreach ($options as $key => $val) { ?>
                     <?php
                         $selected = false;
                         $disabled = false;
 
-                        if($key == "postnl_pakjegemak" || $key == "dhl_parcelshop") $disabled = true;
-                        foreach($val as $k => $v){
-                            if(is_array($v)) {
-                                $title = $v['method-title'];
-                                $id = $val['id'];
-                                if(strpos(strtolower($key), "maatwerk") !== false) $id = $id.'_' .$v[ 'type-id' ];
-                                if(strpos($shipping_method, 'maatwerk') !== false){
-                                    if(strpos($shipping_method, $id) !== false) $selected = true;
-                                }else{
-                                    if($id == substr($shipping_method, 10)) $selected = true;
-                                }
-                                ?>
-
-                                <?php
+                    if ($key == "postnl_pakjegemak" || $key == "dhl_parcelshop") {
+                        $disabled = true;
+                    }
+                    foreach ($val as $k => $v) {
+                        if (is_array($v)) {
+                            $title = $v['method-title'];
+                            $id = $val['id'];
+                            if (strpos(strtolower($key), "maatwerk") !== false) {
+                                $id = $id . '_' . $v[ 'type-id' ];
                             }
+                            if (strpos($shipping_method, 'maatwerk') !== false) {
+                                if (strpos($shipping_method, $id) !== false) {
+                                    $selected = true;
+                                }
+                            } else {
+                                if ($id == substr($shipping_method, 10)) {
+                                    $selected = true;
+                                }
+                            }
+                            ?>
+
+                            <?php
                         }
-                        ?>
+                    }
+                    ?>
                     <option value="<?php echo $id ?>" <?php print($selected ?  "selected" : '') ?> <?php print($disabled ?  "disabled" : '') ?>><?php echo $title ?></option>
                 <?php } ?>
             </select>

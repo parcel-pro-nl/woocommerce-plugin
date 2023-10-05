@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Provide a public-facing view for the plugin
  *
@@ -10,6 +11,7 @@
  * @package    Parcelpro
  * @subpackage Parcelpro/public/partials
  */
+
 ?>
 <input class="parcelpro-checkout-form" type="hidden" id="parcelpro_afhaalpunt" name="parcelpro_afhaalpunt" value=""/>
 <input class="parcelpro-checkout-form" type="hidden" id="parcelpro_company" name="parcelpro_company" value=""/>

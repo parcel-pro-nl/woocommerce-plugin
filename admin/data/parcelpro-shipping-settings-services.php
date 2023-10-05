@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Returns data of the available services to the shipping method
  *
@@ -24,7 +25,7 @@ $cycloonServices = [];
 $types = null;
 if (is_admin()) {
     $current_screen = get_current_screen();
-    $types = json_decode($this->api->get_type( ($current_screen && strpos($current_screen->base, "settings") !== false ? true : false ) ), TRUE);
+    $types = json_decode($this->api->get_type(($current_screen && strpos($current_screen->base, "settings") !== false ? true : false )), true);
     $services = array($types);
 
     if (is_array($types)) {
@@ -101,7 +102,7 @@ if (is_admin()) {
                     ]];
                 }
 
-                if($type['CarrierNaam'] == 'Viatim') {
+                if ($type['CarrierNaam'] == 'Viatim') {
                     $viatimServices = ['Viatim' => [
                         'viatim_mailbox' => 'Brievenbuspakket',
                         'viatim_normal' => 'Pakket 0-15',
@@ -111,7 +112,7 @@ if (is_admin()) {
                     ]];
                 }
 
-                if($type['CarrierNaam'] == 'Fietskoerier') {
+                if ($type['CarrierNaam'] == 'Fietskoerier') {
                     $cycloonServices = [
                         'Fietskoerier' => [
                             'cycloon_pakket' => 'Pakket',
@@ -135,9 +136,10 @@ if (is_admin()) {
         foreach ($options['services'] as $k => $v) {
             $parts = explode('_', $k);
             if ($parts[0] === "maatwerk") {
-                if (!array_key_exists(ucfirst($k), $Custom_services)) $Custom_services[ucfirst($k)] = array();
+                if (!array_key_exists(ucfirst($k), $Custom_services)) {
+                    $Custom_services[ucfirst($k)] = array();
+                }
                 $Custom_services[ucfirst($k)] = array_merge($Custom_services[ucfirst($k)], array($k => $v['id']));
-
             }
         }
     }
@@ -154,7 +156,9 @@ if (is_admin()) {
 //            if(array_key_exists('type-id',$v)){
 //                $type_id = '_' . $v['type-id'];
 //            }
-            if (!array_key_exists(ucfirst($parts[0]), $services)) $services[ucfirst($parts[0])] = array();
+            if (!array_key_exists(ucfirst($parts[0]), $services)) {
+                $services[ucfirst($parts[0])] = array();
+            }
             $services[ucfirst($parts[0])] = array_merge($services[ucfirst($parts[0])], array($k => $v['id'] . $type_id));
         }
     }

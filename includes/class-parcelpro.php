@@ -64,7 +64,8 @@ class Parcelpro
      *
      * @since    1.0.0
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->plugin_name = 'parcelpro';
         $this->version = '1.6.1';
 
@@ -91,30 +92,31 @@ class Parcelpro
      * @since    1.0.0
      * @access   private
      */
-    private function load_dependencies() {
+    private function load_dependencies()
+    {
 
         /**
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-parcelpro-loader.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-parcelpro-loader.php';
 
         /**
          * The class responsible for the communication with Parcel Pro
          * of the plugin.
          */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-parcelpro-api.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-parcelpro-api.php';
 
         /**
          * The class responsible for defining all actions that occur in the admin area.
          */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-parcelpro-admin.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-parcelpro-admin.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-parcelpro-public.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-parcelpro-public.php';
 
         $this->loader = new Parcelpro_Loader();
     }
@@ -128,9 +130,10 @@ class Parcelpro
      * @since    1.0.0
      * @access   private
      */
-    private function define_shipping_method() {
-        $this->loader->add_action( 'woocommerce_shipping_init', $this, 'shipping_init' );
-        $this->loader->add_filter( 'woocommerce_shipping_methods', $this, 'add_shipping_method' );
+    private function define_shipping_method()
+    {
+        $this->loader->add_action('woocommerce_shipping_init', $this, 'shipping_init');
+        $this->loader->add_filter('woocommerce_shipping_methods', $this, 'add_shipping_method');
     }
 
     /**
@@ -140,20 +143,18 @@ class Parcelpro
      * @since    1.0.0
      * @access   private
      */
-    private function define_admin_hooks() {
-        $plugin_admin = new Parcelpro_Admin( $this->get_plugin_name(), $this->get_version() );
+    private function define_admin_hooks()
+    {
+        $plugin_admin = new Parcelpro_Admin($this->get_plugin_name(), $this->get_version());
 
-        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 
-        $this->loader->add_action( 'woocommerce_admin_order_actions_end', $plugin_admin, 'add_actions', 20 );
-        $this->loader->add_action( 'woocommerce_order_status_changed', $plugin_admin, 'auto_export' );
-        $this->loader->add_action( 'admin_footer', $plugin_admin, 'add_bulk_actions' );
-        $this->loader->add_action( 'load-edit.php', $plugin_admin, 'action_handler' );
-        $this->loader->add_action( 'add_meta_boxes_shop_order', $plugin_admin, 'add_order_actions' );
-
-
-
+        $this->loader->add_action('woocommerce_admin_order_actions_end', $plugin_admin, 'add_actions', 20);
+        $this->loader->add_action('woocommerce_order_status_changed', $plugin_admin, 'auto_export');
+        $this->loader->add_action('admin_footer', $plugin_admin, 'add_bulk_actions');
+        $this->loader->add_action('load-edit.php', $plugin_admin, 'action_handler');
+        $this->loader->add_action('add_meta_boxes_shop_order', $plugin_admin, 'add_order_actions');
     }
 
 
@@ -164,20 +165,20 @@ class Parcelpro
      * @since    1.0.0
      * @access   private
      */
-    private function define_public_hooks() {
-        $plugin_public = new Parcelpro_Public( $this->get_plugin_name(), $this->get_version() );
+    private function define_public_hooks()
+    {
+        $plugin_public = new Parcelpro_Public($this->get_plugin_name(), $this->get_version());
 
-        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
-        $this->loader->add_action( 'woocommerce_before_checkout_form', $plugin_public, 'add_popup' );
-        $this->loader->add_action( 'woocommerce_after_checkout_shipping_form', $plugin_public, 'add_input', 10, 1 );
-        $this->loader->add_action( 'woocommerce_checkout_process', $plugin_public, 'validate_shipping', 10, 1 );
-        $this->loader->add_action( 'woocommerce_checkout_update_order_meta', $plugin_public, 'set_checkout_meta', 10, 2 );
-        $this->loader->add_action( 'woocommerce_order_details_after_order_table', $plugin_public, 'add_order_tracking', 10, 1 );
+        $this->loader->add_action('woocommerce_before_checkout_form', $plugin_public, 'add_popup');
+        $this->loader->add_action('woocommerce_after_checkout_shipping_form', $plugin_public, 'add_input', 10, 1);
+        $this->loader->add_action('woocommerce_checkout_process', $plugin_public, 'validate_shipping', 10, 1);
+        $this->loader->add_action('woocommerce_checkout_update_order_meta', $plugin_public, 'set_checkout_meta', 10, 2);
+        $this->loader->add_action('woocommerce_order_details_after_order_table', $plugin_public, 'add_order_tracking', 10, 1);
 
-        $this->loader->add_action( 'woocommerce_email_after_order_table', $plugin_public, 'add_tracking_to_email_template', 20, 4 );
-
+        $this->loader->add_action('woocommerce_email_after_order_table', $plugin_public, 'add_tracking_to_email_template', 20, 4);
     }
 
 
@@ -188,8 +189,9 @@ class Parcelpro
      *
      * @since    1.0.0
      */
-    public function shipping_init() {
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-parcelpro-shipping.php';
+    public function shipping_init()
+    {
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-parcelpro-shipping.php';
     }
 
     /**
@@ -199,7 +201,8 @@ class Parcelpro
      * @param $methods
      * @return array
      */
-    public function add_shipping_method( $methods ) {
+    public function add_shipping_method($methods)
+    {
         $methods[] = 'ParcelPro_Shipping';
 
         return $methods;
@@ -210,7 +213,8 @@ class Parcelpro
      *
      * @since    1.0.0
      */
-    public function run() {
+    public function run()
+    {
         $this->loader->run();
     }
 
@@ -221,7 +225,8 @@ class Parcelpro
      * @since     1.0.0
      * @return    string    The name of the plugin.
      */
-    public function get_plugin_name() {
+    public function get_plugin_name()
+    {
         return $this->plugin_name;
     }
 
@@ -231,7 +236,8 @@ class Parcelpro
      * @since     1.0.0
      * @return    Parcelpro_Loader    Orchestrates the hooks of the plugin.
      */
-    public function get_loader() {
+    public function get_loader()
+    {
         return $this->loader;
     }
 
@@ -241,7 +247,8 @@ class Parcelpro
      * @since     1.0.0
      * @return    string    The version number of the plugin.
      */
-    public function get_version() {
+    public function get_version()
+    {
         return $this->version;
     }
 }
