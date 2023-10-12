@@ -8,8 +8,9 @@ then
 fi
 
 allMatch=1
-function checkMatch() {
-    if [ ! "$composerVersion" = "$1" ]
+function checkVersionMatch() {
+    echo "- $1: $2"
+    if [ ! "$composerVersion" = "$2" ]
     then
       allMatch=0
     fi
@@ -17,21 +18,12 @@ function checkMatch() {
 
 echo "Detected versions:"
 
-composerVersion=$(cat 'composer.json' | jq -r .version)
-echo "- composer.json: $composerVersion"
-checkMatch "$composerVersion"
+composerVersion=$(jq -r .version 'composer.json')
+checkVersionMatch 'composer.json' "$composerVersion"
 
-readmeVersion=$(cat 'readme.txt' | sed -nE 's/^Stable tag: (.*)$/\1/p')
-echo "- readme.txt: $readmeVersion"
-checkMatch "$readmeVersion"
-
-entrypointVersion=$(cat 'woocommerce-parcelpro.php' | sed -nE 's/^ \* Version: +(.*)$/\1/p')
-echo "- woocommerce-parcelpro.php: $entrypointVersion"
-checkMatch "$entrypointVersion"
-
-classPpVersion=$(cat 'includes/class-parcelpro.php' | sed -nE "s/^.*this->version = '(.*)';$/\1/p")
-echo "- includes/class-parcelpro.php: $classPpVersion"
-checkMatch "$classPpVersion"
+checkVersionMatch 'readme.txt (stable tag)' "$(sed -nE 's/^Stable tag: (.*)$/\1/p' 'readme.txt')"
+checkVersionMatch 'woocommerce-parcelpro.php' "$(sed -nE 's/^ \* Version: +(.*)$/\1/p' 'woocommerce-parcelpro.php')"
+checkVersionMatch 'includes/class-parcelpro.php' "$(sed -nE "s/^.*this->version = '(.*)';$/\1/p" 'includes/class-parcelpro.php')"
 
 if [ ! "$allMatch" = 1 ]
 then
