@@ -231,8 +231,14 @@ class Parcelpro_Admin
             $method = $this->settings['availability'];
             $countries = ($method == 'specific') ? $this->settings['countries'] : null;
             $country = wc_get_order($order_id)->get_shipping_country();
+            $order_status = wc_get_order($order_id)->get_status();
 
-            if ($allowed_export == 'yes' && ($method == 'all' || in_array($country, $countries)) && ($this->settings['auto_export_on_state'] == wc_get_order($order_id)->post_status)) {
+            // Ensure the order status always starts with 'wc-', same as the options from `wc_get_order_statuses`.
+            if (strpos($order_status, 'wc-') !== 0) {
+                $order_status = 'wc-' . $order_status;
+            }
+
+            if ($allowed_export == 'yes' && ($method == 'all' || in_array($country, $countries)) && ($this->settings['auto_export_on_state'] == $order_status)) {
                 $this->export_order($order_id);
             }
         }
