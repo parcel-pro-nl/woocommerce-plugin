@@ -1,8 +1,11 @@
 Changelog
 =========
 
-ParcelPro Shipment module voor Wordpress / WooCommerce
+ParcelPro Shipment module voor WordPress / WooCommerce
 (c) Parcel Pro [parcelpro.nl]
+
+## 1.6.2 - 2023-10-20 =
+* Fix automatisch aanmelden
 
 ## 1.6.1 - 2023-09-05 =
 * Fix pakketpunten Homerr
