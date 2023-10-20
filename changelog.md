@@ -5,7 +5,7 @@ ParcelPro Shipment module voor WordPress / WooCommerce
 (c) Parcel Pro [parcelpro.nl]
 
 ## 1.6.3 - 2023-10-20 =
-* Fix bulk acties voor orders
+* Fix bulk acties voor orders in WooCommerce 8
 
 ## 1.6.2 - 2023-10-20 =
 * Fix automatisch aanmelden
