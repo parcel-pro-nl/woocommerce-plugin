@@ -1,7 +1,7 @@
 === Parcel Pro ===
 Tags: Shipping, Verzending, Pakketten, PostNL, DHL, DPD, UPS, Multi Carrier, Shops United Parcel Pro, Parcelpro
 Requires at least: 3.0.1
-Tested up to: 6.1.1
+Tested up to: 6.3.2
 Requires PHP: 5.2.4
 Stable tag: 1.6.2
 License: GPLv2 or later
