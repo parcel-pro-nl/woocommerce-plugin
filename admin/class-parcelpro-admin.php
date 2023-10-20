@@ -117,9 +117,10 @@ class Parcelpro_Admin
     {
         global $post_type;
 
-        if ($post_type == 'shop_order') {
+        // TODO: Check and fix this logic.
+//        if ($post_type == 'shop_order') {
             include(plugin_dir_path(__FILE__) . 'partials/parcelpro-admin-actions-bulk.php');
-        }
+//        }
     }
 
     /**
@@ -257,7 +258,6 @@ class Parcelpro_Admin
         }
         $action = $_REQUEST['action'];
 
-
         switch ($action) {
             case 'parcelpro-export':
                 if (empty($_GET['order_id'])) {
@@ -273,11 +273,11 @@ class Parcelpro_Admin
                 wp_redirect($_SERVER['HTTP_REFERER'], 301);
                 exit;
             case 'parcelpro-bulk-export':
-                if (empty($_GET['post'])) {
+                if (empty($_GET['id'])) {
                     wp_die('Er zijn geen order geselecteerd!');
                 }
 
-                $order_ids = $_GET['post'];
+                $order_ids = $_GET['id'];
 
                 foreach ($order_ids as $order_id) {
                     if (!$status = get_post_meta($order_id, '_parcelpro_status', true)) {
