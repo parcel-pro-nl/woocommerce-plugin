@@ -302,15 +302,15 @@ class Parcelpro_Admin
                 echo "<script>window.close();</script>";
                 exit;
             case 'parcelpro-bulk-label':
-                if (empty($_GET['post'])) {
+                if (empty($_GET['id'])) {
                     wp_die('Er zijn geen order geselecteerd!');
                 }
 
-                $order_ids = $_GET['post'];
+                $order_ids = $_GET['id'];
                 $url = null;
 
                 foreach ($order_ids as $order_id) {
-                    if ($status = get_post_meta($order_id, '_parcelpro_status', true)) {
+                    if (get_post_meta($order_id, '_parcelpro_status', true)) {
                         if (!$url) {
                             $url = $this->api->get_label(get_post_meta($order_id, '_parcelpro_id', true)) . '&selected[]=' . get_post_meta($order_id, '_parcelpro_id', true);
                         } else {
