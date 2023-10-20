@@ -117,7 +117,8 @@ class Parcelpro_Admin
     {
         global $post_type;
 
-        if ($post_type == 'shop_order') {
+        // Check for WooCommerce 7 and 8
+        if ($post_type == 'shop_order' || get_current_screen()->id == 'woocommerce_page_wc-orders') {
             include(plugin_dir_path(__FILE__) . 'partials/parcelpro-admin-actions-bulk.php');
         }
     }
@@ -257,7 +258,6 @@ class Parcelpro_Admin
         }
         $action = $_REQUEST['action'];
 
-
         switch ($action) {
             case 'parcelpro-export':
                 if (empty($_GET['order_id'])) {
@@ -273,11 +273,12 @@ class Parcelpro_Admin
                 wp_redirect($_SERVER['HTTP_REFERER'], 301);
                 exit;
             case 'parcelpro-bulk-export':
-                if (empty($_GET['post'])) {
+                // Check for WooCommerce 7 and 8
+                if (empty($_GET['post']) && empty($_GET['id'])) {
                     wp_die('Er zijn geen order geselecteerd!');
                 }
 
-                $order_ids = $_GET['post'];
+                $order_ids = empty($_GET['post']) ? $_GET['id'] : $_GET['post'];
 
                 foreach ($order_ids as $order_id) {
                     if (!$status = get_post_meta($order_id, '_parcelpro_status', true)) {
@@ -302,15 +303,16 @@ class Parcelpro_Admin
                 echo "<script>window.close();</script>";
                 exit;
             case 'parcelpro-bulk-label':
-                if (empty($_GET['post'])) {
+                // Check for WooCommerce 7 and 8
+                if (empty($_GET['post']) && empty($_GET['id'])) {
                     wp_die('Er zijn geen order geselecteerd!');
                 }
 
-                $order_ids = $_GET['post'];
+                $order_ids = empty($_GET['post']) ? $_GET['id'] : $_GET['post'];
                 $url = null;
 
                 foreach ($order_ids as $order_id) {
-                    if ($status = get_post_meta($order_id, '_parcelpro_status', true)) {
+                    if (get_post_meta($order_id, '_parcelpro_status', true)) {
                         if (!$url) {
                             $url = $this->api->get_label(get_post_meta($order_id, '_parcelpro_id', true)) . '&selected[]=' . get_post_meta($order_id, '_parcelpro_id', true);
                         } else {
