@@ -115,12 +115,9 @@ class Parcelpro_Admin
      */
     public function add_bulk_actions()
     {
-        global $post_type;
-
-        // TODO: Check and fix this logic.
-//        if ($post_type == 'shop_order') {
+        if (get_current_screen()->id == 'woocommerce_page_wc-orders') {
             include(plugin_dir_path(__FILE__) . 'partials/parcelpro-admin-actions-bulk.php');
-//        }
+        }
     }
 
     /**
