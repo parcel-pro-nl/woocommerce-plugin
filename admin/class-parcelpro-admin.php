@@ -164,7 +164,7 @@ class Parcelpro_Admin
                     $exploded_method = explode('_', $shipping_method);
                     if (count($exploded_method) > 1) {
                         if ($exploded_method[1] === 'maatwerk') {
-                            $service = $services[str_replace("parcelpro_", "", $shipping_method)];
+                            $service = $services[str_replace("parcelpro_", "", $shipping_method)] ?? null;
                             if (!$service) {
                                 $maatwerkServices = $services[$exploded_method[1] . '_' . $exploded_method[2]];
 
