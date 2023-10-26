@@ -6,29 +6,25 @@ on:
       - "*.*.*"
 
 jobs:
-  deploy-parcel-pro:
+  deploy:
     name: Deploy Parcel Pro
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Deploy
+      - name: Build
+        run: php build.php
+      - name: Deploy Parcel Pro
         uses: 10up/action-wordpress-plugin-deploy@stable
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: woo-parcel-pro
           ASSETS_DIR: .wordpress-parcel-pro
-  deploy-shops-united:
-    name: Deploy Shops United
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Deploy
+      - name: Deploy Shops United
         uses: 10up/action-wordpress-plugin-deploy@stable
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: woo-shops-united # TODO: Check this
-          ASSETS_DIR: .wordpress-shops-united
+          ASSETS_DIR: .wordpress-shops-united # TODO: Update assets to Shops United branding
