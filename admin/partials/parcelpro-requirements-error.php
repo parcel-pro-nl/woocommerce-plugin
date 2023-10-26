@@ -27,10 +27,16 @@
         </li>
         <li>
             <strong><?php echo PARCELPRO_NAME; ?> requires the plugin <a
-                        href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> to be active!</strong>
+                        href="https://wordpress.org/plugins/woocommerce/">WooCommerce</a> to be active!</strong>
+        </li>
+        <li>
+            <strong>WooCommerce <?php echo PARCELPRO_REQUIRED_WOOCOMMERCE_VERSION; ?>+</strong>
+            <?php if (defined('WOOCOMMERCE_VERSION')) { ?>
+            <em>(You're running version <?php echo esc_html(WOOCOMMERCE_VERSION); ?>)</em>
+            <?php } ?>
         </li>
     </ul>
     <p>If you need to upgrade your version of PHP you can ask your hosting company for assistance, and if you need help
-        upgrading WordPress you can refer to <a href="http://codex.wordpress.org/Upgrading_WordPress">the Codex</a>.</p>
+        upgrading WordPress you can refer to <a href="https://wordpress.org/documentation/article/updating-wordpress/">the WordPress update guide</a>.</p>
 </div>
 

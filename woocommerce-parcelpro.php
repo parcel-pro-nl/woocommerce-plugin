@@ -32,6 +32,7 @@ if (!defined('WPINC')) {
 define('PARCELPRO_NAME', 'WooCommerce Parcel Pro');
 define('PARCELPRO_REQUIRED_PHP_VERSION', '5.3');
 define('PARCELPRO_REQUIRED_WP_VERSION', '3.1');
+define('PARCELPRO_REQUIRED_WOOCOMMERCE_VERSION', '7.0');
 
 
 /**
@@ -51,7 +52,10 @@ function parcelpro_requirements_met()
     if (version_compare($wp_version, PARCELPRO_REQUIRED_WP_VERSION, '<')) {
         return false;
     }
-    if (( !in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins'))) ) && ( defined('WOOCOMMERCE_VERSION') && version_compare(WOOCOMMERCE_VERSION, PARCELPRO_REQUIRED_WP_VERSION, '<') )) {
+    if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+        return false;
+    }
+    if (defined('WOOCOMMERCE_VERSION') && version_compare(WOOCOMMERCE_VERSION, PARCELPRO_REQUIRED_WOOCOMMERCE_VERSION, '<')) {
         return false;
     }
 
