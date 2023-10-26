@@ -16,13 +16,13 @@ return array(
     'enabled'      => array(
         'title'   => 'Inschakelen',
         'type'    => 'checkbox',
-        'label'   => 'Parcel Pro Shipping inschakelen',
+        'label'   => PARCELPRO_SHOPSUNITED . ' Shipping inschakelen',
         'default' => 'no',
     ),
     'title'        => array(
         'title'   => __('Method Title', 'woocommerce'),
         'type'    => 'text',
-        'default' => 'Parcel Pro',
+        'default' => PARCELPRO_SHOPSUNITED,
     ),
     'availability' => array(
         'title'       => __('Method availability', 'woocommerce'),
@@ -52,7 +52,7 @@ return array(
         'type'         => 'text',
         'label'        => 'Voer hier uw ontvangen Gebruikers Id in.',
         'autocomplete' => 'off',
-        'description'  => 'Het Parcel Pro gebruikers id is te vinden op de accountpagina van het verzendsysteem.',
+        'description'  => 'Het ' . PARCELPRO_SHOPSUNITED . ' gebruikers id is te vinden op de accountpagina van het verzendsysteem.',
         'desc_tip'     => true
     ),
     'api_id'       => array(
@@ -60,13 +60,13 @@ return array(
         'type'         => 'text',
         'label'        => 'Voer hier uw ontvangen API Key in.',
         'autocomplete' => 'off',
-        'description'  => 'De Parcel Pro api key is te vinden op de instellingenpagina van het verzendsysteem.',
+        'description'  => 'De ' . PARCELPRO_SHOPSUNITED . ' api key is te vinden op de instellingenpagina van het verzendsysteem.',
         'desc_tip'     => true
     ),
     'auto_export'  => array(
         'title'       => 'Automatisch aanmelden',
         'type'        => 'checkbox',
-        'label'       => 'Automatisch aanmelden bij Parcel Pro inschakelen',
+        'label'       => 'Automatisch aanmelden bij ' . PARCELPRO_SHOPSUNITED . ' inschakelen',
         'default'     => 'no',
         'description' => 'Zending worden automatisch aangemeld na het bereiken van de status voltooid.',
         'desc_tip'    => true
@@ -91,9 +91,9 @@ return array(
     'export__update'  => array(
         'title'       => 'Status aanpassen',
         'type'        => 'checkbox',
-        'label'       => 'Status aanpassen wanneer order wordt aangemeld bij Parcel Pro',
+        'label'       => 'Status aanpassen wanneer order wordt aangemeld bij ' . PARCELPRO_SHOPSUNITED,
         'default'     => 'no',
-        'description' => 'Status aanpassen wanneer order wordt aangemeld bij Parcel Pro.',
+        'description' => 'Status aanpassen wanneer order wordt aangemeld bij ' . PARCELPRO_SHOPSUNITED,
         'desc_tip'    => true
     ),
     'export_update_to_state' => array(
@@ -102,7 +102,7 @@ return array(
         'default'     => 'wc-completed',
         'class'       => 'availability wc-enhanced-select',
         'options'     => wc_get_order_statuses(),
-        'description' => 'Indien de optie \'Aanmelden status aanpassen\' aangevinkt is zal bij het expliciet en automatisch voormelden naar Parcel Pro zal de order in Woocommerce automatisch op deze order status gezet worden.',
+        'description' => 'Indien de optie \'Aanmelden status aanpassen\' aangevinkt is zal bij het expliciet en automatisch voormelden naar ' . PARCELPRO_SHOPSUNITED . ' zal de order in Woocommerce automatisch op deze order status gezet worden.',
         'desc_tip'    => true
     ),
     'coupon_calculate'  => array(

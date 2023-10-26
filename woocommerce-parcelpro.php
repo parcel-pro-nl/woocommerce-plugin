@@ -34,6 +34,7 @@ define('PARCELPRO_REQUIRED_PHP_VERSION', '5.3');
 define('PARCELPRO_REQUIRED_WP_VERSION', '3.1');
 define('PARCELPRO_REQUIRED_WOOCOMMERCE_VERSION', '7.0');
 
+define('PARCELPRO_SHOPSUNITED', 'Parcel Pro');
 
 /**
  * Checks if the system requirements are met.
