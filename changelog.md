@@ -4,6 +4,9 @@ Changelog
 ParcelPro Shipment module voor WordPress / WooCommerce
 (c) Parcel Pro [parcelpro.nl]
 
+## 1.6.5 - 2023-10-26 =
+* Added a small filter to parcelshops
+
 ## 1.6.4 - 2023-10-25 =
 * Fix PHP warning met maatwerk verzendmethodes
 
