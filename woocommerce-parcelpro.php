@@ -55,9 +55,6 @@ function parcelpro_requirements_met()
     if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
         return false;
     }
-    if (defined('WOOCOMMERCE_VERSION') && version_compare(WOOCOMMERCE_VERSION, PARCELPRO_REQUIRED_WOOCOMMERCE_VERSION, '<')) {
-        return false;
-    }
 
     return true;
 }
