@@ -67,7 +67,7 @@ class Parcelpro
     public function __construct()
     {
         $this->plugin_name = 'parcelpro';
-        $this->version = '1.6.5';
+        $this->version = '1.6.6';
 
         $this->load_dependencies();
         $this->define_shipping_method();
