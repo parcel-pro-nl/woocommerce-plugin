@@ -154,6 +154,7 @@ class Parcelpro_Public
     public function set_checkout_meta($order_id)
     {
         if (!empty($_POST[ 'parcelpro_afhaalpunt' ])) {
+            // WooCommerce 7
             update_post_meta($order_id, '_parcelpro_afhaalpunt', 'yes');
             update_post_meta($order_id, '_shipping_company', $_POST[ 'parcelpro_company' ]);
             update_post_meta($order_id, '_shipping_first_name', $_POST[ 'parcelpro_first_name' ]);
@@ -163,6 +164,19 @@ class Parcelpro_Public
             update_post_meta($order_id, '_shipping_postcode', $_POST[ 'parcelpro_postcode' ]);
             update_post_meta($order_id, '_shipping_city', $_POST[ 'parcelpro_city' ]);
             update_post_meta($order_id, '_shipping_country', $_POST[ 'parcelpro_country' ]);
+
+            // WooCommerce 8
+            $order = wc_get_order($order_id);
+            $order->set_meta_data([ 'parcelpro_afhaalpunt' => 'yes' ]);
+            $order->set_shipping_company($_POST[ 'parcelpro_company' ]);
+            $order->set_shipping_first_name($_POST[ 'parcelpro_first_name' ]);
+            $order->set_shipping_last_name($_POST[ 'parcelpro_last_name' ]);
+            $order->set_shipping_address_1($_POST[ 'parcelpro_address_1' ]);
+            $order->set_shipping_address_2($_POST[ 'parcelpro_address_2' ]);
+            $order->set_shipping_postcode($_POST[ 'parcelpro_postcode' ]);
+            $order->set_shipping_city($_POST[ 'parcelpro_city' ]);
+            $order->set_shipping_country($_POST[ 'parcelpro_country' ]);
+            $order->save();
 
             $data = $_POST;
             $data[ 'order_id' ] = $order_id;
