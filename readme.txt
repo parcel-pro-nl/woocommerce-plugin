@@ -3,7 +3,7 @@ Tags: Shipping, Verzending, Pakketten, PostNL, DHL, DPD, UPS, Multi Carrier, Sho
 Requires at least: 3.0.1
 Tested up to: 6.3.2
 Requires PHP: 5.2.4
-Stable tag: 1.6.7
+Stable tag: 1.6.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,13 +24,16 @@ Deze wordt door de plugin aangeroepen als apply_filter('parcelpro_format_order_d
 Zie de handleiding voor meer details.
 
 == Changelog ==
-= 1.6.7 - 2023-10-31
+= 1.6.8 - 2023-10-31 =
+* Remove fragile requirements checks
+
+= 1.6.7 - 2023-10-31 =
 * Fix Parcelshops in WooCommerce 8
 
-= 1.6.6 - 2023-10-31
+= 1.6.6 - 2023-10-31 =
 * Fix requirements check
 
-= 1.6.5 - 2023-10-26
+= 1.6.5 - 2023-10-26 =
 * Added a small filter to parcelshops
 
 = 1.6.4 - 2023-10-25 =
