@@ -16,7 +16,7 @@
  * Plugin Name:     WooCommerce Parcel Pro
  * Plugin URI:      https://www.parcelpro.nl/koppelingen/woocommerce/
  * Description:     Geef klanten de mogelijkheid om hun pakket af te halen bij een afhaalpunt in de buurt. Daarnaast exporteert de plug-in uw zendingen direct in het verzendsysteem van Parcel Pro.
- * Version:         1.6.5
+ * Version:         1.6.6
  * Author:          Parcel Pro
  * Author URI:      https://www.parcelpro.nl/
  * License:         GPL-3.0+
@@ -53,9 +53,6 @@ function parcelpro_requirements_met()
         return false;
     }
     if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-        return false;
-    }
-    if (defined('WOOCOMMERCE_VERSION') && version_compare(WOOCOMMERCE_VERSION, PARCELPRO_REQUIRED_WOOCOMMERCE_VERSION, '<')) {
         return false;
     }
 
