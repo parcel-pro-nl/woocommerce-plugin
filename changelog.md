@@ -4,6 +4,9 @@ Changelog
 ParcelPro Shipment module voor WordPress / WooCommerce
 (c) Parcel Pro [parcelpro.nl]
 
+## 1.6.7 - 2023-10-31
+* Fix Parcelshops in WooCommerce 8
+
 ## 1.6.6 - 2023-10-31
 * Fix requirements check
 
