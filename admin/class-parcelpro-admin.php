@@ -143,15 +143,21 @@ class Parcelpro_Admin
      * Creates content for the order actions page
      *
      * @since    1.0.0
-     * @param $order WC_Order | null
+     * @param $order WC_Order | WP_Post | null
      */
     public function create_box_content($order)
     {
         global $post_id;
 
         $order_id = $post_id;
-        if (!$order_id && $order) {
+        if ($order instanceof WC_Order) {
             $order_id = $order->get_id();
+
+            // In WooCommerce 8, orders are automatically saved as a draft.
+            // So we need to check if this is an automatic draft or not.
+            if ($order->get_status() === 'auto-draft') {
+                $order_id = null;
+            }
         }
 
         $label_link = wp_nonce_url(admin_url('edit.php?&action=parcelpro-label&order_id=' . $order_id), 'parcelpro-label');
