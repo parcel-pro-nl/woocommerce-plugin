@@ -4,6 +4,9 @@ Changelog
 ParcelPro Shipment module voor WordPress / WooCommerce
 (c) Parcel Pro [parcelpro.nl]
 
+## 1.6.9 - 2023-11-02 =
+* Fix actions on edit order screen in WooCommerce 8
+
 ## 1.6.8 - 2023-10-31 =
 * Remove fragile requirements checks
 
