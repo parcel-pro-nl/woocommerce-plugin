@@ -133,10 +133,9 @@ class Parcelpro_Admin
         add_meta_box(
             'parcelpro',
             'Parcel Pro',
-            array($this, 'create_box_content'),
-            'shop_order',
-            'side',
-            'default'
+            [$this, 'create_box_content'],
+            ['shop_order', 'woocommerce_page_wc-orders'],
+            'side'
         );
     }
 
