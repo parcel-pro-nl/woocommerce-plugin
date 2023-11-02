@@ -114,20 +114,6 @@
         return return_value;
     }
 
-    //DEPRECATED VERSION, USED TO CHECK LABEL BASED ON HARDCODED LABEL NAMES
-    function label_like_punten(label){
-        var process  = label.toLowerCase();
-        var types = ['parcelconnect','parcel connect','pakjegemak','afhaalpunt','afhaalpunten','afhalen','parcelshop','ophalen'];
-        var return_value = false;
-        types.forEach(function(e){
-            if(process.includes(e)){
-                return_value =  true;
-            }
-        });
-
-        return return_value;
-    }
-
     function popup_submit(data) {
         var shippingmethod = $("ul[id='shipping_method']").find('input:checked')[0].id.split('_');
 
