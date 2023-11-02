@@ -132,7 +132,7 @@ class Parcelpro_Admin
     {
         add_meta_box(
             'parcelpro',
-            'Parcel Pro',
+            PARCELPRO_SHOPSUNITED,
             array($this, 'create_box_content'),
             'shop_order',
             'side',

@@ -68,7 +68,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
         $this->api = new ParcelPro_API();
 
         $this->id = 'parcelpro_shipping';
-        $this->method_title = 'Parcel Pro';
+        $this->method_title = PARCELPRO_SHOPSUNITED;
         $this->method_description = 'Afhalen van een bestelling bij een door de klant gekozen afhaalpunt.';
         ;
 
