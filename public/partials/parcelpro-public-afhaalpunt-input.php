@@ -34,7 +34,8 @@
         url += '&software=woocommerce';
         return url
     }
-    jQuery(document).ready(function($) {
+    window.addEventListener('load', function () {
+        const $ = jQuery;
         $( document ).ready(function(){
             var targetElement = $('form[name*="checkout"]');
             $('.parcelpro-checkout-form').detach().appendTo(targetElement);

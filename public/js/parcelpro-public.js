@@ -2,43 +2,52 @@
     'use strict';
 
     $(document).ready(function () {
+        // For the standard WooCommerce checkout.
         $("#order_review").change(function (event) {
             var target = $(event.target);
             if (target.hasClass('shipping_method')) {
-                if ($("input[id*='pakjegemak']").is(":checked")) {
-                    $('#modal').show();
-                    $('#afhaalpunt_frame').attr('src', set_url() + '&carrier=PostNL');
-                }
-                else if ($("input[id*='dhl_parcelshop']").is(":checked")) {
-                    $('#modal').show();
-                    $('#afhaalpunt_frame').attr('src', set_url() + '&carrier=DHL');
-                }
-                else if ($("input[id*='homerr']").is(":checked")) {
-                    $('#modal').show();
-                    $('#afhaalpunt_frame').attr('src', set_url() + '&carrier=Homerr');
-                }
-                else if($("input").is(":checked")){
-                    var checked_method = $("input:checked[class*=shipping_method]");
-                    if(id_like_punten(checked_method.attr('id'))&& checked_method && checked_method.attr('id').includes("parcelpro")){
-                        $('#modal').show();
-                        $('#afhaalpunt_frame').attr('src', set_url() + '&typeId=' + encodeURI(checked_method.attr('id')));
-                    }else{
-                        $('#parcelpro_afhaalpunt').val('');
-                    }
-                }
-                else {
-                    $('#parcelpro_afhaalpunt').val('');
-                }
+                setModalSrcFromShippingInput();
             }
         });
         $(document).on("click", "input[class='shipping_method']", function () {
             popup_show();
+        });
+        // For the WooCommerce blocks checkout.
+        $("#shipping-option").change(function () {
+            setModalSrcFromShippingInput();
         });
     });
 
     $(window).on('load', function () {
         popup_show();
     });
+
+    function setModalSrcFromShippingInput() {
+        if ($("input[id*='pakjegemak']").is(":checked")) {
+            $('#modal').show();
+            $('#afhaalpunt_frame').attr('src', set_url() + '&carrier=PostNL');
+        }
+        else if ($("input[id*='dhl_parcelshop']").is(":checked")) {
+            $('#modal').show();
+            $('#afhaalpunt_frame').attr('src', set_url() + '&carrier=DHL');
+        }
+        else if ($("input[id*='homerr']").is(":checked")) {
+            $('#modal').show();
+            $('#afhaalpunt_frame').attr('src', set_url() + '&carrier=Homerr');
+        }
+        else if($("input").is(":checked")){
+            var checked_method = $("input:checked[class*=shipping_method]");
+            if(id_like_punten(checked_method.attr('id'))&& checked_method && checked_method.attr('id').includes("parcelpro")){
+                $('#modal').show();
+                $('#afhaalpunt_frame').attr('src', set_url() + '&typeId=' + encodeURI(checked_method.attr('id')));
+            }else{
+                $('#parcelpro_afhaalpunt').val('');
+            }
+        }
+        else {
+            $('#parcelpro_afhaalpunt').val('');
+        }
+    }
 
     function popup_show() {
         if ($("input[id*='pakjegemak']").is(":checked")) {
@@ -121,6 +130,8 @@
 
     function popup_submit(data) {
         var shippingmethod = $("ul[id='shipping_method']").find('input:checked')[0].id.split('_');
+
+        // TODO: this doesn't work with block checkout.
 
         if ($.inArray( data.Vervoerder.toLowerCase(), shippingmethod ) == -1 && ($.inArray( "maatwerk", shippingmethod ) == -1 )) {
             $('form[name="checkout"]').find('input[name*="parcelpro"]').val('');
