@@ -143,18 +143,24 @@ class Parcelpro_Admin
      * Creates content for the order actions page
      *
      * @since    1.0.0
+     * @param $order WC_Order | null
      */
-    public function create_box_content()
+    public function create_box_content($order)
     {
         global $post_id;
 
-        $label_link = wp_nonce_url(admin_url('edit.php?&action=parcelpro-label&order_id=' . $post_id), 'parcelpro-label');
-        $track_link = wp_nonce_url(admin_url('edit.php?&action=parcelpro-track&order_id=' . $post_id), 'parcelpro-track');
-        $ship_link = wp_nonce_url(admin_url('edit.php?&action=parcelpro-export&order_id=' . $post_id), 'parcelpro-export');
-        $package_link = wp_nonce_url(admin_url('edit.php?&action=parcelpro-package&order_id=' . $post_id), 'parcelpro-package');
+        $order_id = $post_id;
+        if (!$order_id && $order) {
+            $order_id = $order->get_id();
+        }
 
-        if ($post_id) {
-            $data_order = $this->format_order_data($post_id);
+        $label_link = wp_nonce_url(admin_url('edit.php?&action=parcelpro-label&order_id=' . $order_id), 'parcelpro-label');
+        $track_link = wp_nonce_url(admin_url('edit.php?&action=parcelpro-track&order_id=' . $order_id), 'parcelpro-track');
+        $ship_link = wp_nonce_url(admin_url('edit.php?&action=parcelpro-export&order_id=' . $order_id), 'parcelpro-export');
+        $package_link = wp_nonce_url(admin_url('edit.php?&action=parcelpro-package&order_id=' . $order_id), 'parcelpro-package');
+
+        if ($order_id) {
+            $data_order = $this->format_order_data($order_id);
             if (is_array($data_order)) {
                 if (array_key_exists('shipping_method', $data_order)) {
                     $options = get_option('woocommerce_parcelpro_shipping_settings');
@@ -198,12 +204,12 @@ class Parcelpro_Admin
                 }
             }
 
-            if ($status = get_post_meta($post_id, '_parcelpro_status', true)) {
-                if ($shipmentId = get_post_meta($post_id, '_parcelpro_id', true)) {
+            if ($status = get_post_meta($order_id, '_parcelpro_status', true)) {
+                if ($shipmentId = get_post_meta($order_id, '_parcelpro_id', true)) {
                     $shipment = json_decode($this->api->shipments($shipmentId), true);
 
                     if (isset($shipment[0]['TrackingUrl'])) {
-                        update_post_meta($post_id, '_parcelpro_track_url', $shipment[0]['TrackingUrl']);
+                        update_post_meta($order_id, '_parcelpro_track_url', $shipment[0]['TrackingUrl']);
                     }
 
                     include(plugin_dir_path(__FILE__) . 'partials/parcelpro-admin-order-actions-after.php');
