@@ -16,6 +16,10 @@
         $("#shipping-option").change(function () {
             setModalSrcFromShippingInput();
         });
+        // TODO: This also shows the parcelshop modal when switching back to e.g. PostNL.
+        $(document).on("click", "#shipping-option label", function () {
+            popup_show();
+        });
     });
 
     $(window).on('load', function () {
@@ -115,9 +119,12 @@
     }
 
     function popup_submit(data) {
-        var shippingmethod = $("ul[id='shipping_method']").find('input:checked')[0].id.split('_');
+        let shippingmethod = $("ul[id='shipping_method']").find('input:checked')[0]?.id.split('_');
 
-        // TODO: this doesn't work with block checkout.
+        // For the blocks checkout.
+        if (!shippingmethod) {
+            shippingmethod = $("#shipping-option").find('input:checked')[0].value.split('_');
+        }
 
         if ($.inArray( data.Vervoerder.toLowerCase(), shippingmethod ) == -1 && ($.inArray( "maatwerk", shippingmethod ) == -1 )) {
             $('form[name="checkout"]').find('input[name*="parcelpro"]').val('');
@@ -148,13 +155,13 @@
 
         if (data.LocationType.toLowerCase() == "dhl parcelshop") {
             var label = $('label[for*="parcelshop"]');
-            console.log(label);
             var price = $('span', label);
             var priceHtml = price.clone().prop('outerHTML');
 
             if(priceHtml === undefined) priceHtml = '';
 
             $('#parcelpro_afhaalpunt').val('DHL');
+            // TODO: These html calls overwrite too much in the blocks checkout.
             $(label).html(data.LocationType + ": " + data.Name + " " + priceHtml);
         }
 
