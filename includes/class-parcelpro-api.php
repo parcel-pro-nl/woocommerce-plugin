@@ -229,6 +229,7 @@ class ParcelPro_API
             "Ordernummer" => $data[ 'order_id' ],
             "Carrier"     => $data[ 'parcelpro_afhaalpunt' ],
             "LocationId"  => $data[ 'parcelpro_company' ],
+            'software'    => 'woocommerce'
         );
 
         curl_setopt($curl, CURLOPT_POST, 1);
