@@ -30,6 +30,7 @@ Voor alle historischer veranderingen en updates, zie de [changelog](changelog.md
 ## Development
 
 Deze repository bevat de code voor de "Parcel Pro" _en_ "Shops United" plugins.
+Deze zijn functioneel hetzelfde, maar worden gepubliceerd met aparte branding.
 Om de code te bouwen, run:
 
 ```shell
@@ -38,10 +39,15 @@ composer build
 php build.php
 ```
 
+Hier worden een aantal bestanden als template gebruikt, waar vervolgens 2 versies van gegenereerd worden:
+
+- `bootstrap-template.php`: De plugin bootstrap file die ingelezen wordt door WordPress.
+- `readme.txt.hbs`: De readme voor de WordPress plugin registry.
+
 ### Publiceren
 
 Om nieuwe versies van de plugins te publiceren maken we een nieuwe tag vanaf `main`.
 Dit is eenvoudig te doen via de [releases pagina](https://github.com/parcel-pro-nl/woocommerce-plugin/releases) op GitHub.
 
 De WordPress assets bevinden zich in de `.wordpress-parcel-pro` en `.wordpress-shops-united` mappen.
-Deze worden automatisch gepubliceerd in de WordPress plugin registry vanaf de `main` branch. 
+Deze worden automatisch gepubliceerd in de WordPress plugin registry vanaf de `main` branch.

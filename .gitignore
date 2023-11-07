@@ -7,3 +7,5 @@ composer.lock
 
 # Generated code
 woocommerce-shopsunited.php
+readme.txt
+readme-*.txt

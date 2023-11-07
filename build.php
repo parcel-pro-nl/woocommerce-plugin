@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-const BOOTSTRAP_TEMPLATE = 'bootstrap.php.hbs';
+const BOOTSTRAP_TEMPLATE = 'bootstrap-template.php';
 const TEMPLATE_VARS = 'template-vars.json';
 
 // Load the template vars from the file.
@@ -15,9 +15,21 @@ $composerVersion = $composerJson['version'];
 $templateVars['parcelpro']['version'] = $composerVersion;
 $templateVars['shopsunited']['version'] = $composerVersion;
 
-$pp = processTemplate(BOOTSTRAP_TEMPLATE, 'woocommerce-parcelpro.php', $templateVars['parcelpro']);
+// All template files that should be created.
+// The `{{name}}` placeholder will be replaced by the target plugin name.
+$templateFiles = [
+    'bootstrap-template.php' => 'woocommerce-{{name}}.php',
+    'readme.txt.hbs' => 'readme-{{name}}.txt',
+];
 
-$su = processTemplate(BOOTSTRAP_TEMPLATE, 'woocommerce-shopsunited.php', $templateVars['shopsunited']);
+// Process all template files.
+foreach ($templateFiles as $in => $out) {
+    // Process the Parcel Pro template file.
+    processTemplate($in, str_replace('{{name}}', 'parcelpro', $out), $templateVars['parcelpro']);
+
+    // Process the Shops United template file.
+    processTemplate($in, str_replace('{{name}}', 'shopsunited', $out), $templateVars['shopsunited']);
+}
 
 function processTemplate($templateFile, $outputFile, $context)
 {
