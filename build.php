@@ -7,6 +7,27 @@ const TEMPLATE_FILES = [
     'readme.txt.hbs' => 'readme-{{name}}.txt',
 ];
 
+// The possible plugin outputs.
+const PLUGIN_TYPES = [
+    'parcelpro',
+    'shopsunited'
+];
+
+$pluginArg = null;
+
+// Check if an argument is given, and if so, if it is valid.
+if ($argc >= 2) {
+    $pluginArg = $argv[1];
+    if (!in_array($pluginArg, PLUGIN_TYPES, true)) {
+        echo "Invalid argument: '$pluginArg'. Please use 'parcelpro', 'shopsunited', or no argument.\n";
+        exit(1);
+    }
+
+    echo "Building plugin for $pluginArg\n";
+} else {
+    echo "Building plugin for " . implode(', ', PLUGIN_TYPES) . "\n";
+}
+
 // Load the template vars from the file.
 $templateVars = json_decode(file_get_contents('template-vars.json'), true);
 
@@ -22,11 +43,19 @@ $templateVars['shopsunited']['changelog'] = $changelog;
 
 // Process all template files.
 foreach (TEMPLATE_FILES as $in => $out) {
-    // Process the Parcel Pro template file.
-    processTemplate($in, str_replace('{{name}}', 'parcelpro', $out), $templateVars['parcelpro']);
+    foreach (PLUGIN_TYPES as $type) {
+        // If we have an argument, only build that plugin variant.
+        if ($pluginArg && $type !== $pluginArg) {
+            continue;
+        }
 
-    // Process the Shops United template file.
-    processTemplate($in, str_replace('{{name}}', 'shopsunited', $out), $templateVars['shopsunited']);
+        processTemplate($in, str_replace('{{name}}', $type, $out), $templateVars[$type]);
+    }
+}
+
+// If we are building a single plugin type, ensure the files are in the right place for deployment.
+if ($pluginArg) {
+    rename("readme-$pluginArg.txt", 'readme.txt');
 }
 
 function processTemplate($templateFile, $outputFile, $context)
