@@ -6,6 +6,6 @@ composer.lock
 .idea/
 
 # Generated code
-woocommerce-shopsunited.php
+woocommerce-*.php
 readme.txt
 readme-*.txt
