@@ -22,7 +22,6 @@ composerVersion=$(jq -r .version 'composer.json')
 checkVersionMatch 'composer.json' "$composerVersion"
 
 checkVersionMatch 'changelog.md' "$(sed -nE 's/^## (.*) -.*$/\1/p' 'changelog.md' | head -n 1)"
-checkVersionMatch 'includes/class-parcelpro.php' "$(sed -nE "s/^.*this->version = '(.*)';$/\1/p" 'includes/class-parcelpro.php')"
 
 if [ ! "$allMatch" = 1 ]
 then

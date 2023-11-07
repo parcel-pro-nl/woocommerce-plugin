@@ -30,6 +30,7 @@ if (!defined('WPINC')) {
 }
 
 define('PARCELPRO_NAME', 'WooCommerce Parcel Pro');
+define('PARCELPRO_VERSION', '1.6.9');
 define('PARCELPRO_REQUIRED_PHP_VERSION', '5.3');
 define('PARCELPRO_REQUIRED_WP_VERSION', '3.1');
 define('PARCELPRO_REQUIRED_WOOCOMMERCE_VERSION', '7.0');
