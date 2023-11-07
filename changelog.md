@@ -204,13 +204,13 @@
 ## 1.4.3 - 2019-06-19
 * Fix: Files
 
-## V.1.4.2
+## 1.4.2
 * Gekozen parcelshop
 
-## V.1.4.1
+## 1.4.1
 * Verzendopties achteraf via de backend wijzigen.
 
-## V.1.4.0
+## 1.4.0
 * Verzendopties achteraf via de backend wijzigen.
 * E-mail variabelen
 
@@ -218,40 +218,40 @@
 * Nieuw: Module in repository Wordpress
 * Fix: Tonen van de verzendmethoden bij het afrekenen
 
-## V.1.2.8
+## 1.2.8
 * PostNL Handtekening voor ontvangst ook bij buren.
 * Fix Type aanroep via API.
 
-## V.1.2.7
+## 1.2.7
 * Fix m.b.t. Woocommerce check
 
-## V.1.2.6
+## 1.2.6
 * Fix m.b.t. php 7 'A non-numeric value encountered'
 
-## V.1.2.5
+## 1.2.5
 * Fix m.b.t. array_merge
 
-## V.1.2.4
+## 1.2.4
 * VSP Brievenbuspakketje
 * Compatible wordpress 3.9 // Woocommerce 3.2.4
 * array_key_exists() error bij nieuwe installatie.
 * Auto export na status
 * Same day
 
-## V.1.2.3
+## 1.2.3
 * Order items ophalen in woocommerce 3.x
 
-## V.1.2.2
+## 1.2.2
 * Controle of gekozen afhaalpunt ook hetzelfde is als de vervoerder van de verzendmethode.
 
-## V.1.2.1
+## 1.2.1
 * Soorteren van Parcel Pro verzendmethodes.
 * Openen van popup bij het laden van het scherm wanneer een verzendmethode met afhaalpunt is geselecteerd.
 * Wanneer verzendmethode met afhaalpunt gratis is geen undefined prijs.
 * Lege titels in een rule krijgen een standaard titel.
 * "Add Rule" button type gegeven tegen aanpassen input.
 
-## V.1.2.0
+## 1.2.0
 * Verzendoptie Brievenbuspakketje voor DHL en PostNL.
 * Mogelijkheid om eigen titel mee te geven aan verzendmethode.
 * Aanmelden van een zending bij Parcel Pro bij een specifieke statuss.
@@ -259,24 +259,24 @@
 * Openen van popup voor het kiezen van een afhaalpunt wanneer betalingsmethode veranderd.
 * Verkeerd weergeven van prijs bij het kiezen van een afhaalpunt.
 
-## V.1.1.4
+## 1.1.4
 * Validatie van ingevoerde prijs en gewichten, fixt bug met variable btw.
 
-## V.1.1.3
+## 1.1.3
 * Quantity van producten bij bepalen gewicht zending en methodes.
 
-## V.1.1.2
+## 1.1.2
 * Ondersteuning voor WooCommerce Sequential Order Numbers plugin
 
-## V.1.1.1
+## 1.1.1
 * Bugfix m.b.t. automatisch aanmelden
 * Klikgedrag afhaallocatie frame
 
-## V.1.1.0
+## 1.1.0
 * BTW tarief in winkelwagen
 * Ondersteuning voor DHL, DPD, PostNL en UPS
 
-## V.1.0.0
+## 1.0.0
 * Verzendmethoden aanmaken
 * Bestellingen aanmelden in het verzendsysteem
 * Verzendlabel afdrukken

@@ -56,9 +56,11 @@ function getAndProcessChangelog()
 {
     $changelog = file_get_contents('changelog.md');
 
+    // Change the header formatting.
     $changelog = str_replace('# Changelog', '== Changelog ==', $changelog);
 
-    // TODO: Replace entries with proper formatting
+    // Change the formatting of all entries.
+    $changelog = preg_replace('/^## (.*)$/m', '= $1 =', $changelog);
 
     return $changelog;
 }
