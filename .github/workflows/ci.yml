@@ -6,12 +6,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Restore cache
+        uses: actions/cache@v3
         with:
           path: /tmp/composer-cache
           key: ${{ runner.os }}-${{ hashFiles('composer.json') }}
-      - uses: php-actions/composer@v6
+      - name: Install dependencies
+        uses: php-actions/composer@v6
         with:
           args: --ignore-platform-reqs
-      - run: composer cs:check
+      - name: Check code style
+        run: composer cs:check
+      - name: Run build
+        run: php build.php

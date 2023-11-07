@@ -1,5 +1,5 @@
 === Parcel Pro ===
-Tags: Shipping, Verzending, Pakketten, PostNL, DHL, DPD, UPS, Multi Carrier, Shops United Parcel Pro, Parcelpro
+Tags: Shipping, Verzending, Pakketten, PostNL, DHL, DPD, UPS, Multi Carrier, Shops United, Shopsunited, Parcel Pro, Parcelpro
 Requires at least: 3.0.1
 Tested up to: 6.3.2
 Requires PHP: 5.2.4
