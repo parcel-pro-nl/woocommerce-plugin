@@ -165,25 +165,25 @@
 * Verbeterde documentatie voor custom hooks; zie read me.
 
 ## 1.5.11
-*  Update voor nieuwe versie van Woocommerce
+* Update voor nieuwe versie van Woocommerce
 
 ## 1.5.10
-*  Update voor nieuwe versie van Woocommerce
+* Update voor nieuwe versie van Woocommerce
 
 ## 1.5.9
-*  Update voor nieuwe versie van Woocommerce
+* Update voor nieuwe versie van Woocommerce
 
 ## 1.5.8
-*  Update voor nieuwe versie van Woocommerce
+* Update voor nieuwe versie van Woocommerce
 
 ## 1.5.7
-*  Update voor nieuwe versie van Woocommerce
+* Update voor nieuwe versie van Woocommerce
 
 ## 1.5.6
-*  Update voor nieuwe versie van Woocommerce
+* Update voor nieuwe versie van Woocommerce
 
 ## 1.5.5
-*   Variatie ID s die verkeerd werden opgehaald via oude methode nu verhopen.
+* Variatie ID s die verkeerd werden opgehaald via oude methode nu verhopen.
 
 ## 1.5.4
 * Handmatige orders kunnen nu correct aangemaakt worden met een verzendmethode.
