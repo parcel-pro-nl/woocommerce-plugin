@@ -2,8 +2,11 @@ name: Deploy to WordPress.org
 
 on:
   push:
-    tags:
-      - "*.*.*"
+    branches:
+      - separate-shops-united-plugin
+# TODO: Uncomment this after testing is done.
+#    tags:
+#      - "*.*.*"
 
 jobs:
   deploy-parcelpro:
@@ -18,15 +21,18 @@ jobs:
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: woo-parcel-pro
           ASSETS_DIR: .wordpress-parcel-pro
-  deploy-shopsunited:
-    name: Deploy Shops United
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: composer build:shopsunited
-      - uses: 10up/action-wordpress-plugin-deploy@stable
-        env:
-          SVN_USERNAME: ${{ vars.SVN_USERNAME }}
-          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SLUG: woo-shops-united # TODO: Check this
-          ASSETS_DIR: .wordpress-shops-united # TODO: Update assets to Shops United branding
+          VERSION: 1.6.9-dev
+        with:
+          dry-run: true
+#  deploy-shopsunited:
+#    name: Deploy Shops United
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: composer build:shopsunited
+#      - uses: 10up/action-wordpress-plugin-deploy@stable
+#        env:
+#          SVN_USERNAME: ${{ vars.SVN_USERNAME }}
+#          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+#          SLUG: woo-shops-united # TODO: Check this
+#          ASSETS_DIR: .wordpress-shops-united # TODO: Update assets to Shops United branding
