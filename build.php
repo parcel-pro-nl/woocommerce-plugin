@@ -1,29 +1,27 @@
-#!/usr/bin/env php
 <?php
-
-const BOOTSTRAP_TEMPLATE = 'bootstrap-template.php';
-const TEMPLATE_VARS = 'template-vars.json';
-
-// Load the template vars from the file.
-$templateVars = json_decode(file_get_contents(TEMPLATE_VARS), true);
-
-// Read the current version from composer.json.
-$composerJson = json_decode(file_get_contents('composer.json'), true);
-$composerVersion = $composerJson['version'];
-
-// Add the version number to the template vars.
-$templateVars['parcelpro']['version'] = $composerVersion;
-$templateVars['shopsunited']['version'] = $composerVersion;
 
 // All template files that should be created.
 // The `{{name}}` placeholder will be replaced by the target plugin name.
-$templateFiles = [
+const TEMPLATE_FILES = [
     'bootstrap-template.php' => 'woocommerce-{{name}}.php',
     'readme.txt.hbs' => 'readme-{{name}}.txt',
 ];
 
+// Load the template vars from the file.
+$templateVars = json_decode(file_get_contents('template-vars.json'), true);
+
+// Read the current version from composer.json and add it to the template vars.
+$composerJson = json_decode(file_get_contents('composer.json'), true);
+$templateVars['parcelpro']['version'] = $composerJson['version'];
+$templateVars['shopsunited']['version'] = $composerJson['version'];
+
+// Read the changelog and add it to the template vars.
+$changelog = getAndProcessChangelog();
+$templateVars['parcelpro']['changelog'] = $changelog;
+$templateVars['shopsunited']['changelog'] = $changelog;
+
 // Process all template files.
-foreach ($templateFiles as $in => $out) {
+foreach (TEMPLATE_FILES as $in => $out) {
     // Process the Parcel Pro template file.
     processTemplate($in, str_replace('{{name}}', 'parcelpro', $out), $templateVars['parcelpro']);
 
@@ -52,4 +50,15 @@ function processTemplate($templateFile, $outputFile, $context)
 
     // Write the generated output file.
     file_put_contents($outputFile, $result);
+}
+
+function getAndProcessChangelog()
+{
+    $changelog = file_get_contents('changelog.md');
+
+    $changelog = str_replace('# Changelog', '== Changelog ==', $changelog);
+
+    // TODO: Replace entries with proper formatting
+
+    return $changelog;
 }
