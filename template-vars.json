@@ -1,0 +1,12 @@
+{
+  "parcelpro": {
+    "name": "Parcel Pro",
+    "link": "https://parcelpro.nl/",
+    "pluginUri": "https://www.parcelpro.nl/koppelingen/woocommerce/"
+  },
+  "shopsunited": {
+    "name": "Shops United",
+    "link": "https://shops-united.nl/",
+    "pluginUri": "https://shops-united.nl/koppelingen/woocommerce/"
+  }
+}
