@@ -2,11 +2,15 @@
   "parcelpro": {
     "name": "Parcel Pro",
     "link": "https://parcelpro.nl/",
-    "pluginUri": "https://www.parcelpro.nl/koppelingen/woocommerce/"
+    "pluginUri": "https://www.parcelpro.nl/koppelingen/woocommerce/",
+    "supportManual": "https://support.parcelpro.nl/koppelingen/woocommerce-handleiding",
+    "supportEmail": "ict@parcelpro.nl"
   },
   "shopsunited": {
     "name": "Shops United",
     "link": "https://shops-united.nl/",
-    "pluginUri": "https://shops-united.nl/koppelingen/woocommerce/"
+    "pluginUri": "https://shops-united.nl/koppelingen/woocommerce/",
+    "supportManual": "https://support.shops-united.nl/koppelingen/woocommerce-handleiding",
+    "supportEmail": "ict@shops-united.nl"
   }
 }

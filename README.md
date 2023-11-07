@@ -44,6 +44,8 @@ Hier worden een aantal bestanden als template gebruikt, waar vervolgens 2 versie
 - `bootstrap-template.php`: De plugin bootstrap file die ingelezen wordt door WordPress.
 - `readme.txt.hbs`: De readme voor de WordPress plugin registry.
 
+De template variabelen die gebruikt worden staan in `template-vars.json`.
+
 ### Publiceren
 
 Om nieuwe versies van de plugins te publiceren maken we een nieuwe tag vanaf `main`.

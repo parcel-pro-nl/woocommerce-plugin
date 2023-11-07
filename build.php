@@ -37,7 +37,7 @@ function processTemplate($templateFile, $outputFile, $context)
     $result = file_get_contents($templateFile);
 
     // Get all placeholders that are used in the template.
-    preg_match_all('/{{(.*)}}/', $result, $regexOut);
+    preg_match_all('/{{(.*?)}}/', $result, $regexOut);
     $keys = array_unique($regexOut[1]);
 
     // Replace all key placeholders with the value from the context.
