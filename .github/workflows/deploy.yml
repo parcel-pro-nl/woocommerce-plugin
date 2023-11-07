@@ -32,7 +32,7 @@ jobs:
 #      - run: composer build:shopsunited
 #      - uses: 10up/action-wordpress-plugin-deploy@stable
 #        env:
-#          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+#          SVN_USERNAME: ${{ vars.SVN_USERNAME }}
 #          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
 #          SLUG: woo-shops-united # TODO: Check this
 #          ASSETS_DIR: .wordpress-shops-united # TODO: Update assets to Shops United branding

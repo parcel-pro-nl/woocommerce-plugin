@@ -4,6 +4,7 @@
 .git
 .github
 .gitignore
+README.md
 
 # WordPress assets
 .wordpress-parcel-pro
