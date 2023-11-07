@@ -6,24 +6,26 @@ on:
       - main
 
 jobs:
-  assets:
-    name: Update assets
+  assets-parcelpro:
+    name: Assets Parcel Pro
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Build
-        run: php build.php
-      - name: Update Parcel Pro assets
-        uses: 10up/action-wordpress-plugin-asset-update@stable
+      - uses: actions/checkout@v3
+      - run: php build.php
+      - uses: 10up/action-wordpress-plugin-asset-update@stable
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: woo-parcel-pro
           ASSETS_DIR: .wordpress-parcel-pro
           IGNORE_OTHER_FILES: true
-      - name: Update Shops United assets
-        uses: 10up/action-wordpress-plugin-asset-update@stable
+  assets-shopsunited:
+    name: Assets Shops United
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: php build.php
+      - uses: 10up/action-wordpress-plugin-asset-update@stable
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
