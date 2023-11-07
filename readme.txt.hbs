@@ -16,10 +16,10 @@ Bij vragen kunt u contact opnemen via [info@parcelpro.nl](mailto:info@parcelpro.
 == Custom Hooks ==
 Mocht u gebruik maken van een custom check out, dan zou het mogelijk kunnen zijn dat de developer hiervoor de standaard velden van Woocommerce aangepast heeft.
 
-Om aan de gegevens die naar Parcel Pro verstuurd worden toch alle nieuwe gegevens toe te voegen, kan gebruikt worden van de volgende custom hook:
-'parcelpro_format_order_data'
+Om aan de gegevens die naar Parcel Pro verstuurd worden toch alle nieuwe gegevens toe te voegen, kan deze custom hook gebruikt worden:
+`parcelpro_format_order_data`.
 
-Deze wordt door de plugin aangeroepen als apply_filter('parcelpro_format_order_data',$data), met alle verzendgegevens die verstuurd gaan worden naar Parcel Pro in de $data.
+Deze wordt door de plugin aangeroepen als `apply_filter('parcelpro_format_order_data', $data);`, met alle verzendgegevens die verstuurd gaan worden naar Parcel Pro in de `$data`.
 
 Zie de handleiding voor meer details.
 

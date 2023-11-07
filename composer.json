@@ -18,6 +18,7 @@
     }
   ],
   "scripts": {
+    "build": "php build.php",
     "cs:check": "phpcs",
     "cs:fix": "phpcbf"
   },
