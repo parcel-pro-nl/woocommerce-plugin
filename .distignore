@@ -1,0 +1,26 @@
+# See: https://github.com/10up/action-wordpress-plugin-deploy#excluding-files-from-deployment
+
+# Git and GitHub files
+.git
+.github
+.gitignore
+README.md
+
+# WordPress assets
+.wordpress-parcel-pro
+.wordpress-shops-united
+
+# Composer
+vendor/
+
+# CI-related files
+.distignore
+check-versions.sh
+phpcs.xml
+
+# Build and template files
+bootstrap-template.php
+build.php
+readme.txt.hbs
+readme-*.txt
+template-vars.json

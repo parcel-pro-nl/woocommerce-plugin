@@ -13,8 +13,8 @@
  */
 
 ?>
-<a href="<?php echo $ship_link; ?>" class="button tips parcelpro-export" alt="Aanmelden bij Parcel Pro" data-tip="Aanmelden bij Parcel Pro">
-    <img src="<?php echo dirname(plugin_dir_url(__FILE__)) . '/images/arrows.svg'; ?>" style="height: 16px; width: 12px;" alt="Aanmelden bij Parcel Pro">
+<a href="<?php echo $ship_link; ?>" class="button tips parcelpro-export" alt="Aanmelden bij <?= PARCELPRO_SHOPSUNITED ?>" data-tip="Aanmelden bij <?= PARCELPRO_SHOPSUNITED ?>">
+    <img src="<?php echo dirname(plugin_dir_url(__FILE__)) . '/images/arrows.svg'; ?>" style="height: 16px; width: 12px;" alt="Aanmelden bij <?= PARCELPRO_SHOPSUNITED ?>">
 </a>
 
 <!-- <a href="<?php //echo $package_link; ?>" class="button tips parcelpro-package" alt="Parcel Pro Aantal pakketten" data-tip="Parcel Pro Aantal pakketten">

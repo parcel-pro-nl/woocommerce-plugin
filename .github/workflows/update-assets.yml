@@ -1,33 +1,35 @@
-name: Deploy to WordPress.org
+name: Update assets on WordPress.org
 
 on:
   push:
-    tags:
-      - "*.*.*"
+    branches:
+      - main
 
 jobs:
-  deploy-parcelpro:
-    name: Deploy Parcel Pro
+  assets-parcelpro:
+    name: Assets Parcel Pro
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: composer build:parcelpro
-      - uses: 10up/action-wordpress-plugin-deploy@stable
+      - uses: 10up/action-wordpress-plugin-asset-update@stable
         env:
           SVN_USERNAME: ${{ vars.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: woo-parcel-pro
           ASSETS_DIR: .wordpress-parcel-pro
+          IGNORE_OTHER_FILES: true
 # TODO: Uncomment this once the Shops United plugin is set up.
-#  deploy-shopsunited:
-#    name: Deploy Shops United
+#  assets-shopsunited:
+#    name: Assets Shops United
 #    runs-on: ubuntu-latest
 #    steps:
 #      - uses: actions/checkout@v3
 #      - run: composer build:shopsunited
-#      - uses: 10up/action-wordpress-plugin-deploy@stable
+#      - uses: 10up/action-wordpress-plugin-asset-update@stable
 #        env:
 #          SVN_USERNAME: ${{ vars.SVN_USERNAME }}
 #          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
 #          SLUG: woo-shops-united # TODO: Check this
 #          ASSETS_DIR: .wordpress-shops-united # TODO: Update assets to Shops United branding
+#          IGNORE_OTHER_FILES: true

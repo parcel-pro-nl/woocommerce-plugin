@@ -4,3 +4,8 @@ composer.lock
 
 # IDEs
 .idea/
+
+# Generated code
+woocommerce-*.php
+readme.txt
+readme-*.txt

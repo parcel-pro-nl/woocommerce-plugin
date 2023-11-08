@@ -53,7 +53,7 @@ class Parcelpro
      * @access   protected
      * @var      string $version The current version of the plugin.
      */
-    protected $version;
+    protected $version = PARCELPRO_VERSION;
 
     /**
      * Define the core functionality of the plugin.
@@ -67,7 +67,6 @@ class Parcelpro
     public function __construct()
     {
         $this->plugin_name = 'parcelpro';
-        $this->version = '1.6.9';
 
         $this->load_dependencies();
         $this->define_shipping_method();

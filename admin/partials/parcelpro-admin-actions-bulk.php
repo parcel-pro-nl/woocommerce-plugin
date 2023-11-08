@@ -18,11 +18,11 @@
         'use strict';
 
         $( document ).ready( function () {
-            $( '<option>' ).val( 'parcelpro-bulk-export' ).text( 'Aanmelden bij Parcel Pro' ).appendTo( "select[name='action']" );
-            $( '<option>' ).val( 'parcelpro-bulk-export' ).text( 'Aanmelden bij Parcel Pro' ).appendTo( "select[name='action2']" );
+            $( '<option>' ).val( 'parcelpro-bulk-export' ).text( 'Aanmelden bij <?= PARCELPRO_SHOPSUNITED ?>' ).appendTo( "select[name='action']" );
+            $( '<option>' ).val( 'parcelpro-bulk-export' ).text( 'Aanmelden bij <?= PARCELPRO_SHOPSUNITED ?>' ).appendTo( "select[name='action2']" );
 
-            $( '<option>' ).val( 'parcelpro-bulk-label' ).text( 'Print Parcel Pro label' ).appendTo( "select[name='action']" );
-            $( '<option>' ).val( 'parcelpro-bulk-label' ).text( 'Print Parcel Pro label' ).appendTo( "select[name='action2']" );
+            $( '<option>' ).val( 'parcelpro-bulk-label' ).text( 'Print <?= PARCELPRO_SHOPSUNITED ?> label' ).appendTo( "select[name='action']" );
+            $( '<option>' ).val( 'parcelpro-bulk-label' ).text( 'Print <?= PARCELPRO_SHOPSUNITED ?> label' ).appendTo( "select[name='action2']" );
         } );
 
     })( jQuery );

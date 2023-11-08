@@ -8,17 +8,17 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link            https://www.parcelpro.nl/
+ * @link            {{link}}
  * @since           1.0.0
  * @package         Parcelpro
  *
  * @wordpress-plugin
- * Plugin Name:     WooCommerce Parcel Pro
- * Plugin URI:      https://www.parcelpro.nl/koppelingen/woocommerce/
- * Description:     Geef klanten de mogelijkheid om hun pakket af te halen bij een afhaalpunt in de buurt. Daarnaast exporteert de plug-in uw zendingen direct in het verzendsysteem van Parcel Pro.
- * Version:         1.6.9
- * Author:          Parcel Pro
- * Author URI:      https://www.parcelpro.nl/
+ * Plugin Name:     WooCommerce {{name}}
+ * Plugin URI:      {{pluginUri}}
+ * Description:     Geef klanten de mogelijkheid om hun pakket af te halen bij een afhaalpunt in de buurt. Daarnaast exporteert de plug-in uw zendingen direct in het verzendsysteem van {{name}}.
+ * Version:         {{version}}
+ * Author:          {{name}}
+ * Author URI:      {{link}}
  * License:         GPL-3.0+
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:     woocommerce_parcelpro
@@ -29,11 +29,13 @@ if (!defined('WPINC')) {
     die('Access denied.');
 }
 
-define('PARCELPRO_NAME', 'WooCommerce Parcel Pro');
+define('PARCELPRO_NAME', 'WooCommerce {{name}}');
+define('PARCELPRO_VERSION', '{{version}}');
 define('PARCELPRO_REQUIRED_PHP_VERSION', '5.3');
 define('PARCELPRO_REQUIRED_WP_VERSION', '3.1');
 define('PARCELPRO_REQUIRED_WOOCOMMERCE_VERSION', '7.0');
 
+define('PARCELPRO_SHOPSUNITED', '{{name}}');
 
 /**
  * Checks if the system requirements are met.

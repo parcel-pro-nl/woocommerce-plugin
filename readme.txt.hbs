@@ -1,0 +1,26 @@
+=== {{name}} ===
+Tags: Shipping, Verzending, Pakketten, PostNL, DHL, DPD, UPS, Multi Carrier, Shops United, Shopsunited, Parcel Pro, Parcelpro
+Requires at least: 3.0.1
+Tested up to: 6.3.2
+Requires PHP: 5.2.4
+Stable tag: 1.6.9
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+== Description ==
+{{name}} heeft een API koppeling ontwikkeld die gelinkt is aan de backoffice van WordPress/WooCommerce. Hiermee kunt u heel gemakkelijk orders inladen in ons verzendsysteem. Dit zorgt ervoor dat het verzendproces efficiënter wordt en het helpt u bij het verwerken van meerdere orders en zendingen.
+
+De handleiding is te vinden op [{{supportManual}}]({{supportManual}})
+Bij vragen kunt u contact opnemen via [{{supportEmail}}](mailto:{{supportEmail}}) of 085 273 2785.
+
+== Custom Hooks ==
+Mocht u gebruik maken van een custom check out, dan zou het mogelijk kunnen zijn dat de developer hiervoor de standaard velden van WooCommerce aangepast heeft.
+
+Om aan de gegevens die naar {{name}} verstuurd worden toch alle nieuwe gegevens toe te voegen, kan deze custom hook gebruikt worden:
+`parcelpro_format_order_data`.
+
+Deze wordt door de plugin aangeroepen als `apply_filter('parcelpro_format_order_data', $data);`, met alle verzendgegevens die verstuurd gaan worden naar {{name}} in de `$data`.
+
+Zie de handleiding voor meer details.
+
+{{changelog}}
