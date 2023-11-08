@@ -25,7 +25,7 @@ Zie de [handleiding](https://support.parcelpro.nl/koppelingen/woocommerce-handle
 
 ## Changelog
 
-Voor alle historischer veranderingen en updates, zie de [changelog](changelog.md).
+Voor alle historische veranderingen en updates, zie de [changelog](changelog.md).
 
 ## Development
 
