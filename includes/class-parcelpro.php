@@ -175,7 +175,10 @@ class Parcelpro
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
         $this->loader->add_action('woocommerce_before_checkout_form', $plugin_public, 'add_popup');
-        $this->loader->add_action('woocommerce_after_checkout_shipping_form', $plugin_public, 'add_input', 10, 1);
+        $this->loader->add_action('woocommerce_after_checkout_shipping_form', $plugin_public, 'add_input');
+        $this->loader->add_action('woocommerce_before_cart_contents', $plugin_public, 'add_popup');
+        $this->loader->add_action('woocommerce_after_cart_contents', $plugin_public, 'add_input');
+
         $this->loader->add_action('woocommerce_checkout_process', $plugin_public, 'validate_shipping', 10, 1);
         $this->loader->add_action('woocommerce_checkout_update_order_meta', $plugin_public, 'set_checkout_meta', 10, 2);
         $this->loader->add_action('woocommerce_order_details_after_order_table', $plugin_public, 'add_order_tracking', 10, 1);
