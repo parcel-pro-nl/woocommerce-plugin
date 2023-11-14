@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.10 - 2023-11-14
+* Fix parcelshop selector popup on cart page
+
 ## 1.6.9 - 2023-11-02
 * Fix actions on edit order screen in WooCommerce 8
 
