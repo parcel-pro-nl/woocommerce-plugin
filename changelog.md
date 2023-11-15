@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.11 - 2023-11-15
+* Fix order auto export with order statuses from other plugins
+
 ## 1.6.10 - 2023-11-14
 * Fix parcelshop selector popup on cart page
 
