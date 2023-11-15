@@ -250,7 +250,13 @@ class Parcelpro_Admin
                 $order_status = 'wc-' . $order_status;
             }
 
-            if ($allowed_export == 'yes' && ($method == 'all' || in_array($country, $countries)) && ($this->settings['auto_export_on_state'] == $order_status)) {
+            // Ensure the auto export state always starts with 'wc-', so states from other plugins match the naming convention.
+            $auto_export_state = $this->settings['auto_export_on_state'];
+            if (strpos($auto_export_state, 'wc-') !== 0) {
+                $auto_export_state = 'wc-' . $auto_export_state;
+            }
+
+            if ($allowed_export == 'yes' && ($method == 'all' || in_array($country, $countries)) && ($auto_export_state == $order_status)) {
                 $this->export_order($order_id);
             }
         }
