@@ -275,6 +275,10 @@ class Parcelpro_Admin
         }
         $action = $_REQUEST['action'];
 
+        if (!isset($_REQUEST['_wpnonce']) || !wp_verify_nonce($_REQUEST['_wpnonce'], $action)) {
+            wp_die('Invalid nonce');
+        }
+
         switch ($action) {
             case 'parcelpro-export':
                 if (empty($_GET['order_id'])) {
