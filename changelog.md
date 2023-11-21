@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.12 - 2023-11-21
+* Add nonce validation to action handler for improved security
+
 ## 1.6.11 - 2023-11-15
 * Fix order auto export with order statuses from other plugins
 
