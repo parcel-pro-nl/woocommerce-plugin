@@ -142,8 +142,8 @@ class Parcelpro_Admin
     /**
      * Creates content for the order actions page
      *
-     * @since    1.0.0
      * @param $order WC_Order | WP_Post | null
+     * @since    1.0.0
      */
     public function create_box_content($order)
     {
@@ -275,7 +275,14 @@ class Parcelpro_Admin
         }
         $action = $_REQUEST['action'];
 
-        if (!isset($_REQUEST['_wpnonce']) || !wp_verify_nonce($_REQUEST['_wpnonce'], $action)) {
+        // Get the action used to calculate the nonce.
+        // Note that for bulk actions the action type is different.
+        $nonceAction = $action;
+        if (str_starts_with($nonceAction, 'parcelpro-bulk-')) {
+            $nonceAction = 'bulk-orders';
+        }
+
+        if (!isset($_REQUEST['_wpnonce']) || !wp_verify_nonce($_REQUEST['_wpnonce'], $nonceAction)) {
             wp_die('Invalid nonce');
         }
 
