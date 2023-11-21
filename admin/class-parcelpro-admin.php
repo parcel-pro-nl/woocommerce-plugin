@@ -283,7 +283,7 @@ class Parcelpro_Admin
         }
 
         if (!isset($_REQUEST['_wpnonce']) || !wp_verify_nonce($_REQUEST['_wpnonce'], $nonceAction)) {
-            wp_die('Invalid nonce');
+            wp_die("Invalid nonce for action: $action");
         }
 
         switch ($action) {
