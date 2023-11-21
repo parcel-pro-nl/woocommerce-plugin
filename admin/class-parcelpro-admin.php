@@ -284,7 +284,7 @@ class Parcelpro_Admin
                 if (empty($_GET['order_id'])) {
                     wp_die('Er is geen order geselecteerd!');
                 }
-                if ($status = get_post_meta($_GET['order_id'], '_parcelpro_status', true)) {
+                if (get_post_meta($_GET['order_id'], '_parcelpro_status', true)) {
                     wp_die('Order is al aagemeld bij Parcel Pro!');
                 }
 
@@ -302,7 +302,7 @@ class Parcelpro_Admin
                 $order_ids = empty($_GET['post']) ? $_GET['id'] : $_GET['post'];
 
                 foreach ($order_ids as $order_id) {
-                    if (!$status = get_post_meta($order_id, '_parcelpro_status', true)) {
+                    if (!get_post_meta($order_id, '_parcelpro_status', true)) {
                         $this->export_order($order_id);
                     }
                 }
@@ -313,7 +313,7 @@ class Parcelpro_Admin
                 if (empty($_GET['order_id'])) {
                     wp_die('Er is geen order geselecteerd!');
                 }
-                if (!$status = get_post_meta($_GET['order_id'], '_parcelpro_status', true)) {
+                if (!get_post_meta($_GET['order_id'], '_parcelpro_status', true)) {
                     wp_die('Order is nog niet aagemeld bij Parcel Pro!');
                 }
 
@@ -337,7 +337,7 @@ class Parcelpro_Admin
                         if (!$url) {
                             $url = $this->api->get_label(get_post_meta($order_id, '_parcelpro_id', true)) . '&selected[]=' . get_post_meta($order_id, '_parcelpro_id', true);
                         } else {
-                            $url = $url . '&selected[]=' . get_post_meta($order_id, '_parcelpro_id', true);
+                            $url .= '&selected[]=' . get_post_meta($order_id, '_parcelpro_id', true);
                         }
                     }
                 }
@@ -347,7 +347,7 @@ class Parcelpro_Admin
                 if (empty($_GET['order_id'])) {
                     wp_die('Er is geen order geselecteerd!');
                 }
-                if (!$status = get_post_meta($_GET['order_id'], '_parcelpro_status', true)) {
+                if (!get_post_meta($_GET['order_id'], '_parcelpro_status', true)) {
                     wp_die('Order is nog niet aagemeld bij Parcel Pro!');
                 }
 
@@ -371,7 +371,7 @@ class Parcelpro_Admin
                 if (empty($_GET['order_id'])) {
                     wp_die('Er is geen order geselecteerd!');
                 }
-                if ($status = get_post_meta($_GET['order_id'], '_parcelpro_status', true)) {
+                if (get_post_meta($_GET['order_id'], '_parcelpro_status', true)) {
                     wp_die('Order is al aagemeld bij Parcel Pro!');
                 }
                 $order_id = $_GET['order_id'];
@@ -390,7 +390,7 @@ class Parcelpro_Admin
                 if (empty($_GET['order_id'])) {
                     wp_die('Er is geen order geselecteerd!');
                 }
-                if ($status = get_post_meta($_GET['order_id'], '_parcelpro_status', true)) {
+                if (get_post_meta($_GET['order_id'], '_parcelpro_status', true)) {
                     wp_die('Order is al aagemeld bij Parcel Pro!');
                 }
                 if (!(isset($_GET['package']) && isset($_GET['shipping_method']))) {
@@ -411,7 +411,7 @@ class Parcelpro_Admin
                         $key == $shipping_method ||
                         (strpos($shipping_method, 'maatwerk') !== false && strpos($shipping_method, $key) !== false)
                     ) {
-                        foreach ($val as $k => $v) {
+                        foreach ($val as $v) {
                             if (is_array($v)) {
                                 $title = $v['method-title'];
                                 if (key_exists('type-id', $v) && strpos($v['type-id'], $shipping_method) !== false) {
@@ -469,7 +469,7 @@ class Parcelpro_Admin
                 }
 
                 if (strpos($redirect, 'post.php') !== false) {
-                    $redirect = $redirect . '&action=edit';
+                    $redirect .= '&action=edit';
                 }
                 if ($package_count) {
                     update_post_meta($order_id, '_parcelpro_package', $package_count);
