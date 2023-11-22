@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.13 - 2023-11-22
+* Fix nonce validation for non-parcelpro actions in filter
+
 ## 1.6.12 - 2023-11-21
 * Add nonce validation to action handler for improved security
 
