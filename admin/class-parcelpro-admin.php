@@ -275,6 +275,11 @@ class Parcelpro_Admin
         }
         $action = $_REQUEST['action'];
 
+        // If the action is not a parcelpro-* action, do nothing.
+        if (!str_starts_with($action, 'parcelpro-')) {
+            return false;
+        }
+
         // Get the action used to calculate the nonce.
         // Note that for bulk actions the action type is different.
         $nonceAction = $action;
