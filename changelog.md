@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.16 - 2023-11-22
+* Fix bulk order actions for WC 7 and legacy order data storage
+
 ## 1.6.15 - 2023-11-22
 * Improve nonce-related error messages
 

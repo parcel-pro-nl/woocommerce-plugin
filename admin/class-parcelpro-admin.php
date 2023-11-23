@@ -285,6 +285,12 @@ class Parcelpro_Admin
         $nonceAction = $action;
         if (str_starts_with($nonceAction, 'parcelpro-bulk-')) {
             $nonceAction = 'bulk-orders';
+
+            // Check if WooCommerce stores orders as post or order objects.
+            // If we have a post_type, that means it's a post, so the action type is different.
+            if (isset($_REQUEST['post_type'])) {
+                $nonceAction = 'bulk-posts';
+            }
         }
 
         if (!isset($_REQUEST['_wpnonce'])) {
