@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.15 - 2023-11-22
+* Improve nonce-related error messages
+
 ## 1.6.14 - 2023-11-22
 * Fix to avoid unnecessary type calls
 
