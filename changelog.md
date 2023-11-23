@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.14 - 2023-11-22
+* Fix to avoid unnecessary type calls
+
 ## 1.6.13 - 2023-11-22
 * Fix nonce validation for non-parcelpro actions in filter
 
