@@ -79,6 +79,7 @@ class ParcelPro_API
             if (!get_option('woocommerce_parcelpro_shipping_types')) {
                 update_option('woocommerce_parcelpro_shipping_types', $response);
             }
+            update_option('woocommerce_parcelpro_shipping_types_updated', current_time('mysql'));
         } else {
             $response = get_option('woocommerce_parcelpro_shipping_types');
         }
