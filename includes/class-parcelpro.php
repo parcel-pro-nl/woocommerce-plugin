@@ -151,12 +151,12 @@ class Parcelpro
 
         $this->loader->add_action('woocommerce_admin_order_actions_end', $plugin_admin, 'add_actions', 20);
         $this->loader->add_action('woocommerce_order_status_changed', $plugin_admin, 'auto_export');
-        $this->loader->add_action('admin_footer', $plugin_admin, 'add_bulk_actions');
         $this->loader->add_action('load-edit.php', $plugin_admin, 'action_handler');
 
         $this->loader->add_action('add_meta_boxes_shop_order', $plugin_admin, 'add_order_actions');
         $this->loader->add_action('add_meta_boxes', $plugin_admin, 'add_order_actions');
 
+        $this->loader->add_filter('bulk_actions-woocommerce_page_wc-orders', $plugin_admin, 'setup_bulk_actions', 20);
         $this->loader->add_filter('handle_bulk_actions-woocommerce_page_wc-orders', $plugin_admin, 'action_handler');
     }
 

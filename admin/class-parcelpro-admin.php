@@ -109,21 +109,6 @@ class Parcelpro_Admin
     }
 
     /**
-     * Adds the bulk action on the orders page
-     *
-     * @since    1.0.0
-     */
-    public function add_bulk_actions()
-    {
-        global $post_type;
-
-        // Check for WooCommerce 7 and 8
-        if ($post_type == 'shop_order' || get_current_screen()->id == 'woocommerce_page_wc-orders') {
-            include(plugin_dir_path(__FILE__) . 'partials/parcelpro-admin-actions-bulk.php');
-        }
-    }
-
-    /**
      * Add the meta box on the single order page
      *
      * @since    1.0.0
@@ -260,6 +245,13 @@ class Parcelpro_Admin
                 $this->export_order($order_id);
             }
         }
+    }
+
+    public function setup_bulk_actions($actions)
+    {
+        $actions['parcelpro-bulk-export'] = 'Aanmelden bij ' . PARCELPRO_SHOPSUNITED;
+        $actions['parcelpro-bulk-label'] = 'Print ' . PARCELPRO_SHOPSUNITED . ' label';
+        return $actions;
     }
 
     /**
