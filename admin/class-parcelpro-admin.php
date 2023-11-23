@@ -287,8 +287,12 @@ class Parcelpro_Admin
             $nonceAction = 'bulk-orders';
         }
 
-        if (!isset($_REQUEST['_wpnonce']) || !wp_verify_nonce($_REQUEST['_wpnonce'], $nonceAction)) {
-            wp_die("Invalid nonce for action: $action");
+        if (!isset($_REQUEST['_wpnonce'])) {
+            wp_die("No nonce set for action: $action ($nonceAction)");
+        }
+
+        if (!wp_verify_nonce($_REQUEST['_wpnonce'], $nonceAction)) {
+            wp_die("Invalid nonce for action: $action ($nonceAction)");
         }
 
         switch ($action) {
