@@ -40,17 +40,14 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 20
-    - uses: shivammathur/setup-php@v2
-      with:
-        php-version: 8.2
+    - run: npm ci
+      working-directory: tests
     - name: Setup
       run: |
         composer build parcelpro
         ./setup.sh
         echo "USER_ID=${{ secrets.PP_USER_ID }}" >> tests/.env
         echo "API_KEY=${{ secrets.PP_API_KEY }}" >> tests/.env
-    - run: npm ci
-      working-directory: tests
     - run: npm test
       working-directory: tests
     - uses: actions/upload-artifact@v3
