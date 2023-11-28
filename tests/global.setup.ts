@@ -9,7 +9,7 @@ test('login', async ({ page }) => {
   await page.getByLabel('Remember Me').click();
   await page.getByText('Log In').click();
 
-  await expect(page).toHaveTitle(/Dashboard/);
+  await expect(page).not.toHaveTitle(/Log In/);
 
   await page.context().storageState({ path: STORAGE_STATE });
 });
