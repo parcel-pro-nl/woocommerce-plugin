@@ -41,6 +41,7 @@ jobs:
       working-directory: tests
     - run: npx playwright install chromium --with-deps
       working-directory: tests
+    - run: composer build parcelpro
     - run: ./setup.sh
     - run: npm test
       working-directory: tests
