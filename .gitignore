@@ -9,3 +9,16 @@ composer.lock
 woocommerce-*.php
 readme.txt
 readme-*.txt
+
+# Dev setup
+wp_data/
+.env
+
+# Plugin archives
+*.zip
+
+# Playwright
+node_modules/
+playwright-storage/
+playwright-report/
+test-results/

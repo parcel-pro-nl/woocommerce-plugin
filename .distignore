@@ -15,8 +15,13 @@ vendor/
 
 # CI-related files
 .distignore
-check-versions.sh
 phpcs.xml
+
+# Dev setup
+wp_data/
+.env
+*.sh
+docker-compose.yml
 
 # Build and template files
 bootstrap-template.php
@@ -24,3 +29,9 @@ build.php
 readme.txt.hbs
 readme-*.txt
 template-vars.json
+
+# Plugin archives
+*.zip
+
+# Playwright
+tests/
