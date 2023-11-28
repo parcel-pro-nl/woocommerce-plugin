@@ -41,8 +41,12 @@ jobs:
       working-directory: tests
     - run: npx playwright install chromium --with-deps
       working-directory: tests
-    - run: composer build parcelpro
-    - run: ./setup.sh
+    - name: Setup
+      run: |
+        composer build parcelpro
+        ./setup.sh
+        echo "USER_ID=${{ secrets.PP_USER_ID }}" >> tests/.env
+        echo "API_KEY=${{ secrets.PP_API_KEY }}" >> tests/.env
     - run: npm test
       working-directory: tests
     - uses: actions/upload-artifact@v3
