@@ -46,7 +46,7 @@ test('created shipping setting shows in checkout', async ({ page }) => {
   await page.getByRole('button', { name: 'Add to cart' }).click();
 
   // Fill the checkout form.
-  await page.goto('/blocks-checkout');
+  await page.goto('/checkout');
   await fillCheckoutForm(page);
 
   // Select the shipping method and place the order.
