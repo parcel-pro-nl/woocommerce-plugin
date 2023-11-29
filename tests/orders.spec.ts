@@ -44,3 +44,14 @@ test('order meta box actions', async ({ page }) => {
   // Check if a tracking code is added to the order notes.
   await expect(page.getByText(/^3S/)).toBeVisible();
 });
+
+test('order bulk actions are available', async ({ page }) => {
+  await page.goto('/wp-admin');
+  await navigateToOrders(page);
+  await createNewOrder(page);
+  await navigateToOrders(page);
+
+  const selectField = page.locator('#bulk-action-selector-top');
+  await selectField.selectOption('Aanmelden bij Parcel Pro');
+  await selectField.selectOption('Print Parcel Pro label');
+});
