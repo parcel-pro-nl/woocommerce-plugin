@@ -11,8 +11,15 @@ wp config set WP_DEBUG_LOG true --raw
 # Ensure post ids are always unique (required for Parcel Pro orders).
 echo "alter table wp_posts auto_increment=$(date +%s)" | mysql -h db -u wordpress --password=wordpress wordpress
 
-# Install WooCommerce and preset some settings.
-wp plugin install woocommerce --activate
+# Install WooCommerce.
+if [ -n "${1+x}" ]
+then
+  wp plugin install woocommerce --activate --force --version="$1"
+else
+  wp plugin install woocommerce --activate --force
+fi
+
+# Preset some WooCommerce settings.
 wp option set woocommerce_default_country NL
 # Skip the onboarding wizard.
 wp option set woocommerce_onboarding_profile '{"skipped":true}' --format=json

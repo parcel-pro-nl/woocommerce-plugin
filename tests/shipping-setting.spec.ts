@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { navigateWooCommerce } from './helpers/navigate';
 import { randomString } from './helpers/random';
+import { fillCheckoutForm } from './helpers/checkout';
 
 test('created shipping setting shows in checkout', async ({ page }) => {
   await page.goto('/wp-admin');
@@ -44,31 +45,21 @@ test('created shipping setting shows in checkout', async ({ page }) => {
   await page.goto('/product/playwright-product');
   await page.getByRole('button', { name: 'Add to cart' }).click();
 
+  // Fill the checkout form.
   await page.goto('/checkout');
-
-  // Check if the address is pre-filled. If so, click edit.
-  const editButton = page.getByLabel('Edit address');
-  if (await editButton.isVisible()) {
-    await editButton.click();
-  }
-
-  // Fill all checkout details.
-  await page.getByRole('textbox', { name: 'First name' }).fill('Playwright');
-  await page.getByRole('textbox', { name: 'Last name' }).fill('Tester');
-  await page
-    .getByRole('textbox', { name: 'Address', exact: true })
-    .fill('Hofhoek 7');
-  await page.getByRole('textbox', { name: 'Postal code' }).fill('3176 PD');
-  await page.getByRole('textbox', { name: 'City' }).fill('Poortugaal');
-  await page
-    .getByRole('textbox', { name: 'Phone (optional)' })
-    .fill('0612345678');
-  await page
-    .getByRole('textbox', { name: 'Email address' })
-    .fill('test@example.com');
+  await fillCheckoutForm(page);
 
   // Select the shipping method and place the order.
-  await page.locator('#shipping-option').getByText(shippingMethodName).click();
+  if (await page.locator('#shipping-option').isVisible()) {
+    // Blocks checkout.
+    await page
+      .locator('#shipping-option')
+      .getByText(shippingMethodName)
+      .click();
+  } else {
+    // Standard checkout.
+    await page.getByText(shippingMethodName).click();
+  }
   await page.getByRole('button', { name: 'Place Order' }).click();
 
   // Check if the order details contain the right shipping method.
