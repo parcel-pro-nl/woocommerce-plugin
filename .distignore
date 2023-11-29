@@ -22,6 +22,7 @@ wp_data/
 .env
 *.sh
 docker-compose.yml
+DEVELOPMENT.md
 
 # Build and template files
 bootstrap-template.php
