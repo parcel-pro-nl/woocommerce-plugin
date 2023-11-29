@@ -84,14 +84,15 @@ The log file can be found at `wp_data/wp-content/debug.log`.
 
 ### Installing a Previous WooCommerce Version
 
-To install a previous version of the WooCommerce plugin, you can use the `install-woocommerce.sh` script.
-Usage:
+To install a previous version of the WooCommerce plugin, you can re-run the `setup.sh` script,
+and pass a WooCommerce version number as the argument.
+For example:
 
 ```shell
-./install-woocommerce.sh path/to/woocommerce-version.zip
+./setup.sh 7.9.0
 ```
 
-These older versions can be downloaded from: https://wordpress.org/plugins/woocommerce/advanced
+For an overview of the versions, see: https://wordpress.org/plugins/woocommerce/advanced
 
 ### Shutting Down
 
