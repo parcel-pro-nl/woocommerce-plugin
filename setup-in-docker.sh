@@ -12,7 +12,7 @@ wp config set WP_DEBUG_LOG true --raw
 echo "alter table wp_posts auto_increment=$(date +%s)" | mysql -h db -u wordpress --password=wordpress wordpress
 
 # Install WooCommerce and preset some settings.
-wp plugin install woocommerce --activate
+wp plugin install woocommerce --activate # TODO: --version=7.9.0
 wp option set woocommerce_default_country NL
 # Skip the onboarding wizard.
 wp option set woocommerce_onboarding_profile '{"skipped":true}' --format=json
