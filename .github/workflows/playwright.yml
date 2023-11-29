@@ -9,6 +9,7 @@ on:
 jobs:
   test:
     strategy:
+      fail-fast: false
       matrix:
         # The WooCommerce plugin versions to test against.
         # The empty string is necessary to test against the latest version.
