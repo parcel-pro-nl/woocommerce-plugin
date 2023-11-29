@@ -1,5 +1,8 @@
 # Parcel Pro / Shops United WooCommerce plugin
 
+[![CI](https://github.com/parcel-pro-nl/woocommerce-plugin/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/parcel-pro-nl/woocommerce-plugin/actions/workflows/ci.yml)
+[![Playwright Tests](https://github.com/parcel-pro-nl/woocommerce-plugin/actions/workflows/playwright.yml/badge.svg?branch=main)](https://github.com/parcel-pro-nl/woocommerce-plugin/actions/workflows/playwright.yml)
+
 Parcel Pro heeft een API koppeling ontwikkeld die gelinkt is aan de backoffice van WordPress/WooCommerce.
 Hiermee kunt u heel gemakkelijk orders inladen in ons verzendsysteem.
 Dit zorgt ervoor dat het verzendproces efficiënter wordt en het helpt u bij het verwerken van meerdere orders en zendingen.
@@ -29,27 +32,4 @@ Voor alle historische veranderingen en updates, zie de [changelog](changelog.md)
 
 ## Development
 
-Deze repository bevat de code voor de "Parcel Pro" _en_ "Shops United" plugins.
-Deze zijn functioneel hetzelfde, maar worden gepubliceerd met aparte branding.
-Om de code te bouwen, run:
-
-```shell
-composer build
-# Of:
-php build.php
-```
-
-Hier worden een aantal bestanden als template gebruikt, waar vervolgens 2 versies van gegenereerd worden:
-
-- `bootstrap-template.php`: De plugin bootstrap file die ingelezen wordt door WordPress.
-- `readme.txt.hbs`: De readme voor de WordPress plugin registry.
-
-De template variabelen die gebruikt worden staan in `template-vars.json`.
-
-### Publiceren
-
-Om nieuwe versies van de plugins te publiceren maken we een nieuwe tag vanaf `main`.
-Dit is eenvoudig te doen via de [releases pagina](https://github.com/parcel-pro-nl/woocommerce-plugin/releases) op GitHub.
-
-De WordPress assets bevinden zich in de `.wordpress-parcel-pro` en `.wordpress-shops-united` mappen.
-Deze worden automatisch gepubliceerd in de WordPress plugin registry vanaf de `main` branch.
+Voor alle development informatie, zie de [development guide](DEVELOPMENT.md).

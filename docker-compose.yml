@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  wordpress:
+    image: wordpress:6
+    container_name: wordpress
+    ports:
+      - '80:80'
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - './wp_data:/var/www/html'
+      - '.:/var/www/html/wp-content/plugins/parcelpro'
+    depends_on:
+      - db
+  db:
+    image: mariadb:11
+    ports:
+      - '3306:3306'
+    environment:
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: yes
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+      MARIADB_DATABASE: wordpress
+    volumes:
+      - 'db_data:/var/lib/mysql'
+
+volumes:
+  db_data:
+    driver: local
