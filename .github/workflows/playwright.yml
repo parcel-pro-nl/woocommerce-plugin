@@ -8,6 +8,11 @@ on:
 
 jobs:
   test:
+    strategy:
+      matrix:
+        # The WooCommerce plugin versions to test against.
+        # The empty string is necessary to test against the latest version.
+        wc-version: ['', 7.9.0]
     timeout-minutes: 10
     runs-on: ubuntu-latest
     services:
@@ -44,7 +49,7 @@ jobs:
     - name: Setup
       run: |
         composer build parcelpro
-        ./setup.sh
+        ./setup.sh ${{ matrix.wc-version }}
         echo "USER_ID=${{ secrets.PP_USER_ID }}" >> tests/.env
         echo "API_KEY=${{ secrets.PP_API_KEY }}" >> tests/.env
     - run: npm test
