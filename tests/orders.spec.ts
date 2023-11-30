@@ -25,12 +25,16 @@ test('order row actions', async ({ page }) => {
   // Check if a tracking code is added to the order notes.
   await orderRow.click();
   await expect(page.getByText(/^3S/)).toBeVisible();
+
+  // Check if the order is available in Parcel Pro.
+  await page.goto('https://login.parcelpro.nl/zending/list.php');
+  await page.getByRole('row', { name: orderNumber }).click();
 });
 
 test('order meta box actions', async ({ page }) => {
   await page.goto('/wp-admin');
   await navigateToOrders(page);
-  await createNewOrder(page);
+  const orderNumber = await createNewOrder(page);
 
   // Register the order.
   await page.getByRole('link', { name: 'Aanmelden bij Parcel Pro' }).click();
@@ -43,6 +47,10 @@ test('order meta box actions', async ({ page }) => {
 
   // Check if a tracking code is added to the order notes.
   await expect(page.getByText(/^3S/)).toBeVisible();
+
+  // Check if the order is available in Parcel Pro.
+  await page.goto('https://login.parcelpro.nl/zending/list.php');
+  await page.getByRole('row', { name: orderNumber }).click();
 });
 
 test('order bulk actions', async ({ page }) => {
@@ -68,4 +76,8 @@ test('order bulk actions', async ({ page }) => {
   await expect(
     orderRow.getByRole('link', { name: 'Volg Parcel Pro zending' }),
   ).toBeVisible();
+
+  // Check if the order is available in Parcel Pro.
+  await page.goto('https://login.parcelpro.nl/zending/list.php');
+  await page.getByRole('row', { name: orderNumber }).click();
 });
