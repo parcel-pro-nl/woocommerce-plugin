@@ -17,8 +17,8 @@ test('login', async ({ page }) => {
 
   await page.goto('https://login.parcelpro.nl');
 
-  await page.locator('#email').fill(process.env.USERNAME);
-  await page.locator('#password').fill(process.env.PASSWORD);
+  await page.locator('#email').fill(process.env.PP_USERNAME);
+  await page.locator('#password').fill(process.env.PP_PASSWORD);
   await page.getByText('Inloggen').click();
 
   await expect(page).not.toHaveTitle(/Inloggen/);
