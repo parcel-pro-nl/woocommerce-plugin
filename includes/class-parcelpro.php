@@ -175,7 +175,7 @@ class Parcelpro
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
         $this->loader->add_action('woocommerce_before_checkout_form', $plugin_public, 'add_popup');
-        $this->loader->add_action('woocommerce_after_checkout_shipping_form', $plugin_public, 'add_input');
+        $this->loader->add_action('woocommerce_after_checkout_form', $plugin_public, 'add_input');
         $this->loader->add_action('woocommerce_before_cart_contents', $plugin_public, 'add_popup');
         $this->loader->add_action('woocommerce_after_cart_contents', $plugin_public, 'add_input');
 
@@ -185,9 +185,6 @@ class Parcelpro
 
         $this->loader->add_action('woocommerce_email_after_order_table', $plugin_public, 'add_tracking_to_email_template', 20, 4);
     }
-
-
-
 
     /**
      * Initializes shipping method.
