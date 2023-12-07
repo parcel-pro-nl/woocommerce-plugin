@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.17 - 2023-12-07
+* Improve parcelshop popup hooks resilience with other checkouts
+
 ## 1.6.16 - 2023-11-22
 * Fix bulk order actions for WC 7 and legacy order data storage
 
