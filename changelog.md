@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.18 - 2023-12-19
+* Fix shipping settings page layout for WooCommerce 8.4.0
+
 ## 1.6.17 - 2023-12-07
 * Improve parcelshop popup hooks resilience with other checkouts
 
