@@ -70,7 +70,6 @@ class ParcelPro_Shipping extends WC_Shipping_Method
         $this->id = 'parcelpro_shipping';
         $this->method_title = PARCELPRO_SHOPSUNITED;
         $this->method_description = 'Afhalen van een bestelling bij een door de klant gekozen afhaalpunt.';
-        ;
 
         $this->services = include(plugin_dir_path(__FILE__) . 'data/parcelpro-shipping-settings-services.php');
 
