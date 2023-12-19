@@ -43,7 +43,7 @@ test('created shipping setting shows in checkout', async ({ page }) => {
 
   // Go to a product page and add it to the cart.
   await page.goto('/product/playwright-product');
-  await page.getByRole('button', { name: 'Add to cart' }).click();
+  await page.getByRole('button', { name: 'Add to cart', exact: true }).click();
 
   // Fill the checkout form.
   await page.goto('/checkout');
