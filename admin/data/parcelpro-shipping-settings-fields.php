@@ -13,6 +13,10 @@
  */
 
 return array(
+    array(
+        'type' => 'title',
+        'id' => 'parcelpro_options',
+    ),
     'enabled'      => array(
         'title'   => 'Inschakelen',
         'type'    => 'checkbox',
@@ -123,5 +127,9 @@ return array(
     ),
     'services'     => array(
         'type' => 'services',
+    ),
+    array(
+        'type' => 'sectionend',
+        'id' => 'parcelpro_options'
     ),
 );
