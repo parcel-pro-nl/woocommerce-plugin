@@ -13,9 +13,9 @@
  */
 
 return array(
+    // This title is necessary to ensure the `<table>` start tag is rendered.
     array(
         'type' => 'title',
-        'id' => 'parcelpro_options',
     ),
     'enabled'      => array(
         'title'   => 'Inschakelen',
@@ -127,5 +127,9 @@ return array(
     ),
     'services'     => array(
         'type' => 'services',
+    ),
+    // This title is necessary to ensure the save button is rendered here.
+    array(
+        'type' => 'title',
     ),
 );
