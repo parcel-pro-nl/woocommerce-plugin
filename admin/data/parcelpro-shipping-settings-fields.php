@@ -128,8 +128,4 @@ return array(
     'services'     => array(
         'type' => 'services',
     ),
-    array(
-        'type' => 'sectionend',
-        'id' => 'parcelpro_options'
-    ),
 );
