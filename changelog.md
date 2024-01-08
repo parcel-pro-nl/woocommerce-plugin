@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.19 - 2024-01-08
+* Quick fix on countries select dropdown
+
 ## 1.6.18 - 2023-12-19
 * Fix shipping settings page layout for WooCommerce 8.4.0
 
