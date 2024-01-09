@@ -76,7 +76,7 @@ class ParcelPro_API
             $response = curl_exec($curl);
             curl_close($curl);
 
-            if (!get_option('woocommerce_parcelpro_shipping_types')) {
+            if (!get_option('woocommerce_parcelpro_shipping_types') || get_option('woocommerce_parcelpro_shipping_types') != $response) {
                 update_option('woocommerce_parcelpro_shipping_types', $response);
             }
             update_option('woocommerce_parcelpro_shipping_types_updated', current_time('mysql'));
