@@ -74,12 +74,13 @@ class ParcelPro_API
             $curl = $this->setup_curl($this->api_url . '/api/type.php' . '?' . http_build_query($headers, '', '&'));
 
             $response = curl_exec($curl);
+            $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
             curl_close($curl);
 
-            if (!get_option('woocommerce_parcelpro_shipping_types') || get_option('woocommerce_parcelpro_shipping_types') != $response) {
+            if ($code === 200) {
                 update_option('woocommerce_parcelpro_shipping_types', $response);
+                update_option('woocommerce_parcelpro_shipping_types_updated', current_time('mysql'));
             }
-            update_option('woocommerce_parcelpro_shipping_types_updated', current_time('mysql'));
         } else {
             $response = get_option('woocommerce_parcelpro_shipping_types');
         }
