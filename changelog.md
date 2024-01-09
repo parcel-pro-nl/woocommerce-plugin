@@ -1,6 +1,5 @@
 # Changelog
-
-## 1.6.19 - 2024-01-08
+## 1.6.20 - 2024-01-09
 * Quick fix on countries select dropdown
 
 ## 1.6.18 - 2023-12-19
