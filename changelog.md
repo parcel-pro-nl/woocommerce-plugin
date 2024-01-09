@@ -1,4 +1,7 @@
 # Changelog
+## 1.6.21 - 2024-01-09
+* Fix custom shipping types
+
 ## 1.6.20 - 2024-01-09
 * Quick fix on countries select dropdown
 
