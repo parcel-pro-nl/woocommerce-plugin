@@ -4,7 +4,9 @@
   "type": "wordpress-plugin",
   "version": "1.6.21",
   "require": {
-    "php": ">=7.1"
+    "php": ">=7.1",
+    "ext-curl": "*",
+    "ext-json": "*"
   },
   "license": [
     "GPL-2.0-or-later"

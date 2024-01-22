@@ -305,4 +305,77 @@ class ParcelPro_API
 
         return(($result_records));
     }
+
+	/**
+	 * @param string $carrier The carrier name.
+	 * @param DateTimeInterface $dateTime The date on which the package will be handed over to the carrier.
+	 * @param $postcode string The postal code of the package destination.
+	 *
+	 * @return DateTimeImmutable|false
+	 */
+	public function getDeliveryDate(string $carrier, \DateTimeInterface $dateTime, string $postcode)
+	{
+		if (!$postcode) {
+			return false;
+		}
+
+		$date = $dateTime->format('Y-m-d');
+		$apiKey = $this->
+
+		$query = http_build_query([
+			'Startdatum' => $date,
+			'Postcode' => $postcode,
+			'GebruikerId' => $this->login_id,
+			'Map' => true,
+		]);
+
+		$curlHandle = curl_init();
+		curl_setopt_array($curlHandle, [
+			CURLOPT_URL => $this->api_url . '/api/v3/timeframes.php?' . $query,
+			CURLOPT_HTTPHEADER => [
+				'Content-Type: application/json',
+				'Digest: ' . hash_hmac(
+					"sha256",
+					sprintf('GebruikerId=%sPostcode=%sStartdatum=%s', $this->login_id, $postcode, $date),
+					$apiKey
+				),
+			],
+			CURLOPT_CUSTOMREQUEST => "GET",
+			CURLOPT_HEADER => false,
+			CURLOPT_RETURNTRANSFER => true,
+		]);
+
+		$responseBody = curl_exec($curlHandle);
+		$responseCode = curl_getinfo($curlHandle, CURLINFO_RESPONSE_CODE);
+
+		curl_close($curlHandle);
+
+		if ($responseCode !== 200) {
+			$logger = wc_get_logger();
+				if ($logger) {
+					$logger->error(sprintf(
+						'Failed to get expected delivery date, response code %s, body:\n%s',
+						$responseCode,
+						$responseBody
+					));
+				}
+			return false;
+		}
+
+		$responseJson = json_decode($responseBody, true);
+		$rawDate = $responseJson[$carrier]['Date'] ?? false;
+
+		if (!$rawDate) {
+			$logger = wc_get_logger();
+			if ($logger) {
+				$logger->error( sprintf(
+					'Failed to get expected delivery date, body:\n%s',
+					$responseBody
+				) );
+			}
+			return false;
+		}
+
+		return \DateTimeImmutable::createFromFormat('Y-m-d', $rawDate);
+	}
 }
