@@ -316,11 +316,11 @@ class ParcelPro_API
 	public function getDeliveryDate(string $carrier, \DateTimeInterface $dateTime, string $postcode)
 	{
 		if (!$postcode) {
-			return false;
+			return $postcode;
 		}
+		$postcode = str_replace(' ', '', $postcode);
 
 		$date = $dateTime->format('Y-m-d');
-		$apiKey = $this->
 
 		$query = http_build_query([
 			'Startdatum' => $date,
@@ -337,7 +337,7 @@ class ParcelPro_API
 				'Digest: ' . hash_hmac(
 					"sha256",
 					sprintf('GebruikerId=%sPostcode=%sStartdatum=%s', $this->login_id, $postcode, $date),
-					$apiKey
+					$this->api_id
 				),
 			],
 			CURLOPT_CUSTOMREQUEST => "GET",
@@ -359,11 +359,18 @@ class ParcelPro_API
 						$responseBody
 					));
 				}
-			return false;
+			return "200";
 		}
 
 		$responseJson = json_decode($responseBody, true);
-		$rawDate = $responseJson[$carrier]['Date'] ?? false;
+		$rawDate = false;
+
+		// Lookup the expected date in a case-insensitive way, since a carrier may be "Postnl" or PostNL".
+		foreach($responseJson as $api_carrier => $carrier_times){
+			if(strtolower($api_carrier) === strtolower( $carrier)){
+				$rawDate = $carrier_times['Date'];
+			}
+		}
 
 		if (!$rawDate) {
 			$logger = wc_get_logger();
@@ -373,7 +380,7 @@ class ParcelPro_API
 					$responseBody
 				) );
 			}
-			return false;
+			return $carrier;
 		}
 
 		return \DateTimeImmutable::createFromFormat('Y-m-d', $rawDate);

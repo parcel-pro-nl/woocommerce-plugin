@@ -26,6 +26,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
     private $found_services;
     private $custom_services;
 
+	/** @var ParcelPro_API $api */
     private $api;
     public $id;
     public $method_title;
@@ -92,81 +93,81 @@ class ParcelPro_Shipping extends WC_Shipping_Method
         $this->form_fields = include(plugin_dir_path(__FILE__) . 'data/parcelpro-shipping-settings-fields.php');
     }
 
-    /**
-     * Adds the section for services form fields.
-     *
-     * @since    1.0.0
-     * @return string
-     */
-    public function generate_services_html()
-    {
-        ob_start();
+//    /**
+//     * Adds the section for services form fields.
+//     *
+//     * @since    1.0.0
+//     * @return string
+//     */
+//    public function generate_services_html()
+//    {
+//        ob_start();
+//
+//        $this->custom_services = $this->get_option('services', array());
+//        $this->services = include(plugin_dir_path(__FILE__) . 'data/parcelpro-shipping-settings-services.php');
+//
+//        include(plugin_dir_path(__FILE__) . 'partials/parcelpro-shipping-settings-tables.php');
+//
+//        return ob_get_clean();
+//    }
 
-        $this->custom_services = $this->get_option('services', array());
-        $this->services = include(plugin_dir_path(__FILE__) . 'data/parcelpro-shipping-settings-services.php');
-
-        include(plugin_dir_path(__FILE__) . 'partials/parcelpro-shipping-settings-tables.php');
-
-        return ob_get_clean();
-    }
-
-    /**
-     * Validates submitted setting values before they get saved to the database. Invalid data will be overwritten with
-     * defaults.
-     *
-     * @since    1.0.0*
-     * @param array $input
-     * @return array
-     */
-    public function validate_services_field($input)
-    {
-        $services = array();
-        $posted_services = array_key_exists('parcelpro_shipping_settings', $_POST) ? $_POST[ 'parcelpro_shipping_settings' ] : null;
-        $posted_services_order = array_key_exists('service_order', $_POST) ? $_POST[ 'service_order' ] : array();
-        $order_fix = count($posted_services_order) + 1;
-
-        if (is_array($posted_services)) {
-            foreach ($posted_services as $id => $settings) {
-                foreach ($settings as $nr => $rule) {
-                    $order = (in_array($id, $posted_services_order)) ? array_search($id, $posted_services_order) + 1 : $order_fix++;
-
-                    $rule[ 'min-weight' ] = WC_Settings_API::validate_decimal_field(null, $rule[ 'min-weight' ]);
-                    $rule[ 'type-id' ] = isset($rule[ 'type-id' ]) ? WC_Settings_API::validate_decimal_field(null, $rule[ 'type-id' ]) : null;
-                    $rule[ 'max-weight' ] = WC_Settings_API::validate_decimal_field(null, $rule[ 'max-weight' ]);
-                    $rule[ 'min-total' ] = WC_Settings_API::validate_decimal_field(null, $rule[ 'min-total' ]);
-                    $rule[ 'max-total' ] = WC_Settings_API::validate_decimal_field(null, $rule[ 'max-total' ]);
-                    $rule[ 'price' ] = WC_Settings_API::validate_price_field(null, $rule[ 'price' ]);
-                    $rule[ 'servicepunt' ] = isset($rule[ 'servicepunt' ]) ?  $rule['servicepunt'] :  null;
-
-                    $services[ $id ]['id'] = $id;
-                    $services[ $id ]['order'] = $order;
-
-                    if ($rule['method-title'] == '') {
-                        foreach ($this->services as $carrier_name => $carrier) {
-                            if (array_key_exists($id, $carrier)) {
-                                $rule['method-title'] = $carrier_name . ' ' . $carrier[$id];
-                            }
-                        }
-                    }
-
-                    $services[ $id ][ $nr ] = array(
-                        'country'      => ( isset($rule['country']) ) ? $rule['country'] : 'NL',
-                        'method-title' => ( isset($rule['method-title']) ) ? $rule['method-title'] : null,
-                        'type-id'      => ( isset($rule['type-id']) ) ? $rule['type-id'] : 0,
-                        'min-weight'   => ( isset($rule['min-weight']) ) ? $rule['min-weight'] : null,
-                        'max-weight'   => ( isset($rule['max-weight']) ) ? $rule['max-weight'] : null,
-                        'min-total'    => ( isset($rule['min-total']) ) ? $rule['min-total'] : null,
-                        'max-total'    => ( isset($rule['max-total']) ) ? $rule['max-total'] : null,
-                        'price'        => ( isset($rule['price']) ) ? $rule['price'] : null,
-                        'servicepunt'  => ( isset($rule['servicepunt']) && $rule[ 'servicepunt' ] !== null ) ?  'on' :  null,
-                        'order'        => ( isset($order) ) ? $order : null
-                    );
-                }
-            }
-
-            return $services;
-        }
-    }
+//    /**
+//     * Validates submitted setting values before they get saved to the database. Invalid data will be overwritten with
+//     * defaults.
+//     *
+//     * @since    1.0.0*
+//     * @param array $input
+//     * @return array
+//     */
+//    public function validate_services_field($input)
+//    {
+//        $services = array();
+//        $posted_services = array_key_exists('parcelpro_shipping_settings', $_POST) ? $_POST[ 'parcelpro_shipping_settings' ] : null;
+//        $posted_services_order = array_key_exists('service_order', $_POST) ? $_POST[ 'service_order' ] : array();
+//        $order_fix = count($posted_services_order) + 1;
+//
+//        if (is_array($posted_services)) {
+//            foreach ($posted_services as $id => $settings) {
+//                foreach ($settings as $nr => $rule) {
+//                    $order = (in_array($id, $posted_services_order)) ? array_search($id, $posted_services_order) + 1 : $order_fix++;
+//
+//                    $rule[ 'min-weight' ] = WC_Settings_API::validate_decimal_field(null, $rule[ 'min-weight' ]);
+//                    $rule[ 'type-id' ] = isset($rule[ 'type-id' ]) ? WC_Settings_API::validate_decimal_field(null, $rule[ 'type-id' ]) : null;
+//                    $rule[ 'max-weight' ] = WC_Settings_API::validate_decimal_field(null, $rule[ 'max-weight' ]);
+//                    $rule[ 'min-total' ] = WC_Settings_API::validate_decimal_field(null, $rule[ 'min-total' ]);
+//                    $rule[ 'max-total' ] = WC_Settings_API::validate_decimal_field(null, $rule[ 'max-total' ]);
+//                    $rule[ 'price' ] = WC_Settings_API::validate_price_field(null, $rule[ 'price' ]);
+//                    $rule[ 'servicepunt' ] = isset($rule[ 'servicepunt' ]) ?  $rule['servicepunt'] :  null;
+//
+//                    $services[ $id ]['id'] = $id;
+//                    $services[ $id ]['order'] = $order;
+//
+//                    if ($rule['method-title'] == '') {
+//                        foreach ($this->services as $carrier_name => $carrier) {
+//                            if (array_key_exists($id, $carrier)) {
+//                                $rule['method-title'] = $carrier_name . ' ' . $carrier[$id];
+//                            }
+//                        }
+//                    }
+//
+//                    $services[ $id ][ $nr ] = array(
+//                        'country'      => ( isset($rule['country']) ) ? $rule['country'] : 'NL',
+//                        'method-title' => ( isset($rule['method-title']) ) ? $rule['method-title'] : null,
+//                        'type-id'      => ( isset($rule['type-id']) ) ? $rule['type-id'] : 0,
+//                        'min-weight'   => ( isset($rule['min-weight']) ) ? $rule['min-weight'] : null,
+//                        'max-weight'   => ( isset($rule['max-weight']) ) ? $rule['max-weight'] : null,
+//                        'min-total'    => ( isset($rule['min-total']) ) ? $rule['min-total'] : null,
+//                        'max-total'    => ( isset($rule['max-total']) ) ? $rule['max-total'] : null,
+//                        'price'        => ( isset($rule['price']) ) ? $rule['price'] : null,
+//                        'servicepunt'  => ( isset($rule['servicepunt']) && $rule[ 'servicepunt' ] !== null ) ?  'on' :  null,
+//                        'order'        => ( isset($order) ) ? $order : null
+//                    );
+//                }
+//            }
+//
+//            return $services;
+//        }
+//    }
 
     /**
      * Executes the logic to add a service to the found services.
@@ -216,6 +217,12 @@ class ParcelPro_Shipping extends WC_Shipping_Method
             }
 
             foreach ($this->services as $carrier_name => $carrier) {
+				// Fetch expected delivery day
+	            $delivery_expected = $this->api->getDeliveryDate(
+					$carrier_name,
+					new DateTimeImmutable(),
+					$package['destination']['postcode']
+	            );
                 foreach ($carrier as $key => $value) {
                     if (array_key_exists($key, $this->custom_services) && is_array($this->custom_services[ $key ])) {
                         foreach ($this->custom_services[ $key ] as $rule_nr => $rule) {
@@ -231,7 +238,12 @@ class ParcelPro_Shipping extends WC_Shipping_Method
                                     $maatwerk_type = '_' . $rule[ 'type-id' ] ;
                                 }
 
-                                $this->prepare_service($key . $maatwerk_type, $rule[ 'method-title' ], $rule[ 'price' ], $this->custom_services[ $key ][ 'order' ], key_exists('type-id', $rule) ? $rule[ 'type-id' ] : null, isset($rule[ 'servicepunt' ])  ? $rule[ 'servicepunt' ] : null);
+                                $this->prepare_service($key . $maatwerk_type,
+	                                $rule[ 'method-title' ] . ' ('. $this->formatDeliveryDate($delivery_expected) . ')',
+	                                $rule[ 'price' ],
+	                                $this->custom_services[ $key ][ 'order' ],
+	                                array_key_exists('type-id', $rule) ? $rule[ 'type-id' ] : null,
+	                                isset($rule[ 'servicepunt' ])  ? $rule[ 'servicepunt' ] : null);
                             }
                         }
                     }
@@ -275,4 +287,10 @@ class ParcelPro_Shipping extends WC_Shipping_Method
 
         return $records;
     }
+
+	private function formatDeliveryDate(\DateTimeInterface $date)
+	{
+		$locale = get_locale();
+		return \IntlDateFormatter::formatObject($date, 'd MMMM', $locale);
+	}
 }
