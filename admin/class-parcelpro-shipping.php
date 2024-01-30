@@ -230,28 +230,27 @@ class ParcelPro_Shipping extends WC_Shipping_Method
             }
 
             foreach ($this->services as $carrier_name => $carrier) {
+                $lowercaseCarrier  = strtolower($carrier_name);
+                /** @var DateTimeImmutable $shipping_time */
+                $shipping_time = new DateTimeImmutable();
+                $rawCutoffTime = $this->get_option('parcelpro_forecast_settings_' . $lowercaseCarrier . '_cutoff_time');
+                $isBeforeCutoffTime = $this->isBeforeLastShippingTime($rawCutoffTime);
 
-				$lowercaseCarrier  = strtolower($carrier_name);
-				/** @var DateTimeImmutable $shipping_time */
-	            $shipping_time = new DateTimeImmutable();
-				$rawCutoffTime = $this->get_option('parcelpro_forecast_settings_'. $lowercaseCarrier.'_cutoff_time');
-				$isBeforeCutoffTime = $this->isBeforeLastShippingTime($rawCutoffTime);
-
-				if (!$isBeforeCutoffTime) {
-					$shipping_time = $shipping_time->add(new DateInterval('P1D'));
-				}
+                if (!$isBeforeCutoffTime) {
+                    $shipping_time = $shipping_time->add(new DateInterval('P1D'));
+                }
 
                 // Fetch expected delivery day
                 $delivery_expected = $this->api->getDeliveryDate(
                     $carrier_name,
-	                $shipping_time,
+                    $shipping_time,
                     $package['destination']['postcode']
                 );
-	            $formattedDeliveryDate = '';
-				$is_enabled = $this->get_option('parcelpro_forecast_settings_' . $lowercaseCarrier . '_show_delivery_date');
-				if ($delivery_expected && $is_enabled === 'yes') {
-					$formattedDeliveryDate = '(' . $this->formatDeliveryDate($delivery_expected) . ')';
-				}
+                $formattedDeliveryDate = '';
+                $is_enabled = $this->get_option('parcelpro_forecast_settings_' . $lowercaseCarrier . '_show_delivery_date');
+                if ($delivery_expected && $is_enabled === 'yes') {
+                    $formattedDeliveryDate = '(' . $this->formatDeliveryDate($delivery_expected) . ')';
+                }
 
 
                 foreach ($carrier as $key => $value) {
@@ -292,48 +291,49 @@ class ParcelPro_Shipping extends WC_Shipping_Method
         }
     }
 
-	private function getServiceTitle(string $carrier, string $postalCode, string $methodTitle): string {
-		$title = $methodTitle;
+    private function getServiceTitle(string $carrier, string $postalCode, string $methodTitle): string
+    {
+        $title = $methodTitle;
 
-		if ($this->get_option('parcelpro_forecast_settings_'. strtolower($carrier). '_show_delivery_date')){
-			$title .= '' ;
-		}
+        if ($this->get_option('parcelpro_forecast_settings_' . strtolower($carrier) . '_show_delivery_date')) {
+            $title .= '' ;
+        }
 
-		return $methodTitle;
-	}
+        return $methodTitle;
+    }
 
-	/**
-	 * @param $rawLastTime string|null The cutoff time of a carrier.
-	 *
-	 * @return bool Whether the current time is before the cutoff time
-	 */
-	private function isBeforeLastShippingTime($rawLastTime): bool
-	{
-		if (!$rawLastTime) {
-			return true;
-		}
+    /**
+     * @param $rawLastTime string|null The cutoff time of a carrier.
+     *
+     * @return bool Whether the current time is before the cutoff time
+     */
+    private function isBeforeLastShippingTime($rawLastTime): bool
+    {
+        if (!$rawLastTime) {
+            return true;
+        }
 
-		try {
-			$parsed = new DateTime($rawLastTime);
-		} catch (\Exception $e) {
-			$logger = wc_get_logger();
-			if ($logger) {
-				$logger->error(sprintf(
-					'Failed to parse last shipping time (%s): %s',
-					$rawLastTime,
-					$e->getMessage()
-				));
-			}
-			return true;
-		}
+        try {
+            $parsed = new DateTime($rawLastTime);
+        } catch (\Exception $e) {
+            $logger = wc_get_logger();
+            if ($logger) {
+                $logger->error(sprintf(
+                    'Failed to parse last shipping time (%s): %s',
+                    $rawLastTime,
+                    $e->getMessage()
+                ));
+            }
+            return true;
+        }
 
-		$now = new DateTime();
-		return $now < $parsed;
-	}
+        $now = new DateTime();
+        return $now < $parsed;
+    }
 
-	private function getShippingDate() {
-
-	}
+    private function getShippingDate()
+    {
+    }
 
     /**
      * Sorts the found services on the given preferences.
@@ -363,7 +363,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
         return $records;
     }
 
-    private function formatDeliveryDate(\DateTimeInterface $date) : string
+    private function formatDeliveryDate(\DateTimeInterface $date): string
     {
         $locale = get_locale();
         return \IntlDateFormatter::formatObject($date, 'd MMMM', $locale);

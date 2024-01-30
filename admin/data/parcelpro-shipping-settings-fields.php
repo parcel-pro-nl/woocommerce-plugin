@@ -141,7 +141,7 @@ return array(
     ),
     'parcelpro_forecast_settings_dhl_show_delivery_date' => array(
         'type'     => 'checkbox',
-		'title'    => 'Verwachte levertijd inschakelen (DHL)',
+        'title'    => 'Verwachte levertijd inschakelen (DHL)',
         'label'    => 'Verwachte levertijd inschakelen',
         'desc_tip' => true,
         'default'  => 'no',
