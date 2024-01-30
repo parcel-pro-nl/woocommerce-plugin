@@ -139,7 +139,7 @@ return array(
         'label'    => 'Cutoff tijd van PostNL voor verwachte levertijd berekening.',
         'default'  => '17:00 Europe/Amsterdam',
         'desc_tip' => true,
-	    'description' => 'Stel hier de tijd in waarop de bestelling geplaatst moet zijn om nog dezelfde dag verzonden te worden.',
+        'description' => 'Stel hier de tijd in waarop de bestelling geplaatst moet zijn om nog dezelfde dag verzonden te worden.',
     ),
     'dhl_show_delivery_date' => array(
         'type'     => 'checkbox',

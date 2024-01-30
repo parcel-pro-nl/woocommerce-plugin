@@ -217,25 +217,25 @@ class ParcelPro_Shipping extends WC_Shipping_Method
 
             foreach ($this->services as $carrier_name => $carrier) {
                 $lowercaseCarrier  = strtolower($carrier_name);
-	            $shipping_time = new DateTimeImmutable();
+                $shipping_time = new DateTimeImmutable();
                 $rawCutoffTime = $this->get_option($lowercaseCarrier . '_last_shipping_time');
                 $isBeforeCutoffTime = $this->isBeforeLastShippingTime($rawCutoffTime);
 
                 if (!$isBeforeCutoffTime) {
                     $shipping_time = $shipping_time->add(new DateInterval('P1D'));
                 }
-	            // Fetch expected delivery day
-	            $is_enabled = $this->get_option(
-		            $lowercaseCarrier . '_show_delivery_date'
-	            );
-	            $delivery_expected = new DateTimeImmutable();
-				if($is_enabled === 'yes') {
-					$delivery_expected = $this->api->getDeliveryDate(
-						$carrier_name,
-						$shipping_time,
-						$package['destination']['postcode']
-					);
-				}
+                // Fetch expected delivery day
+                $is_enabled = $this->get_option(
+                    $lowercaseCarrier . '_show_delivery_date'
+                );
+                $delivery_expected = new DateTimeImmutable();
+                if ($is_enabled === 'yes') {
+                    $delivery_expected = $this->api->getDeliveryDate(
+                        $carrier_name,
+                        $shipping_time,
+                        $package['destination']['postcode']
+                    );
+                }
 
                 $formattedDeliveryDate = '';
                 if ($delivery_expected && $is_enabled === 'yes') {
