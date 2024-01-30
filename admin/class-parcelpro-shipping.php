@@ -280,11 +280,6 @@ class ParcelPro_Shipping extends WC_Shipping_Method
         }
     }
 
-    /**
-     * @param $rawLastTime string|null The cutoff time of a carrier.
-     *
-     * @return bool Whether the current time is before the cutoff time
-     */
     private function isBeforeLastShippingTime($rawLastTime): bool
     {
         if (!$rawLastTime) {
