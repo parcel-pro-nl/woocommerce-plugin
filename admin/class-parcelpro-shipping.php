@@ -234,7 +234,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
                 );
                 $formattedDeliveryDate = '';
                 $is_enabled = $this->get_option(
-					'parcelpro_forecast_settings_' . $lowercaseCarrier . '_show_delivery_date'
+                    'parcelpro_forecast_settings_' . $lowercaseCarrier . '_show_delivery_date'
                 );
                 if ($delivery_expected && $is_enabled === 'yes') {
                     $formattedDeliveryDate = '(' . $this->formatDeliveryDate($delivery_expected) . ')';
