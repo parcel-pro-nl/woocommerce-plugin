@@ -127,7 +127,7 @@ return array(
     ),
     'parcelpro_forecast_settings_postnl_show_delivery_date' => array(
         'type'     => 'checkbox',
-        'title'    => 'Verwachte levertijd inschakelen (PostNl)',
+        'title'    => 'Verwachte levertijd inschakelen (PostNL)',
         'label'    => 'Verwachte levertijd inschakelen',
         'desc_tip' => true,
         'default'  => 'no',
