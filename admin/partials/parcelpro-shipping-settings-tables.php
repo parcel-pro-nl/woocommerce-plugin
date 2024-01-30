@@ -52,10 +52,7 @@
                         }
                         if (array_key_exists($service['id'], $carrier)) { ?>
                               <tr>
-                                  <td style="background: whitesmoke; " width="1%;" class="sort ui-sortable-handle">
-                                      <span style="width: 100%"><></span>
-                                      <input type="hidden" name="service_order[]" value="<?php echo esc_attr($service['id']) ?>">
-                                  </td>
+                                  <td style="background: whitesmoke; " width="1%;" class="sort ui-sortable-handle"><span style="width: 100%"><></span><input type="hidden" name="service_order[]" value="<?php echo esc_attr($service['id']) ?>"></td>
                                   <td class="service"><?php echo $carrier[$service['id']] ?></td>
                                   <td class="carrier"><?php echo $carrier_name ?></td>
                               </tr>
@@ -82,52 +79,7 @@
                 $carrier_name = 'dienst ' . $carrier_parts[1];
             }
             ?>
-            <h3>Verzendinstellingen van <?php echo $carrier_name; ?></h3>
-            <div>
-                <h4>Afleverdatum weergeven</h4>
-                <table class="parcelpro_rules widefat">
-                    <thead>
-                    <tr>
-                        <th>Toon verwachte afleverdatum</th>
-                        <th>Cutoff tijd</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-	                        <?php
-	                        woocommerce_form_field(
-		                        'parcelpro_shipping_settings[' . $carrier_name . '][show_delivery_date',
-                                array(
-		                        'type'     => 'checkbox',
-		                        'label'    => 'Verwachte levertijd inschakelen',
-		                        'desc_tip' => true,
-		                        'default'  => 'no',
-	                        ));
-	                        ?>
-                        </td>
-                        <td>
-	                        <?php
-                            echo get_option('parcelpro_shipping_settings_' . $carrier_name . '_show_delivery_date');
-	                        $x = null;
-	                        woocommerce_form_field(
-		                        'parcelpro_shipping_settings_' . $carrier_name . '_show_delivery_date', array(
-		                        'type'     => 'time',
-		                        'label'    => 'Cutoff tijd voor verwachte levertijd berekening.',
-		                        'default'  => '17:00',
-		                        'class'    => 'wc-enhanced-select',
-                                'desc_tip' => true,
-		                        'custom_attributes' => array(
-			                        'min' => date('HH:00'),
-			                        'max' => date('HH:00', strtotime('+24 hour'))
-		                        )), $x);
-                            echo $x;
-	                        ?>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <h3>Verzendmethodes van <?php echo $carrier_name; ?></h3>
             <div>
                 <p>Met onderstaande tabellen is het mogelijk om de verschillende verzendmethodes van <?php echo $carrier_name; ?> in te stellen.</p>
             <?php
@@ -199,7 +151,6 @@
                                     </td>
                                 <?php } ?>
                                 <td><input type="text" name="parcelpro_shipping_settings[<?php echo $id; ?>][<?php echo $rule_nr ?>][method-title]" value="<?php ( array_key_exists(('method-title'), $rule) ) ? ( $rule[ 'method-title' ] ) ? print( $rule[ 'method-title' ] ) : print( $carrier_name . ' ' . $type ) : print( $carrier_name . ' ' . $type ); ?>"/></td>
-<!--                                    <td><input type="text" name="parcelpro_shipping_settings[--><?php //echo $id; ?><!--][--><?php //echo $rule_nr ?><!--][type-id]" value="--><?php //( $rule[ 'type-id' ] ) ? print( $rule[ 'type-id' ] ) : print( 0 ); ?><!--"/></td>-->
                                 <td><input type="text" name="parcelpro_shipping_settings[<?php echo $id; ?>][<?php echo $rule_nr ?>][min-weight]" value="<?php ( $rule[ 'min-weight' ] ) ? print( $rule[ 'min-weight' ] ) : print( 0 ); ?>"/></td>
                                 <td><input type="text" name="parcelpro_shipping_settings[<?php echo $id; ?>][<?php echo $rule_nr ?>][max-weight]" value="<?php ( $rule[ 'max-weight' ] ) ? print( $rule[ 'max-weight' ] ) : print( 0 ); ?>"/></td>
                                 <td><input type="text" name="parcelpro_shipping_settings[<?php echo $id; ?>][<?php echo $rule_nr ?>][min-total]" value="<?php ( $rule[ 'min-total' ] ) ? print( $rule[ 'min-total' ] ) : print( 0 ); ?>"/></td>

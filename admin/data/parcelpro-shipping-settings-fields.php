@@ -125,6 +125,44 @@ return array(
         'description' => 'Customer note (billing address) invullen bij het veld "inhoud" in het verzendsysteen.',
         'desc_tip'    => true
     ),
+    'parcelpro_forecast_settings_PostNL_show_delivery_date' => array(
+        'type'     => 'checkbox',
+        'title'    => 'Verwachte levertijd inschakelen (PostNl)',
+        'label'    => 'Verwachte levertijd inschakelen',
+        'desc_tip' => true,
+        'default'  => 'no',
+    ),
+    'parcelpro_forecast_settings_PostNL_cutoff_time' => array(
+        'type'     => 'text',
+        'title'    => 'Cutoff tijd van PostNL voor verwachte levertijd berekening.',
+        'label'    => 'Cutoff tijd van PostNL voor verwachte levertijd berekening.',
+        'default'  => '17:00 (Europe/Amsterdam)',
+//        'class'    => 'availability wc-enhanced-select',
+        'desc_tip' => true,
+//        'custom_attributes' => [
+//            'min' => date('HH:00'),
+//            'max' => date('HH:00', strtotime('+24 hour'))
+//        ]
+    ),
+    'parcelpro_forecast_settings_DHL_show_delivery_date' => array(
+        'type'     => 'checkbox',
+		'title'    => 'Verwachte levertijd inschakelen (DHL)',
+        'label'    => 'Verwachte levertijd inschakelen',
+        'desc_tip' => true,
+        'default'  => 'no',
+    ),
+    'parcelpro_forecast_settings_DHL_cutoff_time' => array(
+        'type'     => 'text',
+        'title'    => 'Cutoff tijd van DHL voor verwachte levertijd berekening.',
+        'label'    => 'Cutoff tijd van DHL voor verwachte levertijd berekening.',
+        'default'  => '17:00 (Europe/Amsterdam)',
+//        'class'    => 'availability wc-enhanced-select',
+        'desc_tip' => true,
+//        'custom_attributes' => [
+//            'min' => date('HH:00'),
+//            'max' => date('HH:00', strtotime('+24 hour'))
+//        ],
+    ),
     'services'     => array(
         'type' => 'services',
     ),
