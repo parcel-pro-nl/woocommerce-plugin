@@ -6,7 +6,8 @@
   "require": {
     "php": ">=7.1",
     "ext-curl": "*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-intl": "*"
   },
   "license": [
     "GPL-2.0-or-later"

@@ -121,23 +121,9 @@ class ParcelPro_Shipping extends WC_Shipping_Method
     public function validate_services_field($input)
     {
         $services = array();
-        //$posted_forecast_settings = $_POST['parcelpro_forecast_settings'] ?? null;
         $posted_services = $_POST['parcelpro_shipping_settings'] ?? null;
         $posted_services_order = array_key_exists('service_order', $_POST) ? $_POST[ 'service_order' ] : array();
         $order_fix = count($posted_services_order) + 1;
-
-//        if (is_array($posted_services)) {
-//            foreach ($posted_services as $id => $settings) {
-//                $services[ $id ]['show_delivery_date'] = $this->validate_checkbox_field(
-//                    null,
-//                    $posted_forecast_settings['show_delivery_date']
-//                );
-//                $services[ $id ]['cutoff_time'] = $this->validate_text_field(
-//                    null,
-//                    $posted_forecast_settings['cutoff_time']
-//                );
-//            }
-//        }
 
         if (is_array($posted_services)) {
             foreach ($posted_services as $id => $settings) {
@@ -190,7 +176,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
      * @param $service_title
      * @param $price
      */
-    private function prepare_service($service, $service_title, $price, $order, $type_id, $servicepunt)
+    private function prepare_service($service, $service_title, $price, $order, $type_id, $servicepunt): void
     {
         $this->found_services[ $service ][ 'id' ] = 'parcelpro_' . $service;
         $this->found_services[ $service ][ 'label' ] = $service_title;
@@ -206,7 +192,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
      * @since    1.0.0
      * @param $package
      */
-    public function calculate_shipping($package = array())
+    public function calculate_shipping($package = array()): void
     {
         $this->found_services = array();
         $allowed = $this->get_option('availability', '');
@@ -247,7 +233,9 @@ class ParcelPro_Shipping extends WC_Shipping_Method
                     $package['destination']['postcode']
                 );
                 $formattedDeliveryDate = '';
-                $is_enabled = $this->get_option('parcelpro_forecast_settings_' . $lowercaseCarrier . '_show_delivery_date');
+                $is_enabled = $this->get_option(
+					'parcelpro_forecast_settings_' . $lowercaseCarrier . '_show_delivery_date'
+                );
                 if ($delivery_expected && $is_enabled === 'yes') {
                     $formattedDeliveryDate = '(' . $this->formatDeliveryDate($delivery_expected) . ')';
                 }
@@ -291,17 +279,6 @@ class ParcelPro_Shipping extends WC_Shipping_Method
         }
     }
 
-    private function getServiceTitle(string $carrier, string $postalCode, string $methodTitle): string
-    {
-        $title = $methodTitle;
-
-        if ($this->get_option('parcelpro_forecast_settings_' . strtolower($carrier) . '_show_delivery_date')) {
-            $title .= '' ;
-        }
-
-        return $methodTitle;
-    }
-
     /**
      * @param $rawLastTime string|null The cutoff time of a carrier.
      *
@@ -331,18 +308,15 @@ class ParcelPro_Shipping extends WC_Shipping_Method
         return $now < $parsed;
     }
 
-    private function getShippingDate()
-    {
-    }
-
     /**
      * Sorts the found services on the given preferences.
      *
-     * @since    1.2.1
      * @param $records
      * @param $field
      * @param bool $reverse
+     *
      * @return array
+     *@since    1.2.1
      */
     public function service_sort($records, $field, $reverse = false)
     {
