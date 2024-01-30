@@ -125,33 +125,37 @@ return array(
         'description' => 'Customer note (billing address) invullen bij het veld "inhoud" in het verzendsysteen.',
         'desc_tip'    => true
     ),
-    'parcelpro_forecast_settings_postnl_show_delivery_date' => array(
+    'postnl_show_delivery_date' => array(
         'type'     => 'checkbox',
-        'title'    => 'Verwachte levertijd inschakelen (PostNL)',
-        'label'    => 'Verwachte levertijd inschakelen',
+        'title'    => 'Toon Verwachte levertijd voor PostNL',
+        'label'    => 'Toon Verwachte levertijd voor PostNL',
         'desc_tip' => true,
         'default'  => 'no',
+        'description' => 'Toon bij de checkout de geschatte tijd waarop het pakket geleverd zal worden',
     ),
-    'parcelpro_forecast_settings_postnl_cutoff_time' => array(
+    'postnl_last_shipping_time' => array(
         'type'     => 'text',
         'title'    => 'Cutoff tijd van PostNL voor verwachte levertijd berekening.',
         'label'    => 'Cutoff tijd van PostNL voor verwachte levertijd berekening.',
-        'default'  => '17:00 (Europe/Amsterdam)',
+        'default'  => '17:00 Europe/Amsterdam',
         'desc_tip' => true,
+	    'description' => 'Stel hier de tijd in waarop de bestelling geplaatst moet zijn om nog dezelfde dag verzonden te worden.',
     ),
-    'parcelpro_forecast_settings_dhl_show_delivery_date' => array(
+    'dhl_show_delivery_date' => array(
         'type'     => 'checkbox',
-        'title'    => 'Verwachte levertijd inschakelen (DHL)',
-        'label'    => 'Verwachte levertijd inschakelen',
+        'title'    => 'Toon Verwachte levertijd voor DHL',
+        'label'    => 'Toon Verwachte levertijd voor DHL',
         'desc_tip' => true,
         'default'  => 'no',
+        'description' => 'Toon bij de checkout de geschatte tijd waarop het pakket geleverd zal worden',
     ),
-    'parcelpro_forecast_settings_dhl_cutoff_time' => array(
+    'dhl_last_shipping_time' => array(
         'type'     => 'text',
         'title'    => 'Cutoff tijd van DHL voor verwachte levertijd berekening.',
         'label'    => 'Cutoff tijd van DHL voor verwachte levertijd berekening.',
-        'default'  => '17:00 (Europe/Amsterdam)',
+        'default'  => '17:00 Europe/Amsterdam',
         'desc_tip' => true,
+        'description' => 'Stel hier de tijd in waarop de bestelling geplaatst moet zijn om nog dezelfde dag verzonden te worden.',
     ),
     'services'     => array(
         'type' => 'services',

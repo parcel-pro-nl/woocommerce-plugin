@@ -217,29 +217,30 @@ class ParcelPro_Shipping extends WC_Shipping_Method
 
             foreach ($this->services as $carrier_name => $carrier) {
                 $lowercaseCarrier  = strtolower($carrier_name);
-                /** @var DateTimeImmutable $shipping_time */
-                $shipping_time = new DateTimeImmutable();
-                $rawCutoffTime = $this->get_option('parcelpro_forecast_settings_' . $lowercaseCarrier . '_cutoff_time');
+	            $shipping_time = new DateTimeImmutable();
+                $rawCutoffTime = $this->get_option($lowercaseCarrier . '_last_shipping_time');
                 $isBeforeCutoffTime = $this->isBeforeLastShippingTime($rawCutoffTime);
 
                 if (!$isBeforeCutoffTime) {
                     $shipping_time = $shipping_time->add(new DateInterval('P1D'));
                 }
+	            // Fetch expected delivery day
+	            $is_enabled = $this->get_option(
+		            $lowercaseCarrier . '_show_delivery_date'
+	            );
+	            $delivery_expected = new DateTimeImmutable();
+				if($is_enabled === 'yes') {
+					$delivery_expected = $this->api->getDeliveryDate(
+						$carrier_name,
+						$shipping_time,
+						$package['destination']['postcode']
+					);
+				}
 
-                // Fetch expected delivery day
-                $delivery_expected = $this->api->getDeliveryDate(
-                    $carrier_name,
-                    $shipping_time,
-                    $package['destination']['postcode']
-                );
                 $formattedDeliveryDate = '';
-                $is_enabled = $this->get_option(
-                    'parcelpro_forecast_settings_' . $lowercaseCarrier . '_show_delivery_date'
-                );
                 if ($delivery_expected && $is_enabled === 'yes') {
-                    $formattedDeliveryDate = '(' . $this->formatDeliveryDate($delivery_expected) . ')';
+                    $formattedDeliveryDate = ' (' . $this->formatDeliveryDate($delivery_expected) . ')';
                 }
-
 
                 foreach ($carrier as $key => $value) {
                     if (array_key_exists($key, $this->custom_services) && is_array($this->custom_services[ $key ])) {
@@ -258,7 +259,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
 
                                 $this->prepare_service(
                                     $key . $maatwerk_type,
-                                    $rule[ 'method-title' ] . ' ' . $formattedDeliveryDate,
+                                    $rule[ 'method-title' ] . $formattedDeliveryDate,
                                     $rule[ 'price' ],
                                     $this->custom_services[ $key ][ 'order' ],
                                     array_key_exists('type-id', $rule) ? $rule[ 'type-id' ] : null,
