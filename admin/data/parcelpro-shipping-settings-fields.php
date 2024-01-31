@@ -136,11 +136,10 @@ return array(
     'postnl_last_shipping_time' => array(
         'type'     => 'text',
         'title'    => 'Uiterlijke besteltijd voor verzending met PostNL.',
-        'label'    => 'Cutoff tijd van PostNL voor verwachte levertijd berekening. Bijvoorbeeld: \'17:00 Europe/Amsterdam\'',
         'default'  => '17:00 Europe/Amsterdam',
         'placeholder' => '17:00 Europe/Amsterdam',
         'desc_tip' => true,
-        'description' => 'Stel hier de tijd in waarop de bestelling geplaatst moet zijn om nog dezelfde dag verzonden te worden.',
+        'description' => 'Stel hier de tijd in waarop de bestelling geplaatst moet zijn om nog dezelfde dag verzonden te worden. Bijvoorbeeld: \'17:00 Europe/Amsterdam\'.',
     ),
     'dhl_show_delivery_date' => array(
         'type'     => 'checkbox',
@@ -153,11 +152,10 @@ return array(
     'dhl_last_shipping_time' => array(
         'type'     => 'text',
         'title'    => 'Uiterlijke besteltijd voor verzending met DHL.',
-        'label'    => 'Cutoff tijd van DHL voor verwachte levertijd berekening. Bijvoorbeeld: \'17:00 Europe/Amsterdam\'',
         'default'  => '17:00 Europe/Amsterdam',
         'placeholder' => '17:00 Europe/Amsterdam',
         'desc_tip' => true,
-        'description' => 'Stel hier de tijd in waarop de bestelling geplaatst moet zijn om nog dezelfde dag verzonden te worden.',
+        'description' => 'Stel hier de tijd in waarop de bestelling geplaatst moet zijn om nog dezelfde dag verzonden te worden. Bijvoorbeeld: \'17:00 Europe/Amsterdam\'.',
     ),
     'services'     => array(
         'type' => 'services',
