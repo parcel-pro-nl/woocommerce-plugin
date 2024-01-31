@@ -228,18 +228,17 @@ class ParcelPro_Shipping extends WC_Shipping_Method
                 $is_enabled = $this->get_option(
                     $lowercaseCarrier . '_show_delivery_date'
                 );
-                $delivery_expected = new DateTimeImmutable();
+                $formattedDeliveryDate = '';
                 if ($is_enabled === 'yes') {
                     $delivery_expected = $this->api->getDeliveryDate(
                         $carrier_name,
                         $shipping_time,
                         $package['destination']['postcode']
                     );
-                }
-
-                $formattedDeliveryDate = '';
-                if ($delivery_expected && $is_enabled === 'yes') {
-                    $formattedDeliveryDate = ' (' . $this->formatDeliveryDate($delivery_expected) . ')';
+                    
+                    if ($delivery_expected) {
+                        $formattedDeliveryDate = ' (' . $this->formatDeliveryDate($delivery_expected) . ')';
+                    }
                 }
 
                 foreach ($carrier as $key => $value) {
