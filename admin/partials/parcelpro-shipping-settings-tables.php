@@ -151,7 +151,6 @@
                                     </td>
                                 <?php } ?>
                                 <td><input type="text" name="parcelpro_shipping_settings[<?php echo $id; ?>][<?php echo $rule_nr ?>][method-title]" value="<?php ( array_key_exists(('method-title'), $rule) ) ? ( $rule[ 'method-title' ] ) ? print( $rule[ 'method-title' ] ) : print( $carrier_name . ' ' . $type ) : print( $carrier_name . ' ' . $type ); ?>"/></td>
-<!--                                    <td><input type="text" name="parcelpro_shipping_settings[--><?php //echo $id; ?><!--][--><?php //echo $rule_nr ?><!--][type-id]" value="--><?php //( $rule[ 'type-id' ] ) ? print( $rule[ 'type-id' ] ) : print( 0 ); ?><!--"/></td>-->
                                 <td><input type="text" name="parcelpro_shipping_settings[<?php echo $id; ?>][<?php echo $rule_nr ?>][min-weight]" value="<?php ( $rule[ 'min-weight' ] ) ? print( $rule[ 'min-weight' ] ) : print( 0 ); ?>"/></td>
                                 <td><input type="text" name="parcelpro_shipping_settings[<?php echo $id; ?>][<?php echo $rule_nr ?>][max-weight]" value="<?php ( $rule[ 'max-weight' ] ) ? print( $rule[ 'max-weight' ] ) : print( 0 ); ?>"/></td>
                                 <td><input type="text" name="parcelpro_shipping_settings[<?php echo $id; ?>][<?php echo $rule_nr ?>][min-total]" value="<?php ( $rule[ 'min-total' ] ) ? print( $rule[ 'min-total' ] ) : print( 0 ); ?>"/></td>

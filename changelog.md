@@ -1,4 +1,8 @@
 # Changelog
+
+## 1.7.0 - 2024-02-01
+* Added optional delivery time expectations for DHL and PostNL
+
 ## 1.6.21 - 2024-01-09
 * Fix custom shipping types
 

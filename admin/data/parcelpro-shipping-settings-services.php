@@ -153,9 +153,6 @@ if (is_admin()) {
             $parts = explode('_', $k);
 
             $type_id = '';
-//            if(array_key_exists('type-id',$v)){
-//                $type_id = '_' . $v['type-id'];
-//            }
             if (!array_key_exists(ucfirst($parts[0]), $services)) {
                 $services[ucfirst($parts[0])] = array();
             }

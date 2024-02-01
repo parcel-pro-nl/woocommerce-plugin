@@ -125,6 +125,38 @@ return array(
         'description' => 'Customer note (billing address) invullen bij het veld "inhoud" in het verzendsysteen.',
         'desc_tip'    => true
     ),
+    'postnl_show_delivery_date' => array(
+        'type'     => 'checkbox',
+        'title'    => 'Verwachte levertijd voor PostNL',
+        'label'    => 'Toon verwachte levertijd voor PostNL',
+        'desc_tip' => true,
+        'default'  => 'no',
+        'description' => 'Toon bij de checkout de geschatte tijd waarop het pakket geleverd zal worden',
+    ),
+    'postnl_last_shipping_time' => array(
+        'type'     => 'text',
+        'title'    => 'Uiterlijke besteltijd voor verzending met PostNL.',
+        'default'  => '17:00 Europe/Amsterdam',
+        'placeholder' => '17:00 Europe/Amsterdam',
+        'desc_tip' => true,
+        'description' => 'Stel hier de tijd in waarop de bestelling geplaatst moet zijn om nog dezelfde dag verzonden te worden. Bijvoorbeeld: \'17:00 Europe/Amsterdam\'.',
+    ),
+    'dhl_show_delivery_date' => array(
+        'type'     => 'checkbox',
+        'title'    => 'Verwachte levertijd voor DHL',
+        'label'    => 'Toon verwachte levertijd voor DHL',
+        'desc_tip' => true,
+        'default'  => 'no',
+        'description' => 'Toon bij de checkout de geschatte tijd waarop het pakket geleverd zal worden',
+    ),
+    'dhl_last_shipping_time' => array(
+        'type'     => 'text',
+        'title'    => 'Uiterlijke besteltijd voor verzending met DHL.',
+        'default'  => '17:00 Europe/Amsterdam',
+        'placeholder' => '17:00 Europe/Amsterdam',
+        'desc_tip' => true,
+        'description' => 'Stel hier de tijd in waarop de bestelling geplaatst moet zijn om nog dezelfde dag verzonden te worden. Bijvoorbeeld: \'17:00 Europe/Amsterdam\'.',
+    ),
     'services'     => array(
         'type' => 'services',
     ),

@@ -277,7 +277,7 @@ class ParcelPro_API
     }
 
     /**
-     * Loads a list of available types that a user can add to their woocommerce enviroment. Based on their active contracts.
+     * Loads a list of available types that a user can add to their woocommerce environment. Based on their active contracts.
      * through the api types.
      *
      * @since    1.5.0
@@ -304,5 +304,85 @@ class ParcelPro_API
 
 
         return(($result_records));
+    }
+
+    /**
+     * @param string $carrier The carrier name.
+     * @param DateTimeInterface $dateTime The date on which the package will be handed over to the carrier.
+     * @param $postcode string The postal code of the package destination.
+     *
+     * @return DateTimeImmutable|false
+     */
+    public function getDeliveryDate(string $carrier, \DateTimeInterface $dateTime, string $postcode)
+    {
+        if (!$postcode) {
+            return $postcode;
+        }
+        $postcode = str_replace(' ', '', $postcode);
+
+        $date = $dateTime->format('Y-m-d');
+
+        $query = http_build_query([
+            'Startdatum' => $date,
+            'Postcode' => $postcode,
+            'GebruikerId' => $this->login_id,
+            'Map' => true,
+        ]);
+
+        $curlHandle = curl_init();
+        curl_setopt_array($curlHandle, [
+            CURLOPT_URL => $this->api_url . '/api/v3/timeframes.php?' . $query,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Digest: ' . hash_hmac(
+                    "sha256",
+                    sprintf('GebruikerId=%sPostcode=%sStartdatum=%s', $this->login_id, $postcode, $date),
+                    $this->api_id
+                ),
+            ],
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HEADER => false,
+            CURLOPT_RETURNTRANSFER => true,
+        ]);
+
+        $responseBody = curl_exec($curlHandle);
+        $responseCode = curl_getinfo($curlHandle, CURLINFO_RESPONSE_CODE);
+
+        curl_close($curlHandle);
+
+        if ($responseCode !== 200) {
+            $logger = wc_get_logger();
+            if ($logger) {
+                $logger->error(sprintf(
+                    'Failed to get expected delivery date, response code %s, body:\n%s',
+                    $responseCode,
+                    $responseBody
+                ));
+            }
+            return "200";
+        }
+
+        $responseJson = json_decode($responseBody, true);
+        $rawDate = false;
+
+        // Lookup the expected date in a case-insensitive way, since a carrier may be "Postnl" or PostNL".
+        foreach ($responseJson as $api_carrier => $carrier_times) {
+            if (strtolower($api_carrier) === strtolower($carrier)) {
+                $rawDate = $carrier_times['Date'];
+            }
+        }
+
+        if (!$rawDate) {
+            $logger = wc_get_logger();
+            if ($logger) {
+                $logger->error(sprintf(
+                    'Failed to get expected delivery date, body:\n%s',
+                    $responseBody
+                ));
+            }
+            return $carrier;
+        }
+
+        return \DateTimeImmutable::createFromFormat('Y-m-d', $rawDate);
     }
 }
