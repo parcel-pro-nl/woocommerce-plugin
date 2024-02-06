@@ -1,4 +1,6 @@
 # Changelog
+## 1.7.1 - 2024-02-06
+* Change support for Wordpress up to 6.4.3
 
 ## 1.7.0 - 2024-02-01
 * Added optional delivery time expectations for DHL and PostNL
