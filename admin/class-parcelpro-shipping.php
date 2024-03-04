@@ -236,7 +236,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
                         $package['destination']['postcode']
                     );
 
-                    if ($delivery_expected) {
+                    if ($delivery_expected instanceof DateTimeInterface) {
                         $formattedDeliveryDate = ' (' . $this->formatDeliveryDate($delivery_expected) . ')';
                     }
                 }
