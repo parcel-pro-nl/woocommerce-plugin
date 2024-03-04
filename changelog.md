@@ -1,4 +1,7 @@
 # Changelog
+## 1.7.2 - 2024-03-04
+* Fixed a bug that would incorrectly display a wrong expected datetime
+
 ## 1.7.1 - 2024-02-06
 * Change support for Wordpress up to 6.4.3
 
