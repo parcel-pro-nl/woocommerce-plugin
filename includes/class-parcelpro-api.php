@@ -311,7 +311,7 @@ class ParcelPro_API
      * @param DateTimeInterface $dateTime The date on which the package will be handed over to the carrier.
      * @param $postcode string The postal code of the package destination.
      *
-     * @return DateTimeImmutable|false
+     * @return DateTimeImmutable|false|string
      */
     public function getDeliveryDate(string $carrier, \DateTimeInterface $dateTime, string $postcode)
     {
