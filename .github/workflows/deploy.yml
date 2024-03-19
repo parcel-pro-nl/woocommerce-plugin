@@ -18,16 +18,15 @@ jobs:
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: woo-parcel-pro
           ASSETS_DIR: .wordpress-parcel-pro
-# TODO: Uncomment this once the Shops United plugin is set up.
-#  deploy-shopsunited:
-#    name: Deploy Shops United
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - run: composer build:shopsunited
-#      - uses: 10up/action-wordpress-plugin-deploy@stable
-#        env:
-#          SVN_USERNAME: ${{ vars.SVN_USERNAME }}
-#          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-#          SLUG: woo-shops-united # TODO: Check this
-#          ASSETS_DIR: .wordpress-shops-united # TODO: Update assets to Shops United branding
+  deploy-shopsunited:
+    name: Deploy Shops United
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: composer build:shopsunited
+      - uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ vars.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: integration-shops-united-woocommerce
+          ASSETS_DIR: .wordpress-shops-united # TODO: Update assets to Shops United branding
