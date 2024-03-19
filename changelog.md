@@ -1,4 +1,8 @@
 # Changelog
+
+## 1.7.3 - 2024-03-19
+* Improve error handling in the getDeliveryDate function
+
 ## 1.7.2 - 2024-03-04
 * Fixed a bug that would incorrectly display a wrong expected datetime
 

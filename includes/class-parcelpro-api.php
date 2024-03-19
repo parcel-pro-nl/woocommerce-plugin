@@ -311,12 +311,12 @@ class ParcelPro_API
      * @param DateTimeInterface $dateTime The date on which the package will be handed over to the carrier.
      * @param $postcode string The postal code of the package destination.
      *
-     * @return DateTimeImmutable|false|string
+     * @return DateTimeImmutable|false
      */
     public function getDeliveryDate(string $carrier, \DateTimeInterface $dateTime, string $postcode)
     {
         if (!$postcode) {
-            return $postcode;
+            return false;
         }
         $postcode = str_replace(' ', '', $postcode);
 
@@ -359,7 +359,7 @@ class ParcelPro_API
                     $responseBody
                 ));
             }
-            return "200";
+            return false;
         }
 
         $responseJson = json_decode($responseBody, true);
@@ -380,7 +380,7 @@ class ParcelPro_API
                     $responseBody
                 ));
             }
-            return $carrier;
+            return false;
         }
 
         return \DateTimeImmutable::createFromFormat('Y-m-d', $rawDate);
