@@ -29,4 +29,4 @@ jobs:
           SVN_USERNAME: ${{ vars.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: integration-shops-united-woocommerce
-          ASSETS_DIR: .wordpress-shops-united # TODO: Update assets to Shops United branding
+          ASSETS_DIR: .wordpress-shops-united
