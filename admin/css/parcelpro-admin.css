@@ -144,3 +144,9 @@ span.ui-accordion-header-icon    {
     /*width: 175px;*/
     margin-top: 0 !important;
 }
+
+.widefat .column-wc_actions a.button.parcelpro {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
