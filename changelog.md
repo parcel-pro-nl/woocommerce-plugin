@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.8.1 - 2024-03-20
+* Fix actions icon alignment in orders table
+
 ## 1.8.0 - 2024-03-20
 * Set up Shops United branded plugin build
 

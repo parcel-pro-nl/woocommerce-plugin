@@ -13,7 +13,7 @@
  */
 
 ?>
-<a href="<?php echo $ship_link; ?>" class="button tips parcelpro-export" alt="Aanmelden bij <?= PARCELPRO_SHOPSUNITED ?>" data-tip="Aanmelden bij <?= PARCELPRO_SHOPSUNITED ?>">
+<a href="<?php echo $ship_link; ?>" class="button tips parcelpro parcelpro-export" alt="Aanmelden bij <?= PARCELPRO_SHOPSUNITED ?>" data-tip="Aanmelden bij <?= PARCELPRO_SHOPSUNITED ?>">
     <img src="<?php echo dirname(plugin_dir_url(__FILE__)) . '/images/arrows.svg'; ?>" style="height: 16px; width: 12px;" alt="Aanmelden bij <?= PARCELPRO_SHOPSUNITED ?>">
 </a>
 
