@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.8.0 - 2024-03-20
+* Set up Shops United branded plugin build
+
 ## 1.7.3 - 2024-03-19
 * Improve error handling in the getDeliveryDate function
 
