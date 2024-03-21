@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 import { navigateWooCommerce } from './helpers/navigate';
 import { randomString } from './helpers/random';
 import { clearAndCreateShippingMethod } from './helpers/settings';
@@ -39,6 +39,11 @@ test('expected delivery shows in checkout', async ({ page }) => {
     await page.locator('#shipping-option').getByText(textMatcher).click();
   } else {
     // Standard checkout.
+
+    // It can happen that this checkout doesn't properly update the shipping methods,
+    // so we want to trigger another postcode change here, to force it to load the data.
+    await page.getByRole('textbox', { name: 'Postcode / ZIP' }).press(' ');
+
     await page.getByText(textMatcher).click();
   }
 });
