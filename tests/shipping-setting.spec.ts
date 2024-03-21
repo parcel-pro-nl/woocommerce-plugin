@@ -2,6 +2,11 @@ import { expect, test } from '@playwright/test';
 import { navigateWooCommerce } from './helpers/navigate';
 import { randomString } from './helpers/random';
 import { fillCheckoutForm } from './helpers/checkout';
+import {
+  clearAndCreateShippingMethod,
+  clearShippingMethods,
+  createShippingMethod,
+} from './helpers/settings';
 
 test('created shipping setting shows in checkout', async ({ page }) => {
   await page.goto('/wp-admin');
@@ -10,36 +15,9 @@ test('created shipping setting shows in checkout', async ({ page }) => {
   await page.getByRole('link', { name: 'Shipping' }).click();
   await page.getByRole('link', { name: 'Parcel Pro' }).click();
 
-  // Remove all existing shipping methods.
-  const deleteRuleButtons = await page
-    .locator('.parcelpro_rules')
-    .first()
-    .getByRole('button', { name: '×' })
-    .all();
-  for (let i = deleteRuleButtons.length - 1; i >= 0; i--) {
-    await deleteRuleButtons[i].click();
-  }
-
-  // Click "Add Rule +"
-  await page.locator('[name="postnl_afleveradres"]').click();
-
-  // Get the new rule row and all input fields.
-  const newRuleRow = page
-    .locator('.parcelpro_rules tbody tr:last-child')
-    .first();
-  const [methodTitle, minWeight, maxWeight, minTotal, maxTotal, price] =
-    await newRuleRow.locator('input').all();
-
+  // Clear all existing shipping methods and create a new one.
   const shippingMethodName = `test-${randomString()}`;
-
-  // Fill and save the shipping method fields.
-  await methodTitle.fill(shippingMethodName);
-  await minWeight.fill('0');
-  await maxWeight.fill('9999');
-  await minTotal.fill('0');
-  await maxTotal.fill('9999');
-  await price.fill('0');
-  await page.getByRole('button', { name: 'Save changes' }).click();
+  await clearAndCreateShippingMethod(page, shippingMethodName);
 
   // Go to a product page and add it to the cart.
   await page.goto('/product/playwright-product');
