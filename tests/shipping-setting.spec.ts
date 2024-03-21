@@ -2,11 +2,7 @@ import { expect, test } from '@playwright/test';
 import { navigateWooCommerce } from './helpers/navigate';
 import { randomString } from './helpers/random';
 import { fillCheckoutForm } from './helpers/checkout';
-import {
-  clearAndCreateShippingMethod,
-  clearShippingMethods,
-  createShippingMethod,
-} from './helpers/settings';
+import { clearAndCreateShippingMethod } from './helpers/settings';
 
 test('created shipping setting shows in checkout', async ({ page }) => {
   await page.goto('/wp-admin');
