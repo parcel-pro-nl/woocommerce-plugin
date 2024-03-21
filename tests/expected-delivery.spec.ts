@@ -31,22 +31,14 @@ test('expected delivery shows in checkout', async ({ page }) => {
   await page.goto('/checkout');
   await fillCheckoutForm(page);
 
-  // Get the shipping method text.
-  let shippingText = '';
-  if (await page.locator('#shipping-option').isVisible()) {
-    // Blocks checkout.
-    shippingText = await page
-      .locator('#shipping-option')
-      .getByText(shippingMethodName)
-      .textContent();
-  } else {
-    // Standard checkout.
-    await page.getByText(shippingMethodName).textContent();
-  }
-
   // Check if the text contains a date.
   // E.g.: test-iennluploq (22 March)
-  expect(shippingText).toMatch(
-    new RegExp(`${shippingMethodName} \\(\\d+ [a-zA-Z]+\\)`),
-  );
+  const textMatcher = new RegExp(`${shippingMethodName} \\(\\d+ [a-zA-Z]+\\)`);
+  if (await page.locator('#shipping-option').isVisible()) {
+    // Blocks checkout.
+    await page.locator('#shipping-option').getByText(textMatcher).click();
+  } else {
+    // Standard checkout.
+    await page.getByText(textMatcher).click();
+  }
 });
