@@ -1,15 +1,23 @@
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 import { navigateWooCommerce } from './helpers/navigate';
 import { randomString } from './helpers/random';
-import { fillCheckoutForm } from './helpers/checkout';
 import { clearAndCreateShippingMethod } from './helpers/settings';
+import { fillCheckoutForm } from './helpers/checkout';
 
-test('created shipping setting shows in checkout', async ({ page }) => {
+test('expected delivery shows in checkout', async ({ page }) => {
   await page.goto('/wp-admin');
   await navigateWooCommerce(page, 'Settings');
 
   await page.getByRole('link', { name: 'Shipping' }).click();
   await page.getByRole('link', { name: 'Parcel Pro' }).click();
+
+  // Enable the expected delivery date for PostNL.
+  const expectedDeliveryCheckbox = page.getByLabel(
+    'Toon verwachte levertijd voor PostNL',
+  );
+  if (!(await expectedDeliveryCheckbox.isChecked())) {
+    await expectedDeliveryCheckbox.click();
+  }
 
   // Clear all existing shipping methods and create a new one.
   const shippingMethodName = `test-${randomString()}`;
@@ -23,22 +31,19 @@ test('created shipping setting shows in checkout', async ({ page }) => {
   await page.goto('/checkout');
   await fillCheckoutForm(page);
 
-  // Select the shipping method and place the order.
+  // Check if the text contains a date.
+  // E.g.: test-iennluploq (22 March)
+  const textMatcher = new RegExp(`${shippingMethodName} \\(\\d+ [a-zA-Z]+\\)`);
   if (await page.locator('#shipping-option').isVisible()) {
     // Blocks checkout.
-    await page
-      .locator('#shipping-option')
-      .getByText(shippingMethodName)
-      .click();
+    await page.locator('#shipping-option').getByText(textMatcher).click();
   } else {
     // Standard checkout.
-    await page.getByText(shippingMethodName).click();
-  }
-  await page.getByRole('button', { name: 'Place Order' }).click();
 
-  // Check if the order details contain the right shipping method.
-  await expect(
-    page.getByText('Thank you. Your order has been received.'),
-  ).toBeVisible();
-  await expect(page.getByText(shippingMethodName)).toBeVisible();
+    // It can happen that this checkout doesn't properly update the shipping methods,
+    // so we want to trigger another postcode change here, to force it to load the data.
+    await page.getByRole('textbox', { name: 'Postcode / ZIP' }).press(' ');
+
+    await page.getByText(textMatcher).click();
+  }
 });
