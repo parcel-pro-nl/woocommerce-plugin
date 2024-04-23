@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.8.2 - 2024-04-23
+* Fix in_array() error for countries
+
 ## 1.8.1 - 2024-03-20
 * Fix actions icon alignment in orders table
 
