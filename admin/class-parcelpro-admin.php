@@ -241,7 +241,7 @@ class Parcelpro_Admin
         if (!$status || $status == '') {
             $allowed_export = $this->settings['auto_export'];
             $method = $this->settings['availability'];
-            $countries = ($method == 'specific') ? (!empty($this->settings['countries']) ? $this->settings['countries'] : []) : [];
+            $countries = ($method == 'specific') ? ($this->settings['countries'] ?? []) : [];
             $country = wc_get_order($order_id)->get_shipping_country();
             $order_status = wc_get_order($order_id)->get_status();
 
