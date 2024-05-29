@@ -515,7 +515,7 @@ class Parcelpro_Admin
         $order = wc_get_order($order_id);
 
         // If all products in an order are virtual, we shouldn't export it.
-        if ($this->is_all_virtual($order)) {
+        if (!$this->order_needs_shipping($order)) {
             return;
         }
 
@@ -544,17 +544,17 @@ class Parcelpro_Admin
      * @param $order WC_Order
      * @return boolean
      */
-    private function is_all_virtual($order)
+    private function order_needs_shipping($order)
     {
         $items = $order->get_items();
         foreach ($items as $item) {
             $product = wc_get_product($item->get_product_id());
-            // If we somehow don't get a valid product, consider that as non-virtual.
-            if (!$product || !$product->is_virtual()) {
-                return false;
+            // If we somehow don't get a valid product, consider that as a product that needs shipping.
+            if (!$product || $product->needs_shipping()) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
