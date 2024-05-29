@@ -36,8 +36,6 @@ class ParcelPro_Shipping extends WC_Shipping_Method
     public $availability;
     public $countries;
 
-
-
     /**
      * Initialize the class and set its properties.
      *
@@ -97,22 +95,9 @@ class ParcelPro_Shipping extends WC_Shipping_Method
 
     public function load_shipping_methods()
     {
-        foreach ($this->custom_services as $service) {
-            $methodId = 'parcelpro_' . $service['id'];
-            $typeId = null;
-
-            foreach ($service as $rule) {
-                if (is_array($rule) && array_key_exists('type-id', $rule) && $rule['type-id'] !== '') {
-                    $typeId = $rule['type-id'];
-                }
-            }
-
-            if ($typeId !== null) {
-                $methodId = $methodId . '_' . $typeId;
-            }
-
-            WC()->shipping()->register_shipping_method(new Parcelpro_Shipping_Method($methodId));
-        }
+        // We have to register a custom shipping method, to ensure the shipping method validation passes.
+        // See error code "woocommerce_rest_invalid_shipping_option" in the WooCommerce function `OrderController::validate_selected_shipping_methods`.
+        WC()->shipping()->register_shipping_method(new Parcelpro_Shipping_Method());
     }
 
     /**
