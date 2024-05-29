@@ -32,3 +32,6 @@ wp user meta set admin manageedit-shop_ordercolumnshidden '[]' --format=json
 
 # Activate the Parcel Pro plugin.
 wp plugin activate parcelpro
+
+# Configure the Parcel Pro plugin.
+wp option patch update woocommerce_parcelpro_shipping_settings enabled yes
