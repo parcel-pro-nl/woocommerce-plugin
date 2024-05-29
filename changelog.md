@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.8.3 - 2024-05-29
+* Fix "this order requires a shipping option" error in checkout for WooCommerce 8.8.0
+
 ## 1.8.2 - 2024-04-23
 * Fix in_array() error for countries
 
