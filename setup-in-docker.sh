@@ -32,19 +32,3 @@ wp user meta set admin manageedit-shop_ordercolumnshidden '[]' --format=json
 
 # Activate the Parcel Pro plugin.
 wp plugin activate parcelpro
-
-# Configure the Parcel Pro plugin.
-wp option patch update woocommerce_parcelpro_shipping_settings enabled yes
-# If a .env file exists, read it to set configuration.
-envFile="$(realpath $(dirname $0))/.env"
-if [ -f "$envFile" ]
-then
-  # Read the .env file into variables.
-  while IFS=\= read -r key value
-  do
-    declare "$key=$value"
-  done < "$envFile"
-
-  wp option patch update woocommerce_parcelpro_shipping_settings login_id "$PP_ID"
-  wp option patch update woocommerce_parcelpro_shipping_settings api_id "$PP_API_KEY"
-fi

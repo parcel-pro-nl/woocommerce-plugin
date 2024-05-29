@@ -39,9 +39,6 @@ docker compose up -d
 
 Once WordPress is running, you can view it on http://localhost/wp-admin.
 
-Optionally, you can set copy the `.env.example` to `.env` and set the variables.
-This will pre-configure the plugin for first use.
-
 To simplify the first-time setup, there is a setup script:
 
 ```shell
