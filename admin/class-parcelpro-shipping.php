@@ -97,11 +97,22 @@ class ParcelPro_Shipping extends WC_Shipping_Method
 
     public function load_shipping_methods()
     {
-        error_log('load_shipping_methods');
-        error_log(var_export($this->services, true));
+        foreach ($this->custom_services as $service) {
+            $methodId = 'parcelpro_' . $service['id'];
+            $typeId = null;
 
-        // TODO
-        WC()->shipping()->register_shipping_method(new Parcelpro_Shipping_Method('pp_example_method'));
+            foreach ($service as $rule) {
+                if (is_array($rule) && array_key_exists('type-id', $rule) && $rule['type-id'] !== '') {
+                    $typeId = $rule['type-id'];
+                }
+            }
+
+            if ($typeId !== null) {
+                $methodId = $methodId . '_' . $typeId;
+            }
+
+            WC()->shipping()->register_shipping_method(new Parcelpro_Shipping_Method($methodId));
+        }
     }
 
     /**
