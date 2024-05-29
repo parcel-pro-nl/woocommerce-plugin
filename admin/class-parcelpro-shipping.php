@@ -57,6 +57,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
     public function register_hook_callbacks()
     {
         add_action('woocommerce_update_options_shipping_parcelpro_shipping', array( $this, 'process_admin_options' ));
+        add_action('woocommerce_load_shipping_methods', array( $this, 'load_shipping_methods' ));
     }
 
     /**
@@ -73,6 +74,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
         $this->method_description = 'Afhalen van een bestelling bij een door de klant gekozen afhaalpunt.';
 
         $this->services = include(plugin_dir_path(__FILE__) . 'data/parcelpro-shipping-settings-services.php');
+        require_once(plugin_dir_path(dirname(__FILE__)) . 'includes/class-parcelpro-shipping-method.php');
 
         $this->enabled = $this->get_option('enabled', 'no');
         $this->title = $this->get_option('title', $this->method_title);
@@ -91,6 +93,15 @@ class ParcelPro_Shipping extends WC_Shipping_Method
     public function init_form_fields()
     {
         $this->form_fields = include(plugin_dir_path(__FILE__) . 'data/parcelpro-shipping-settings-fields.php');
+    }
+
+    public function load_shipping_methods()
+    {
+        error_log('load_shipping_methods');
+        error_log(var_export($this->services, true));
+
+        // TODO
+        WC()->shipping()->register_shipping_method(new Parcelpro_Shipping_Method('pp_example_method'));
     }
 
     /**
