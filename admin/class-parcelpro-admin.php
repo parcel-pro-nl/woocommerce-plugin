@@ -512,11 +512,15 @@ class Parcelpro_Admin
      */
     public function export_order($order_id)
     {
-        $data = $this->format_order_data($order_id);
-
-        $response = json_decode($this->api->post_zending($data), true);
-
         $order = wc_get_order($order_id);
+
+        // If all products in an order are virtual, we shouldn't export it.
+        if (!$this->order_needs_shipping($order)) {
+            return;
+        }
+
+        $data = $this->format_order_data($order_id);
+        $response = json_decode($this->api->post_zending($data), true);
 
         if (!isset($response['level']) && $response) {
             update_post_meta($order_id, '_parcelpro_status', 1);
@@ -534,6 +538,23 @@ class Parcelpro_Admin
         if ($allowed_export == 'yes' && $set_to_status) {
             $order->update_status($set_to_status);
         }
+    }
+
+    /**
+     * @param $order WC_Order
+     * @return boolean
+     */
+    private function order_needs_shipping($order)
+    {
+        $items = $order->get_items();
+        foreach ($items as $item) {
+            $product = wc_get_product($item->get_product_id());
+            // If we somehow don't get a valid product, consider that as a product that needs shipping.
+            if (!$product || $product->needs_shipping()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
