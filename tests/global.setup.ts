@@ -17,6 +17,12 @@ test('login', async ({ page }) => {
 
   await page.goto('https://login.parcelpro.nl');
 
+  // Decline cookies.
+  const cookiesDecline = page.locator('#CybotCookiebotDialogBodyButtonDecline');
+  if (await cookiesDecline.isVisible()) {
+    await cookiesDecline.click();
+  }
+
   await page.locator('#email').fill(process.env.PP_USERNAME);
   await page.locator('#password').fill(process.env.PP_PASSWORD);
   await page.getByText('Inloggen').click();

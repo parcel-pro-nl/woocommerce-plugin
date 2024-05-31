@@ -36,8 +36,6 @@ class ParcelPro_Shipping extends WC_Shipping_Method
     public $availability;
     public $countries;
 
-
-
     /**
      * Initialize the class and set its properties.
      *
@@ -57,6 +55,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
     public function register_hook_callbacks()
     {
         add_action('woocommerce_update_options_shipping_parcelpro_shipping', array( $this, 'process_admin_options' ));
+        add_action('woocommerce_load_shipping_methods', array( $this, 'load_shipping_methods' ));
     }
 
     /**
@@ -73,6 +72,7 @@ class ParcelPro_Shipping extends WC_Shipping_Method
         $this->method_description = 'Afhalen van een bestelling bij een door de klant gekozen afhaalpunt.';
 
         $this->services = include(plugin_dir_path(__FILE__) . 'data/parcelpro-shipping-settings-services.php');
+        require_once(plugin_dir_path(dirname(__FILE__)) . 'includes/class-parcelpro-shipping-method.php');
 
         $this->enabled = $this->get_option('enabled', 'no');
         $this->title = $this->get_option('title', $this->method_title);
@@ -91,6 +91,13 @@ class ParcelPro_Shipping extends WC_Shipping_Method
     public function init_form_fields()
     {
         $this->form_fields = include(plugin_dir_path(__FILE__) . 'data/parcelpro-shipping-settings-fields.php');
+    }
+
+    public function load_shipping_methods()
+    {
+        // We have to register a custom shipping method, to ensure the shipping method validation passes.
+        // See error code "woocommerce_rest_invalid_shipping_option" in the WooCommerce function `OrderController::validate_selected_shipping_methods`.
+        WC()->shipping()->register_shipping_method(new Parcelpro_Shipping_Method());
     }
 
     /**
