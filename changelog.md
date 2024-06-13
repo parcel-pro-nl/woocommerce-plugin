@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.8.4 - 2024-06-13
+* Fix potential "undefined array key 2" error in order box
+
 ## 1.8.3 - 2024-05-29
 * Fix "this order requires a shipping option" error in checkout for WooCommerce 8.8.0
 

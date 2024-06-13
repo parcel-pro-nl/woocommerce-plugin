@@ -202,8 +202,11 @@ class Parcelpro_Admin
                             $types = $this->api->types_key_values();
                             if (array_key_exists(3, $exploded_method) && array_key_exists($exploded_method[3], $types) && $exploded_method[1] === 'maatwerk') {
                                 echo('<p>' . 'Gekozen dienst: ' . $types[($exploded_method[3])] . '</p>');
-                            } else {
+                            } elseif (array_key_exists(2, $exploded_method)) {
                                 echo '<p>' . 'Gekozen dienst: ' . $exploded_method[2] . '</p>';
+                            } else {
+                                // As a last resort, simply show the full shipping method.
+                                echo '<p>' . 'Gekozen dienst: ' . $shipping_method . '</p>';
                             }
                         }
                     }
