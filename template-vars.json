@@ -1,6 +1,6 @@
 {
   "parcelpro": {
-    "slug": "parcelpro",
+    "slug": "woo-parcel-pro",
     "name": "Parcel Pro",
     "link": "https://parcelpro.nl/",
     "pluginUri": "https://www.parcelpro.nl/koppelingen/woocommerce/",
@@ -8,7 +8,7 @@
     "supportEmail": "ict@parcelpro.nl"
   },
   "shopsunited": {
-    "slug": "shopsunited",
+    "slug": "integration-shops-united-woocommerce",
     "name": "Shops United",
     "link": "https://shops-united.nl/",
     "pluginUri": "https://shops-united.nl/koppelingen/woocommerce/",
