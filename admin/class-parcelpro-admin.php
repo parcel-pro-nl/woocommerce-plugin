@@ -297,11 +297,11 @@ class Parcelpro_Admin
         }
 
         if (!isset($_REQUEST['_wpnonce'])) {
-            wp_die("No nonce set for action: $action ($nonceAction)");
+            wp_die(esc_html("No nonce set for action: $action ($nonceAction)"));
         }
 
         if (!wp_verify_nonce($_REQUEST['_wpnonce'], $nonceAction)) {
-            wp_die("Invalid nonce for action: $action ($nonceAction)");
+            wp_die(esc_html("Invalid nonce for action: $action ($nonceAction)"));
         }
 
         switch ($action) {
