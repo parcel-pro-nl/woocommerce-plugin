@@ -13,7 +13,7 @@
  * @package         Parcelpro
  *
  * @wordpress-plugin
- * Plugin Name:     WooCommerce {{name}}
+ * Plugin Name:     {{name}} for WooCommerce
  * Plugin URI:      {{pluginUri}}
  * Description:     Geef klanten de mogelijkheid om hun pakket af te halen bij een afhaalpunt in de buurt. Daarnaast exporteert de plug-in uw zendingen direct in het verzendsysteem van {{name}}.
  * Version:         {{version}}
@@ -21,8 +21,7 @@
  * Author URI:      {{link}}
  * License:         GPL-3.0+
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.txt
- * Text Domain:     woocommerce_parcelpro
- * Domain Path:     /languages
+ * Text Domain:     {{slug}}
  */
 
 if (!defined('WPINC')) {
