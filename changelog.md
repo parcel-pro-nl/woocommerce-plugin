@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.8.5 - 2024-10-23
+## 1.9.0 - 2024-10-23
 * Fix XSS vulnerability in nonce error message
 
 ## 1.8.4 - 2024-06-13

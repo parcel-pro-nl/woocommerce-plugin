@@ -2,7 +2,7 @@
   "name": "parcelpro/woocommerce",
   "description": "Verzendmodule om gemakkelijk orders in te laden in het verzendsysteem van Parcel Pro.",
   "type": "wordpress-plugin",
-  "version": "1.8.4",
+  "version": "1.9.0",
   "require": {
     "php": ">=7.1",
     "ext-curl": "*",
