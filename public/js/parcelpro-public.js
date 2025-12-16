@@ -120,7 +120,8 @@
     }
 
     function popup_submit(data) {
-        var shippingmethod = $("ul[id='shipping_method']").find('input:checked')[0].id.split('_');
+        var container= $("ul[id='shipping_method']").length ? $("ul[id='shipping_method']") : $("*.cart-shipping-methods");
+        var shippingmethod = container.find('input:checked')[0].id.split('_');
 
         if ($.inArray( data.Vervoerder.toLowerCase(), shippingmethod ) == -1 && ($.inArray( "maatwerk", shippingmethod ) == -1 )) {
             $('form[name="checkout"]').find('input[name*="parcelpro"]').val('');
@@ -138,7 +139,7 @@
         $('#parcelpro_country').val(data.Countrycode ? data.Countrycode : 'NL');
 
         if(($.inArray( "maatwerk", shippingmethod ) != -1 )){
-            var sm = $("ul[id='shipping_method']").find('input:checked')[0].id;
+            var sm = container.find('input:checked')[0].id;
             var price = $('span', label);
             var label = $('label[for*="'+sm+'"]');
             var priceHtml = price.clone().prop('outerHTML');
